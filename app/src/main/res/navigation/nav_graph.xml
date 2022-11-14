@@ -10,4 +10,21 @@
         android:name="com.zrq.azi.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/loveFragment"
+        android:name="com.zrq.azi.ui.LoveFragment"
+        android:label="fragment_love"
+        tools:layout="@layout/fragment_love" />
+    <action
+        android:id="@+id/action_global_homeFragment"
+        app:destination="@id/homeFragment"
+        app:enterAnim="@anim/anim_big"
+        app:exitAnim="@anim/anim_small"
+        app:popExitAnim="@anim/anim_small" />
+    <action
+        android:id="@+id/action_global_loveFragment2"
+        app:destination="@id/loveFragment"
+        app:exitAnim="@anim/anim_small"
+        app:enterAnim="@anim/anim_big"
+        app:popExitAnim="@anim/anim_small" />
 </navigation>

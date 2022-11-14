@@ -14,7 +14,7 @@ import com.zrq.azi.interfaces.OnItemClickListener
 import com.zrq.azi.util.Util.formatDuration
 import java.text.SimpleDateFormat
 
-class SongItemAdapter(
+class LoveItemAdapter(
     private val context: Context,
     private val list: ArrayList<Dj.ProgramsBean>,
     private val onItemClickListener: OnItemClickListener,

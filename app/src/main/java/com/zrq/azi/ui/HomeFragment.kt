@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.gson.Gson
+import com.zrq.azi.R
 import com.zrq.azi.adapter.DragCallBack
 import com.zrq.azi.adapter.SongItemAdapter
 import com.zrq.azi.adapter.ViewpagerAdapter
@@ -43,12 +45,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, I
     @RequiresApi(Build.VERSION_CODES.P)
     override fun initData() {
         setScreen()
+        mainModel.list.value?.let { list.addAll(it) }
         Thread {
-            for (i in 1..10) {
-                mainModel.playerControl?.registerViewControl(this)
-                Log.d(TAG, "initData: ${mainModel.playerControl}")
+            while (mainModel.playerControl == null) {
                 Thread.sleep(1000)
             }
+            mainModel.playerControl?.registerViewControl(this)
         }.start()
         mAdapter = SongItemAdapter(requireContext(), list, this)
         mVpAdapter = ViewpagerAdapter(requireActivity(), list)
@@ -105,6 +107,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, I
                     }
                 }
             })
+            fab.setOnClickListener {
+                Navigation.findNavController(requireActivity(), R.id.fragment_container)
+                    .navigate(R.id.action_global_loveFragment2)
+            }
         }
     }
 
