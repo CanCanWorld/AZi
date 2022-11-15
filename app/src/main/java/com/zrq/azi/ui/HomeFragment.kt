@@ -2,34 +2,29 @@ package com.zrq.azi.ui
 
 import android.annotation.SuppressLint
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.google.gson.Gson
 import com.zrq.azi.R
-import com.zrq.azi.adapter.DragCallBack
 import com.zrq.azi.adapter.SongItemAdapter
-import com.zrq.azi.adapter.ViewpagerAdapter
 import com.zrq.azi.bean.Dj
 import com.zrq.azi.databinding.FragmentHomeBinding
-import com.zrq.azi.interfaces.IPlayerViewControl
 import com.zrq.azi.interfaces.OnItemClickListener
+import com.zrq.azi.interfaces.OnItemLongClickListener
 import com.zrq.azi.util.Constants.BASE_URL
 import com.zrq.azi.util.Constants.DJ_PROGRAM
-import com.zrq.azi.view.VisualizeView
 import okhttp3.*
 import java.io.IOException
 
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, IPlayerViewControl {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, OnItemLongClickListener {
     override fun providedViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -39,31 +34,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, I
 
     private val list = ArrayList<Dj.ProgramsBean>()
     private lateinit var mAdapter: SongItemAdapter
-    private lateinit var mVpAdapter: ViewpagerAdapter
     private var offset = 1
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun initData() {
         setScreen()
-        mainModel.list.value?.let { list.addAll(it) }
-        Thread {
-            while (mainModel.playerControl == null) {
-                Thread.sleep(1000)
-            }
-            mainModel.playerControl?.registerViewControl(this)
-        }.start()
-        mAdapter = SongItemAdapter(requireContext(), list, this)
-        mVpAdapter = ViewpagerAdapter(requireActivity(), list)
+        mAdapter = SongItemAdapter(requireContext(), list, this, this)
         mBinding.apply {
             recyclerView.adapter = mAdapter
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
-            viewPager.adapter = mVpAdapter
-            val dragCallBack = DragCallBack(mAdapter, list)
-            val itemTouchHelper = ItemTouchHelper(dragCallBack)
-            itemTouchHelper.attachToRecyclerView(mBinding.recyclerView)
         }
         loadSong()
-        mBinding.visualizeView.setMode(VisualizeView.SINGLE)
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -76,18 +57,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, I
 
     override fun initEvent() {
         mBinding.apply {
-            viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    Log.d(TAG, "onPageSelected: $position")
-                    mainModel.playerControl?.let {
-                        it.setList(list)
-                        it.play(position)
-                    }
-                }
-            })
-
             refreshLayout.setOnRefreshListener {
                 offset = 1
                 loadSong()
@@ -106,7 +75,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, I
                         setScreen()
                     }
                 }
+
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        mBinding.fab.show()
+                    } else {
+                        mBinding.fab.hide()
+                    }
+                }
             })
+
             fab.setOnClickListener {
                 Navigation.findNavController(requireActivity(), R.id.fragment_container)
                     .navigate(R.id.action_global_loveFragment2)
@@ -134,10 +112,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, I
                         if (dj?.programs != null) {
                             list.clear()
                             list.addAll(dj.programs)
-                            mainModel.list.postValue(list)
+                            mainModel.playerList.postValue(list)
                             requireActivity().runOnUiThread {
                                 mAdapter.notifyDataSetChanged()
-                                mVpAdapter.notifyDataSetChanged()
                                 mBinding.refreshLayout.finishRefresh()
                                 mBinding.refreshLayout.finishLoadMore()
                             }
@@ -156,22 +133,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, I
 
     override fun onItemClick(view: View, position: Int) {
         mainModel.position.postValue(position)
-        mBinding.viewPager.setCurrentItem(position, false)
         mainModel.playerControl?.let {
             it.setList(list)
             it.play(position)
         }
     }
 
-    override fun onSeekChange(progress: Int, elapsedTime: Int) {
-    }
-
-    override fun onSongPlayOver(position: Int) {
-        mBinding.viewPager.setCurrentItem(position, true)
-    }
-
-    override fun onVisualizeView(mode: FloatArray) {
-        mBinding.visualizeView.setData(mode)
+    override fun onItemLongClick(view: View, position: Int) {
+        mainModel.songDaoImpl?.addSong(list[position])
+        Toast.makeText(requireContext(), "已收藏", Toast.LENGTH_SHORT).show()
     }
 
     companion object {

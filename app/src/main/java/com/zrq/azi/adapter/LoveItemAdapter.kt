@@ -9,22 +9,27 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.zrq.azi.R
 import com.zrq.azi.bean.Dj
-import com.zrq.azi.databinding.ItemSongBinding
+import com.zrq.azi.databinding.ItemLoveSongBinding
+import com.zrq.azi.interfaces.ITouchHelper
 import com.zrq.azi.interfaces.OnItemClickListener
 import com.zrq.azi.util.Util.formatDuration
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class LoveItemAdapter(
     private val context: Context,
     private val list: ArrayList<Dj.ProgramsBean>,
     private val onItemClickListener: OnItemClickListener,
-) : RecyclerView.Adapter<VH<ItemSongBinding>>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH<ItemSongBinding> {
-        return VH(ItemSongBinding.inflate(LayoutInflater.from(context), parent, false))
+    private val onDataChange: (ArrayList<Dj.ProgramsBean>) -> Unit,
+    private val onItemDelete: (Int) -> Unit,
+) : RecyclerView.Adapter<VH<ItemLoveSongBinding>>(), ITouchHelper {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH<ItemLoveSongBinding> {
+        return VH(ItemLoveSongBinding.inflate(LayoutInflater.from(context), parent, false))
     }
 
     @SuppressLint("SimpleDateFormat")
-    override fun onBindViewHolder(holder: VH<ItemSongBinding>, position: Int) {
+    override fun onBindViewHolder(holder: VH<ItemLoveSongBinding>, position: Int) {
         val bean = list[position]
         holder.binding.apply {
             tvTitle.text = bean.name
@@ -45,4 +50,17 @@ class LoveItemAdapter(
         return list.size
     }
 
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        Collections.swap(list, fromPosition, toPosition)
+        notifyItemMoved(fromPosition, toPosition)
+        onDataChange(list)
+    }
+
+    override fun onItemDismiss(position: Int, viewHolder: RecyclerView.ViewHolder) {
+        val drawable = viewHolder.itemView.background as GradientDrawable
+        drawable.color = ContextCompat.getColorStateList(viewHolder.itemView.context, R.color.app_bg)
+        list.removeAt(position)
+        notifyItemRemoved(position)
+        onItemDelete(position)
+    }
 }

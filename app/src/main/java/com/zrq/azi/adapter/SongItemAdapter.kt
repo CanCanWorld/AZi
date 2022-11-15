@@ -11,6 +11,7 @@ import com.zrq.azi.R
 import com.zrq.azi.bean.Dj
 import com.zrq.azi.databinding.ItemSongBinding
 import com.zrq.azi.interfaces.OnItemClickListener
+import com.zrq.azi.interfaces.OnItemLongClickListener
 import com.zrq.azi.util.Util.formatDuration
 import java.text.SimpleDateFormat
 
@@ -18,6 +19,7 @@ class SongItemAdapter(
     private val context: Context,
     private val list: ArrayList<Dj.ProgramsBean>,
     private val onItemClickListener: OnItemClickListener,
+    private val onItemLongClickListener: OnItemLongClickListener,
 ) : RecyclerView.Adapter<VH<ItemSongBinding>>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH<ItemSongBinding> {
         return VH(ItemSongBinding.inflate(LayoutInflater.from(context), parent, false))
@@ -37,6 +39,10 @@ class SongItemAdapter(
             drawable.color = ContextCompat.getColorStateList(root.context, R.color.app_bg)
             root.setOnClickListener {
                 onItemClickListener.onItemClick(it, holder.adapterPosition)
+            }
+            root.setOnLongClickListener {
+                onItemLongClickListener.onItemLongClick(it, holder.adapterPosition)
+                true
             }
         }
     }

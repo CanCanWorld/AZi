@@ -3,7 +3,6 @@ package com.zrq.azi.adapter
 import android.annotation.SuppressLint
 import android.graphics.Canvas
 import android.graphics.drawable.GradientDrawable
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,11 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zrq.azi.R
 import com.zrq.azi.bean.Dj
-import java.util.*
 import kotlin.math.abs
 
 class DragCallBack(
-    private val adapter: SongItemAdapter,
+    private val adapter: LoveItemAdapter,
     private val data: MutableList<Dj.ProgramsBean>
 ) : ItemTouchHelper.Callback() {
 
@@ -40,35 +38,12 @@ class DragCallBack(
     }
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-        val fromPosition = viewHolder.adapterPosition
-        val toPosition = target.adapterPosition
-
-        if (fromPosition < toPosition) {
-            for (index in fromPosition until toPosition) {
-                Collections.swap(data, index, index + 1)
-            }
-        } else {
-            for (index in fromPosition downTo toPosition + 1) {
-                Collections.swap(data, index, index - 1)
-            }
-        }
-        adapter.notifyItemMoved(fromPosition, toPosition)
+        adapter.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
         return true
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        if (direction == ItemTouchHelper.START) {
-            Log.i(TAG, "<--")
-        } else {
-            Log.i(TAG, "-->")
-        }
-        val position = viewHolder.adapterPosition
-        val drawable = viewHolder.itemView.background as GradientDrawable
-        drawable.color = ContextCompat.getColorStateList(viewHolder.itemView.context, R.color.app_bg)
-        data.removeAt(position)
-        Log.d(TAG, "onSwiped: $data")
-        adapter.notifyItemRemoved(position)
+        adapter.onItemDismiss(viewHolder.adapterPosition, viewHolder)
     }
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
@@ -89,7 +64,6 @@ class DragCallBack(
     @SuppressLint("NotifyDataSetChanged")
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
         super.clearView(recyclerView, viewHolder)
-        Log.d(TAG, "clearView: ")
         ViewCompat.animate(viewHolder.itemView).setDuration(200).scaleX(1f).scaleY(1f).start()
         val drawable = viewHolder.itemView.background as GradientDrawable
         drawable.color = ContextCompat.getColorStateList(viewHolder.itemView.context, R.color.app_bg)

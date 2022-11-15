@@ -38,11 +38,7 @@ object PlayerHelper : Binder(), IPlayerControl {
                 }
                 1 -> {}
                 else -> {
-                    if (pos == playList.size - 1) {
-                        pos = 0
-                    } else {
-                        pos++
-                    }
+                    if (pos == playList.size - 1) pos = 0 else pos++
                     mViewControl?.onSongPlayOver(pos)
                 }
             }

@@ -21,7 +21,7 @@ class PlayBarFragment(
     }
 
     override fun initEvent() {
-        mainModel.list.observe(this) {
+        mainModel.playerList.observe(this) {
             mBinding.apply {
                 tvSongName.text = it[position].name
                 Glide.with(this@PlayBarFragment)
