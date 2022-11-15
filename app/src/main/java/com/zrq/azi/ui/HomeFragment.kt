@@ -20,6 +20,7 @@ import com.zrq.azi.interfaces.OnItemClickListener
 import com.zrq.azi.interfaces.OnItemLongClickListener
 import com.zrq.azi.util.Constants.BASE_URL
 import com.zrq.azi.util.Constants.DJ_PROGRAM
+import com.zrq.azi.util.Constants.PAGE_HOME
 import okhttp3.*
 import java.io.IOException
 
@@ -44,6 +45,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
             recyclerView.adapter = mAdapter
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
+        list.clear()
+        list.addAll(mainModel.homeList)
         loadSong()
     }
 
@@ -112,7 +115,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
                         if (dj?.programs != null) {
                             list.clear()
                             list.addAll(dj.programs)
-                            mainModel.playerList.postValue(list)
                             requireActivity().runOnUiThread {
                                 mAdapter.notifyDataSetChanged()
                                 mBinding.refreshLayout.finishRefresh()
@@ -132,6 +134,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
     }
 
     override fun onItemClick(view: View, position: Int) {
+        mainModel.homeList.clear()
+        mainModel.homeList.addAll(list)
+        mainModel.playOfPage.postValue(PAGE_HOME)
         mainModel.position.postValue(position)
         mainModel.playerControl?.let {
             it.setList(list)

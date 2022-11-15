@@ -25,5 +25,4 @@
         app:backgroundTint="@color/app_bg"
         app:fabSize="normal"
         tools:ignore="ContentDescription" />
-
 </RelativeLayout>
