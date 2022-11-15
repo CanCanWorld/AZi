@@ -1,8 +1,10 @@
 package com.zrq.azi.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +14,7 @@ import com.zrq.azi.adapter.LoveItemAdapter
 import com.zrq.azi.bean.Dj
 import com.zrq.azi.databinding.FragmentLoveBinding
 import com.zrq.azi.interfaces.OnItemClickListener
+import com.zrq.azi.util.Constants
 
 class LoveFragment : BaseFragment<FragmentLoveBinding>(), OnItemClickListener {
     override fun providedViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentLoveBinding {
@@ -32,6 +35,8 @@ class LoveFragment : BaseFragment<FragmentLoveBinding>(), OnItemClickListener {
     override fun initData() {
         list.clear()
         mainModel.songDaoImpl?.listAllSongs()?.let { list.addAll(it) }
+        mainModel.loveList.clear()
+        mainModel.loveList.addAll(list)
         adapter = LoveItemAdapter(requireContext(), list, this, onDataChange, onItemDelete)
         mBinding.apply {
             recyclerView.adapter = adapter
@@ -56,6 +61,11 @@ class LoveFragment : BaseFragment<FragmentLoveBinding>(), OnItemClickListener {
     }
 
     override fun onItemClick(view: View, position: Int) {
-
+        mainModel.playOfPage.postValue(Constants.PAGE_LOVE)
+        mainModel.position.postValue(position)
+        mainModel.playerControl?.let {
+            it.setList(list)
+            it.play(position)
+        }
     }
 }

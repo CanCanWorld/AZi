@@ -28,4 +28,8 @@ object Constants {
 
     const val FIELD_CREATE_TIME = "create_time"
 
+    const val PAGE_HOME = 0
+
+    const val PAGE_LOVE = 1
+
 }

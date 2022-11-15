@@ -90,11 +90,11 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
             position.observe(this@MainActivity) {
                 mBinding.viewPager.setCurrentItem(it, false)
             }
-            playerList.observe(this@MainActivity) {
-                list.clear()
-                list.addAll(it)
-                mVpAdapter.notifyDataSetChanged()
-            }
+//            homeList.observe(this@MainActivity) {
+//                list.clear()
+//                list.addAll(it)
+//                mVpAdapter.notifyDataSetChanged()
+//            }
         }
 
     }

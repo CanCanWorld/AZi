@@ -55,7 +55,7 @@ class DragCallBack(
                 viewHolder?.let {
                     ViewCompat.animate(it.itemView).setDuration(200).scaleX(1.1f).scaleY(1.1f).start()
                     val drawable = viewHolder.itemView.background as GradientDrawable
-                    drawable.color = ContextCompat.getColorStateList(viewHolder.itemView.context, R.color.app_bg_)
+                    drawable.color = ContextCompat.getColorStateList(viewHolder.itemView.context, R.color.green_)
                 }
             }
         }
@@ -66,7 +66,7 @@ class DragCallBack(
         super.clearView(recyclerView, viewHolder)
         ViewCompat.animate(viewHolder.itemView).setDuration(200).scaleX(1f).scaleY(1f).start()
         val drawable = viewHolder.itemView.background as GradientDrawable
-        drawable.color = ContextCompat.getColorStateList(viewHolder.itemView.context, R.color.app_bg)
+        drawable.color = ContextCompat.getColorStateList(viewHolder.itemView.context, R.color.green)
     }
 
     override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {

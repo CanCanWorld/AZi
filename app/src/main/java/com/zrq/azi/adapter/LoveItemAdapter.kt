@@ -3,6 +3,7 @@ package com.zrq.azi.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -39,8 +40,9 @@ class LoveItemAdapter(
                 tvUpdateTime.text = this.format(bean.createTime)
             }
             val drawable = root.background as GradientDrawable
-            drawable.color = ContextCompat.getColorStateList(root.context, R.color.app_bg)
+            drawable.color = ContextCompat.getColorStateList(root.context, R.color.green)
             root.setOnClickListener {
+                Log.d("TAG", "onBindViewHolder: $position")
                 onItemClickListener.onItemClick(it, holder.adapterPosition)
             }
         }
@@ -58,7 +60,7 @@ class LoveItemAdapter(
 
     override fun onItemDismiss(position: Int, viewHolder: RecyclerView.ViewHolder) {
         val drawable = viewHolder.itemView.background as GradientDrawable
-        drawable.color = ContextCompat.getColorStateList(viewHolder.itemView.context, R.color.app_bg)
+        drawable.color = ContextCompat.getColorStateList(viewHolder.itemView.context, R.color.green)
         list.removeAt(position)
         notifyItemRemoved(position)
         onItemDelete(position)
