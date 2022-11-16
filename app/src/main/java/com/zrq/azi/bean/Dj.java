@@ -1,7 +1,10 @@
 package com.zrq.azi.bean;
 
+import androidx.annotation.Keep;
+
 import java.util.List;
 
+@Keep
 public class Dj {
 
     private int count;

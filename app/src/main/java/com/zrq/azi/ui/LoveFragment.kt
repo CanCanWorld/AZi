@@ -1,13 +1,15 @@
 package com.zrq.azi.ui
 
-import android.util.Log
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.view.WindowManager
+import androidx.annotation.RequiresApi
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.zrq.azi.R
 import com.zrq.azi.adapter.DragCallBack
 import com.zrq.azi.adapter.LoveItemAdapter
@@ -56,7 +58,33 @@ class LoveFragment : BaseFragment<FragmentLoveBinding>(), OnItemClickListener {
                 Navigation.findNavController(requireActivity(), R.id.fragment_container)
                     .navigate(R.id.action_global_homeFragment)
             }
+
+            recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                @RequiresApi(Build.VERSION_CODES.P)
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if (dy > 40) {
+                        setScreen()
+                    }
+                }
+
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        mBinding.fab.show()
+                    } else {
+                        mBinding.fab.hide()
+                    }
+                }
+            })
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    private fun setScreen() {
+        requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        val lp: WindowManager.LayoutParams = requireActivity().window.attributes
+        lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+        requireActivity().window.attributes = lp
     }
 
     companion object {
