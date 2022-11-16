@@ -22,7 +22,7 @@ class LoveItemAdapter(
     private val context: Context,
     private val list: ArrayList<Dj.ProgramsBean>,
     private val onItemClickListener: OnItemClickListener,
-    private val onDataChange: (ArrayList<Dj.ProgramsBean>) -> Unit,
+    private val onDataChange: (Int, Int) -> Unit,
     private val onItemDelete: (Int) -> Unit,
 ) : RecyclerView.Adapter<VH<ItemLoveSongBinding>>(), ITouchHelper {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH<ItemLoveSongBinding> {
@@ -53,16 +53,21 @@ class LoveItemAdapter(
     }
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        Log.d(TAG, "fromPosition: $fromPosition, toPosition: $toPosition")
+        onDataChange(fromPosition, toPosition)
         Collections.swap(list, fromPosition, toPosition)
         notifyItemMoved(fromPosition, toPosition)
-        onDataChange(list)
     }
 
     override fun onItemDismiss(position: Int, viewHolder: RecyclerView.ViewHolder) {
         val drawable = viewHolder.itemView.background as GradientDrawable
         drawable.color = ContextCompat.getColorStateList(viewHolder.itemView.context, R.color.green)
+        onItemDelete(position)
         list.removeAt(position)
         notifyItemRemoved(position)
-        onItemDelete(position)
+    }
+
+    companion object{
+        const val TAG = "LoveItemAdapter"
     }
 }

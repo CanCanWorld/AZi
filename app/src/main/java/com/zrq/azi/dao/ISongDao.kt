@@ -8,4 +8,6 @@ interface ISongDao {
     fun deleteSong(id: Int): Int
 
     fun listAllSongs(): ArrayList<Dj.ProgramsBean>
+
+    fun updateSongById(song: Dj.ProgramsBean): Int
 }

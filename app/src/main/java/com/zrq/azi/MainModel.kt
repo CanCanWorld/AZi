@@ -10,6 +10,8 @@ class MainModel : ViewModel() {
 
     val homeList = ArrayList<Dj.ProgramsBean>()
 
+    val homeListCache = ArrayList<Dj.ProgramsBean>()
+
     val loveList =  ArrayList<Dj.ProgramsBean>()
 
     val position = MutableLiveData<Int>()

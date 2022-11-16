@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="app_bg">#7358AE</color>
     <color name="app_bg_">#C47358AE</color>
+    <color name="app_bg__">#BC7358AE</color>
     <color name="grey">#D1D1D1</color>
     <color name="red">#F44336</color>
     <color name="green">#4CAF50</color>

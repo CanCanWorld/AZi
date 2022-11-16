@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:paintColor="@color/black" />
+        app:paintColor="@color/app_bg_" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"

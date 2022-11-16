@@ -45,9 +45,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
             recyclerView.adapter = mAdapter
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
-        list.clear()
-        list.addAll(mainModel.homeList)
-        loadSong()
+        if (mainModel.homeListCache.size == 0) {
+            loadSong()
+        }else {
+            list.clear()
+            list.addAll(mainModel.homeListCache)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -95,7 +98,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
         }
     }
 
-
     private fun loadSong() {
         Thread {
             val url = "$BASE_URL$DJ_PROGRAM?rid=971535834&limit=${40 * offset}"
@@ -111,16 +113,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
                 override fun onResponse(call: Call, response: Response) {
                     if (response.body != null) {
                         val json = response.body!!.string()
-                        val dj = Gson().fromJson(json, Dj::class.java)
-                        if (dj?.programs != null) {
-                            list.clear()
-                            list.addAll(dj.programs)
-                            requireActivity().runOnUiThread {
-                                mAdapter.notifyDataSetChanged()
+                        try {
+                            val dj = Gson().fromJson(json, Dj::class.java)
+                            if (dj?.programs != null) {
+                                list.clear()
+                                list.addAll(dj.programs)
+                                mainModel.homeListCache.clear()
+                                mainModel.homeListCache.addAll(list)
+                                requireActivity().runOnUiThread {
+                                    mAdapter.notifyDataSetChanged()
+                                    mBinding.refreshLayout.finishRefresh()
+                                    mBinding.refreshLayout.finishLoadMore()
+                                }
+                            } else {
                                 mBinding.refreshLayout.finishRefresh()
                                 mBinding.refreshLayout.finishLoadMore()
                             }
-                        } else {
+                        } catch (e: Exception) {
                             mBinding.refreshLayout.finishRefresh()
                             mBinding.refreshLayout.finishLoadMore()
                         }

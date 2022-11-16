@@ -21,6 +21,7 @@ import com.zrq.azi.service.PlayerService
 import com.zrq.azi.interfaces.IPlayerControl
 import com.zrq.azi.interfaces.IPlayerViewControl
 import com.zrq.azi.ui.HomeFragment
+import com.zrq.azi.util.Constants
 import com.zrq.azi.view.VisualizeView
 
 class MainActivity : AppCompatActivity(), IPlayerViewControl {
@@ -90,11 +91,19 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
             position.observe(this@MainActivity) {
                 mBinding.viewPager.setCurrentItem(it, false)
             }
-//            homeList.observe(this@MainActivity) {
-//                list.clear()
-//                list.addAll(it)
-//                mVpAdapter.notifyDataSetChanged()
-//            }
+            playOfPage.observe(this@MainActivity){
+                list.clear()
+                when (it) {
+                    Constants.PAGE_HOME -> {
+                        list.addAll(mainModel.homeList)
+                    }
+                    Constants.PAGE_LOVE -> {
+                        list.addAll(mainModel.loveList)
+                    }
+                    else -> {}
+                }
+                mVpAdapter.notifyDataSetChanged()
+            }
         }
 
     }
@@ -108,6 +117,7 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
         val PERMISSIONS = arrayOf(
             Manifest.permission.RECORD_AUDIO,
         )
+        const val TAG = "MainActivity"
     }
 
     override fun onSeekChange(progress: Int, elapsedTime: Int) {

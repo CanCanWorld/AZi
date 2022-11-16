@@ -39,7 +39,16 @@ class SongDaoImpl(
         while (cursor.moveToNext()) {
             pics.add(cursorToSong(cursor))
         }
+        db.close()
         return pics
+    }
+
+    override fun updateSongById(song: Dj.ProgramsBean): Int {
+        val db = mHelper.writableDatabase
+        val values = songToValues(song)
+        val result = db.update(TABLE_NAME, values, "$FIELD_ID=?", arrayOf(song._id.toString()))
+        db.close()
+        return result
     }
 
     private fun songToValues(song: Dj.ProgramsBean): ContentValues {

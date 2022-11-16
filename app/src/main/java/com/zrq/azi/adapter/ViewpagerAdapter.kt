@@ -15,7 +15,7 @@ class ViewpagerAdapter(
     }
 
     override fun createFragment(position: Int): Fragment {
-        return PlayBarFragment.newInstance(position)
+        return PlayBarFragment.newInstance(list[position])
     }
 
 }

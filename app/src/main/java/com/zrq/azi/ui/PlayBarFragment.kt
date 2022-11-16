@@ -9,7 +9,7 @@ import com.zrq.azi.util.Constants.PAGE_HOME
 import com.zrq.azi.util.Constants.PAGE_LOVE
 
 class PlayBarFragment(
-    private val position: Int
+    private val song: Dj.ProgramsBean
 ) : BaseFragment<FragmentPlayBarBinding>() {
 
 
@@ -27,20 +27,10 @@ class PlayBarFragment(
 
 
         mainModel.playOfPage.observe(this) {
-            var list = ArrayList<Dj.ProgramsBean>()
-            when (it) {
-                PAGE_HOME -> {
-                    list.addAll(mainModel.homeList)
-                }
-                PAGE_LOVE -> {
-                    list.addAll(mainModel.loveList)
-                }
-                else -> {}
-            }
             mBinding.apply {
-                tvSongName.text = list[position].name
+                tvSongName.text = song.name
                 Glide.with(this@PlayBarFragment)
-                    .load(list[position].coverUrl)
+                    .load(song.coverUrl)
                     .into(ivAlbum)
             }
         }
@@ -49,7 +39,7 @@ class PlayBarFragment(
     }
 
     companion object {
-        fun newInstance(position: Int) = PlayBarFragment(position)
+        fun newInstance(song: Dj.ProgramsBean) = PlayBarFragment(song)
     }
 
 }
