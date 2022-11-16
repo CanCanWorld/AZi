@@ -15,4 +15,6 @@ interface IPlayerControl {
     fun setList(list: ArrayList<Dj.ProgramsBean>)
 
     fun getList(): ArrayList<Dj.ProgramsBean>
+
+    fun seekTo(progress: Int)
 }

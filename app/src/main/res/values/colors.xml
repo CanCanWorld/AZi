@@ -7,6 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_">#D0FFFFFF</color>
+    <color name="white__">#B5FFFFFF</color>
+    <color name="white___">#81FFFFFF</color>
+    <color name="white____">#31FFFFFF</color>
     <color name="app_bg">#7358AE</color>
     <color name="app_bg_">#C47358AE</color>
     <color name="app_bg__">#BC7358AE</color>

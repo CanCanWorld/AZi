@@ -16,6 +16,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
 
+    <SeekBar
+        android:id="@+id/seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:max="100"
+        android:progressDrawable="@drawable/seekbar_progress"
+        android:thumb="@drawable/seekbar_thumb"
+        app:layout_constraintBottom_toTopOf="@id/view_pager" />
+
     <com.zrq.azi.view.VisualizeView
         android:id="@+id/visualizeView"
         android:layout_width="match_parent"

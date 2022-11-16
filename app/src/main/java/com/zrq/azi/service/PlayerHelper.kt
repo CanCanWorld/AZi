@@ -13,6 +13,7 @@ import com.zrq.azi.interfaces.IPlayerControl
 import com.zrq.azi.interfaces.IPlayerViewControl
 import okhttp3.*
 import java.io.IOException
+import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.abs
 import kotlin.math.hypot
@@ -31,18 +32,21 @@ object PlayerHelper : Binder(), IPlayerControl {
 
     private var visualizer: Visualizer? = null
 
+    private var mTimerTask: SeekTimeTask? = null
+
+    private var timer: Timer? = null
+
     init {
         mMediaPlayer.setOnCompletionListener {
+            Log.d(TAG, "${playList.size}: ")
             when (playList.size) {
-                0 -> {
-                }
+                0 -> {}
                 1 -> {}
                 else -> {
-                    if (pos == playList.size - 1) pos = 0 else pos++
+                    if (pos == playList.size - 1) play(0) else play(pos + 1)
                     mViewControl?.onSongPlayOver(pos)
                 }
             }
-            play(pos)
         }
         // 因为直接切歌会发生错误，所以增加错误监听器。返回true。就不会回调onCompletion方法了。
         mMediaPlayer.setOnErrorListener { _, _, _ -> true }
@@ -72,6 +76,7 @@ object PlayerHelper : Binder(), IPlayerControl {
                 mMediaPlayer.start()
                 initVisualizer()
             }
+            startTimer()
         }
     }
 
@@ -82,6 +87,13 @@ object PlayerHelper : Binder(), IPlayerControl {
 
     override fun getList(): ArrayList<Dj.ProgramsBean> {
         return playList
+    }
+
+    override fun seekTo(progress: Int) {
+        if (mMediaPlayer.duration != 0) {
+            val playerSeek = mMediaPlayer.duration * progress / 100
+            mMediaPlayer.seekTo(playerSeek)
+        }
     }
 
     private fun initVisualizer() {
@@ -114,9 +126,7 @@ object PlayerHelper : Binder(), IPlayerControl {
                 mViewControl?.onVisualizeView(model)
             }
         }, Visualizer.getMaxCaptureRate() / 2, false, true)
-
         visualizer!!.enabled = true
-
     }
 
     private fun loadSongUrl(callback: (String) -> Unit) {
@@ -137,11 +147,39 @@ object PlayerHelper : Binder(), IPlayerControl {
                     val json = response.body!!.string()
                     val song = Gson().fromJson(json, SongUrl::class.java)
                     if (song != null && song.data != null) {
-                        callback.invoke(song.data[0].url)
+                        callback(song.data[0].url)
                     }
                 }
             }
         })
+    }
+
+    private fun startTimer() {
+        if (timer == null) {
+            Log.d(TAG, "startTimer: ")
+            timer = Timer()
+            if (mTimerTask == null) {
+                mTimerTask = SeekTimeTask()
+            }
+            timer!!.schedule(mTimerTask, 0, 500)
+        }
+    }
+
+    private fun stopTimer() {
+        timer?.cancel()
+        timer = null
+        mTimerTask?.cancel()
+        mTimerTask = null
+    }
+
+    private class SeekTimeTask : TimerTask() {
+        override fun run() {
+            if (mMediaPlayer.currentPosition != 0) {
+                val durationPosition = 100 * mMediaPlayer.currentPosition / mMediaPlayer.duration
+                mViewControl?.onSeekChange(durationPosition, mMediaPlayer.currentPosition)
+            }
+        }
+
     }
 
 }

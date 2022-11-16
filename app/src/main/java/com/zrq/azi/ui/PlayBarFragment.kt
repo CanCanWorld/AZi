@@ -25,7 +25,6 @@ class PlayBarFragment(
 
     override fun initEvent() {
 
-
         mainModel.playOfPage.observe(this) {
             mBinding.apply {
                 tvSongName.text = song.name

@@ -12,6 +12,7 @@ import android.os.IBinder
 import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.SeekBar
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
@@ -97,6 +98,25 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
                     }
                 }
             })
+
+            seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(
+                    seekBar: SeekBar?,
+                    progress: Int,
+                    fromUser: Boolean
+                ) {
+                    if (fromUser) {
+                        mainModel.playerControl?.seekTo(progress)
+                    }
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                }
+
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                }
+
+            })
         }
 
         mainModel.apply {
@@ -153,6 +173,8 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
     }
 
     override fun onSeekChange(progress: Int, elapsedTime: Int) {
+        Log.d(TAG, "onSeekChange: $progress")
+        mBinding.seekBar.progress = progress
     }
 
     override fun onSongPlayOver(position: Int) {
