@@ -21,6 +21,8 @@ import com.zrq.azi.interfaces.OnItemLongClickListener
 import com.zrq.azi.util.Constants.BASE_URL
 import com.zrq.azi.util.Constants.DJ_PROGRAM
 import com.zrq.azi.util.Constants.PAGE_HOME
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import okhttp3.*
 import java.io.IOException
 
@@ -47,7 +49,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
         }
         if (mainModel.homeListCache.size == 0) {
             loadSong()
-        }else {
+        } else {
             list.clear()
             list.addAll(mainModel.homeListCache)
         }
@@ -101,12 +103,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
     private fun loadSong() {
         Thread {
             val url = "$BASE_URL$DJ_PROGRAM?rid=971535834&limit=${40 * offset}"
+
+            fun finish() {
+                requireActivity().runOnUiThread {
+                    mBinding.refreshLayout.finishRefresh()
+                    mBinding.refreshLayout.finishLoadMore()
+                }
+            }
+
             val request: Request = Request.Builder()
                 .url(url)
                 .get()
                 .build()
             OkHttpClient().newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
+                    finish()
                 }
 
                 @SuppressLint("NotifyDataSetChanged")
@@ -122,20 +133,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
                                 mainModel.homeListCache.addAll(list)
                                 requireActivity().runOnUiThread {
                                     mAdapter.notifyDataSetChanged()
-                                    mBinding.refreshLayout.finishRefresh()
-                                    mBinding.refreshLayout.finishLoadMore()
+                                    finish()
                                 }
                             } else {
-                                mBinding.refreshLayout.finishRefresh()
-                                mBinding.refreshLayout.finishLoadMore()
+                                finish()
                             }
                         } catch (e: Exception) {
-                            mBinding.refreshLayout.finishRefresh()
-                            mBinding.refreshLayout.finishLoadMore()
+                            finish()
                         }
                     } else {
-                        mBinding.refreshLayout.finishRefresh()
-                        mBinding.refreshLayout.finishLoadMore()
+                        finish()
                     }
                 }
             })

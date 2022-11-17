@@ -12,4 +12,9 @@
     <string name="tip">温馨提示</string>
     <string name="ensure">确认</string>
     <string name="never_tip">不再提示</string>
+    <string name="login">LOGIN</string>
+    <string name="login_phone">手机登录</string>
+    <string name="visitor_login">游客登录</string>
+    <string name="email_login">邮箱登录</string>
+    <string name="number">手机号</string>
 </resources>
