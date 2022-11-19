@@ -12,6 +12,10 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+    <style name="circle_img_15">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">15%</item>
+    </style>
 
     <style name="MyDialog">
         <item name="android:windowEnterAnimation">@anim/scale_big</item>

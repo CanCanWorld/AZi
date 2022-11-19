@@ -99,6 +99,7 @@ class LoveFragment : BaseFragment<FragmentLoveBinding>(), OnItemClickListener {
         mainModel.playerControl?.let {
             it.setList(list)
             it.play(position)
+            mainModel.showPlayBar()
         }
     }
 }

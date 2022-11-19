@@ -71,7 +71,7 @@
             android:layout_alignBottom="@id/btn_ensure"
             android:layout_margin="2dp"
             android:layout_toStartOf="@id/btn_ensure"
-            android:buttonTint="@color/app_bg"
+            android:buttonTint="@color/main_color"
             android:text="@string/never_tip"
             tools:ignore="RelativeOverlap" />
 
@@ -82,7 +82,7 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal"
             android:text="@string/ensure"
-            android:textColor="@color/app_bg"
+            android:textColor="@color/main_color"
             app:backgroundTint="@color/purple_100" />
     </RelativeLayout>
 </LinearLayout>

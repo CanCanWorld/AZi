@@ -7,36 +7,36 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.zrq.azi.R
 import com.zrq.azi.bean.Dj
+import com.zrq.azi.bean.SongOfList
+import com.zrq.azi.bean.UserPlayList
+import com.zrq.azi.databinding.ItemListItemBinding
+import com.zrq.azi.databinding.ItemPlayListBinding
 import com.zrq.azi.databinding.ItemSongBinding
 import com.zrq.azi.interfaces.OnItemClickListener
 import com.zrq.azi.interfaces.OnItemLongClickListener
 import com.zrq.azi.util.Util.formatDuration
 import java.text.SimpleDateFormat
 
-class SongItemAdapter(
+class ListItemAdapter(
     private val context: Context,
-    private val list: ArrayList<Dj.ProgramsBean>,
+    private val list: ArrayList<SongOfList.SongsDTO>,
     private val onItemClickListener: OnItemClickListener,
     private val onItemLongClickListener: OnItemLongClickListener,
-) : RecyclerView.Adapter<VH<ItemSongBinding>>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH<ItemSongBinding> {
-        return VH(ItemSongBinding.inflate(LayoutInflater.from(context), parent, false))
+) : RecyclerView.Adapter<VH<ItemListItemBinding>>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH<ItemListItemBinding> {
+        return VH(ItemListItemBinding.inflate(LayoutInflater.from(context), parent, false))
     }
 
-    @SuppressLint("SimpleDateFormat")
-    override fun onBindViewHolder(holder: VH<ItemSongBinding>, position: Int) {
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
+    override fun onBindViewHolder(holder: VH<ItemListItemBinding>, position: Int) {
         val bean = list[position]
         holder.binding.apply {
             tvTitle.text = bean.name
-            tvDuration.text = formatDuration(bean.duration)
-            tvPlayCount.text = bean.listenerCount.toString()
-            SimpleDateFormat("yyyy-MM-dd").apply {
-                tvUpdateTime.text = this.format(bean.createTime)
-            }
-            val drawable = root.background as GradientDrawable
-            drawable.color = ContextCompat.getColorStateList(root.context, R.color.main_color)
+            tvDetail.text = "共${bean.trackCount}首歌"
+            Glide.with(context).load(bean.coverImgUrl).into(ivAlbum)
             root.setOnClickListener {
                 onItemClickListener.onItemClick(it, holder.adapterPosition)
             }

@@ -17,4 +17,10 @@
     <string name="visitor_login">游客登录</string>
     <string name="email_login">邮箱登录</string>
     <string name="number">手机号</string>
+    <string name="verification_code">验证码</string>
+    <string name="get_verification">获取验证码</string>
+    <string name="love">喜欢</string>
+    <string name="recently">最近</string>
+    <string name="local">本地</string>
+    <string name="_1">1</string>
 </resources>

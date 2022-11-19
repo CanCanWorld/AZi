@@ -2,11 +2,17 @@ package com.zrq.azi.util
 
 object Constants {
 
-    const val BASE_URL = "https://www.zhangruiqian.ga/"
+    const val BASE_URL = "https://www.zhangruiqian.ga"
 
-    const val DJ_PROGRAM = "dj/program"
+    const val LOGIN_VISITOR ="/register/anonimous"
 
-    const val SONG_URL = "song/url"
+    const val LOGIN_NUMBER_PASSWORD = "/login/cellphone"
+
+    const val USER_PLAY_LIST = "/user/playlist"
+
+    const val DJ_PROGRAM = "/dj/program"
+
+    const val SONG_URL = "/song/url"
 
     const val DATABASE_NAME = "azi_player"
 

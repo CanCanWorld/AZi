@@ -2,27 +2,22 @@ package com.zrq.azi.ui
 
 import android.annotation.SuppressLint
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
-import com.zrq.azi.R
-import com.zrq.azi.adapter.SongItemAdapter
-import com.zrq.azi.bean.Dj
+import com.zrq.azi.adapter.PlayListAdapter
+import com.zrq.azi.bean.UserPlayList
 import com.zrq.azi.databinding.FragmentHomeBinding
 import com.zrq.azi.interfaces.OnItemClickListener
 import com.zrq.azi.interfaces.OnItemLongClickListener
 import com.zrq.azi.util.Constants.BASE_URL
-import com.zrq.azi.util.Constants.DJ_PROGRAM
-import com.zrq.azi.util.Constants.PAGE_HOME
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import com.zrq.azi.util.Constants.USER_PLAY_LIST
 import okhttp3.*
 import java.io.IOException
 
@@ -35,20 +30,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
         return FragmentHomeBinding.inflate(inflater, container, false)
     }
 
-    private val list = ArrayList<Dj.ProgramsBean>()
-    private lateinit var mAdapter: SongItemAdapter
+    private val list = ArrayList<UserPlayList.PlaylistDTO>()
+    private lateinit var mAdapter: PlayListAdapter
     private var offset = 1
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun initData() {
         setScreen()
-        mAdapter = SongItemAdapter(requireContext(), list, this, this)
+        mAdapter = PlayListAdapter(requireContext(), list, this, this)
         mBinding.apply {
             recyclerView.adapter = mAdapter
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
         if (mainModel.homeListCache.size == 0) {
-            loadSong()
+            loadUserPlayList()
         } else {
             list.clear()
             list.addAll(mainModel.homeListCache)
@@ -65,15 +60,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
 
     override fun initEvent() {
         mBinding.apply {
-            refreshLayout.setOnRefreshListener {
-                offset = 1
-                loadSong()
-            }
-
-            refreshLayout.setOnLoadMoreListener {
-                offset++
-                loadSong()
-            }
 
             recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 @RequiresApi(Build.VERSION_CODES.P)
@@ -85,64 +71,47 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
                 }
 
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        mBinding.fab.show()
-                    } else {
-                        mBinding.fab.hide()
-                    }
                 }
             })
 
-            fab.setOnClickListener {
-                Navigation.findNavController(requireActivity(), R.id.fragment_container)
-                    .navigate(R.id.action_global_loveFragment2)
-            }
         }
     }
 
-    private fun loadSong() {
+    private fun loadUserPlayList() {
         Thread {
-            val url = "$BASE_URL$DJ_PROGRAM?rid=971535834&limit=${40 * offset}"
-
-            fun finish() {
-                requireActivity().runOnUiThread {
-                    mBinding.refreshLayout.finishRefresh()
-                    mBinding.refreshLayout.finishLoadMore()
-                }
-            }
-
+            Log.d(TAG, "loadUserPlayList: ")
+            val url = "$BASE_URL$USER_PLAY_LIST?uid=1443709708&offset=0&limit=200"
             val request: Request = Request.Builder()
                 .url(url)
                 .get()
                 .build()
             OkHttpClient().newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    finish()
                 }
 
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(call: Call, response: Response) {
                     if (response.body != null) {
                         val json = response.body!!.string()
+                        Log.d(TAG, "onResponse: $json")
                         try {
-                            val dj = Gson().fromJson(json, Dj::class.java)
-                            if (dj?.programs != null) {
+                            val dj = Gson().fromJson(json, UserPlayList::class.java)
+                            Log.d(TAG, "onResponse: ${dj.playlist}")
+                            if (dj?.playlist != null) {
                                 list.clear()
-                                list.addAll(dj.programs)
+                                list.addAll(dj.playlist)
+                                Log.d(TAG, "onResponse: $list")
                                 mainModel.homeListCache.clear()
                                 mainModel.homeListCache.addAll(list)
                                 requireActivity().runOnUiThread {
                                     mAdapter.notifyDataSetChanged()
-                                    finish()
                                 }
                             } else {
-                                finish()
                             }
                         } catch (e: Exception) {
-                            finish()
+                            Log.d(TAG, "onResponse: $e")
                         }
                     } else {
-                        finish()
                     }
                 }
             })
@@ -150,19 +119,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
     }
 
     override fun onItemClick(view: View, position: Int) {
-        mainModel.homeList.clear()
-        mainModel.homeList.addAll(list)
-        mainModel.playOfPage.postValue(PAGE_HOME)
-        mainModel.position.postValue(position)
-        mainModel.playerControl?.let {
-            it.setList(list)
-            it.play(position)
-        }
     }
 
     override fun onItemLongClick(view: View, position: Int) {
-        mainModel.songDaoImpl?.addSong(list[position])
-        Toast.makeText(requireContext(), "已收藏", Toast.LENGTH_SHORT).show()
     }
 
     companion object {

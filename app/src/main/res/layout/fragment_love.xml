@@ -22,7 +22,7 @@
         android:layout_marginBottom="20dp"
         android:src="@drawable/ic_baseline_home_24"
         android:tint="@color/white"
-        app:backgroundTint="@color/app_bg"
+        app:backgroundTint="@color/main_color"
         app:fabSize="normal"
         tools:ignore="ContentDescription" />
 </RelativeLayout>

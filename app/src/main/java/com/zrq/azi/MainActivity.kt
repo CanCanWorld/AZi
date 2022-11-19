@@ -12,6 +12,7 @@ import android.os.IBinder
 import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.SeekBar
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
@@ -74,6 +75,16 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
         //数据库
         songDaoImpl = SongDaoImpl(SongDatabaseHelper(this))
         mainModel.songDaoImpl = songDaoImpl
+
+        //mainModel
+        mainModel.hidePlayBar = {
+            mBinding.llPlayerBar.visibility = View.GONE
+            mBinding.visualizeView.visibility = View.GONE
+        }
+        mainModel.showPlayBar = {
+            mBinding.llPlayerBar.visibility = View.VISIBLE
+            mBinding.visualizeView.visibility = View.VISIBLE
+        }
 
         mVpAdapter = ViewpagerAdapter(this, list)
         mBinding.apply {
