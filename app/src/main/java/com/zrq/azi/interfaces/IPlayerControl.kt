@@ -1,6 +1,7 @@
 package com.zrq.azi.interfaces
 
 import com.zrq.azi.bean.Dj
+import com.zrq.azi.bean.SongOfList
 
 interface IPlayerControl {
 
@@ -12,9 +13,11 @@ interface IPlayerControl {
 
     fun play(position: Int)
 
-    fun setList(list: ArrayList<Dj.ProgramsBean>)
+    fun next()
 
-    fun getList(): ArrayList<Dj.ProgramsBean>
+    fun setList(list: ArrayList<SongOfList.SongsDTO>)
+
+    fun getList(): ArrayList<SongOfList.SongsDTO>
 
     fun seekTo(progress: Int)
 }

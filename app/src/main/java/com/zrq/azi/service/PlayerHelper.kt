@@ -5,7 +5,7 @@ import android.media.audiofx.Visualizer
 import android.os.Binder
 import android.util.Log
 import com.google.gson.Gson
-import com.zrq.azi.bean.Dj
+import com.zrq.azi.bean.SongOfList
 import com.zrq.azi.bean.SongUrl
 import com.zrq.azi.util.Constants.BASE_URL
 import com.zrq.azi.util.Constants.SONG_URL
@@ -24,7 +24,7 @@ object PlayerHelper : Binder(), IPlayerControl {
 
     private var mMediaPlayer: MediaPlayer = MediaPlayer()
 
-    private var playList = ArrayList<Dj.ProgramsBean>()
+    private var playList = ArrayList<SongOfList.SongsDTO>()
 
     private var pos = 0
 
@@ -39,14 +39,7 @@ object PlayerHelper : Binder(), IPlayerControl {
     init {
         mMediaPlayer.setOnCompletionListener {
             Log.d(TAG, "${playList.size}: ")
-            when (playList.size) {
-                0 -> {}
-                1 -> {}
-                else -> {
-                    if (pos == playList.size - 1) play(0) else play(pos + 1)
-                    mViewControl?.onSongPlayOver(pos)
-                }
-            }
+            next()
         }
         // 因为直接切歌会发生错误，所以增加错误监听器。返回true。就不会回调onCompletion方法了。
         mMediaPlayer.setOnErrorListener { _, _, _ -> true }
@@ -74,18 +67,29 @@ object PlayerHelper : Binder(), IPlayerControl {
             mMediaPlayer.prepareAsync()
             mMediaPlayer.setOnPreparedListener {
                 mMediaPlayer.start()
-                initVisualizer()
+//                initVisualizer()
             }
             startTimer()
         }
     }
 
-    override fun setList(list: ArrayList<Dj.ProgramsBean>) {
+    override fun next() {
+        when (playList.size) {
+            0 -> {}
+            1 -> {}
+            else -> {
+                if (pos == playList.size - 1) play(0) else play(pos + 1)
+                mViewControl?.onSongPlayOver(pos)
+            }
+        }
+    }
+
+    override fun setList(list: ArrayList<SongOfList.SongsDTO>) {
         playList.clear()
         playList.addAll(list)
     }
 
-    override fun getList(): ArrayList<Dj.ProgramsBean> {
+    override fun getList(): ArrayList<SongOfList.SongsDTO> {
         return playList
     }
 
@@ -130,7 +134,7 @@ object PlayerHelper : Binder(), IPlayerControl {
     }
 
     private fun loadSongUrl(callback: (String) -> Unit) {
-        val id = playList[pos].mainSong.id
+        val id = playList[pos].id
         val url = "$BASE_URL$SONG_URL?id=$id"
         Log.d(TAG, "loadSong: $url")
         val request: Request = Request.Builder()
@@ -140,15 +144,21 @@ object PlayerHelper : Binder(), IPlayerControl {
         OkHttpClient().newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.d(TAG, "onFailure: ")
+                next()
+
             }
 
             override fun onResponse(call: Call, response: Response) {
                 if (response.body != null) {
                     val json = response.body!!.string()
                     val song = Gson().fromJson(json, SongUrl::class.java)
-                    if (song != null && song.data != null) {
+                    if (song?.data?.get(0)?.url != null) {
                         callback(song.data[0].url)
+                    }else{
+                        next()
                     }
+                }else{
+                    next()
                 }
             }
         })

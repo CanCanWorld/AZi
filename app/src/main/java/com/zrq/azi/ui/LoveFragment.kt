@@ -92,14 +92,14 @@ class LoveFragment : BaseFragment<FragmentLoveBinding>(), OnItemClickListener {
     }
 
     override fun onItemClick(view: View, position: Int) {
-        mainModel.loveList.clear()
-        mainModel.loveList.addAll(list)
-        mainModel.playOfPage.postValue(Constants.PAGE_LOVE)
-        mainModel.position.postValue(position)
-        mainModel.playerControl?.let {
-            it.setList(list)
-            it.play(position)
-            mainModel.showPlayBar()
-        }
+//        mainModel.loveList.clear()
+//        mainModel.loveList.addAll(list)
+//        mainModel.playOfPage.postValue(Constants.PAGE_LOVE)
+//        mainModel.position.postValue(position)
+//        mainModel.playerControl?.let {
+//            it.setList(list)
+//            it.play(position)
+//            mainModel.showPlayBar()
+//        }
     }
 }

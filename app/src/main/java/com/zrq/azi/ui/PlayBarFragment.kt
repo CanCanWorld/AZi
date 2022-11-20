@@ -3,13 +3,11 @@ package com.zrq.azi.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.zrq.azi.bean.Dj
+import com.zrq.azi.bean.SongOfList
 import com.zrq.azi.databinding.FragmentPlayBarBinding
-import com.zrq.azi.util.Constants.PAGE_HOME
-import com.zrq.azi.util.Constants.PAGE_LOVE
 
 class PlayBarFragment(
-    private val song: Dj.ProgramsBean
+    private val song: SongOfList.SongsDTO
 ) : BaseFragment<FragmentPlayBarBinding>() {
 
 
@@ -24,21 +22,16 @@ class PlayBarFragment(
     }
 
     override fun initEvent() {
-
-        mainModel.playOfPage.observe(this) {
-            mBinding.apply {
-                tvSongName.text = song.name
-                Glide.with(this@PlayBarFragment)
-                    .load(song.coverUrl)
-                    .into(ivAlbum)
-            }
+        mBinding.apply {
+            tvSongName.text = song.name
+            Glide.with(this@PlayBarFragment)
+                .load(song.al.picUrl)
+                .into(ivAlbum)
         }
-
-
     }
 
     companion object {
-        fun newInstance(song: Dj.ProgramsBean) = PlayBarFragment(song)
+        fun newInstance(song: SongOfList.SongsDTO) = PlayBarFragment(song)
     }
 
 }

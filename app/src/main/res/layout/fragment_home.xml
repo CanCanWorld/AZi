@@ -16,8 +16,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/shape_card"
             android:orientation="horizontal"
             android:padding="15dp">
@@ -109,12 +109,22 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/item_play_list"
-            app:layout_constraintBottom_toTopOf="@id/view_pager"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent">
+
+            <com.scwang.smart.refresh.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toTopOf="@id/view_pager"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/item_play_list" />
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
     </LinearLayout>
 </ScrollView>

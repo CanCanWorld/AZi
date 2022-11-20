@@ -2,6 +2,7 @@ package com.zrq.azi.bean;
 
 import androidx.annotation.Keep;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Keep
@@ -9,7 +10,7 @@ public class UserPlayList{
 
     private String version;
     private boolean more;
-    private List<PlaylistDTO> playlist;
+    private ArrayList<PlaylistDTO> playlist;
     private int code;
 
     public String getVersion() {
@@ -28,11 +29,11 @@ public class UserPlayList{
         this.more = more;
     }
 
-    public List<PlaylistDTO> getPlaylist() {
+    public ArrayList<PlaylistDTO> getPlaylist() {
         return playlist;
     }
 
-    public void setPlaylist(List<PlaylistDTO> playlist) {
+    public void setPlaylist(ArrayList<PlaylistDTO> playlist) {
         this.playlist = playlist;
     }
 
@@ -45,6 +46,8 @@ public class UserPlayList{
     }
 
     public static class PlaylistDTO {
+        private String songGson;
+        private int _id;
         private List<?> subscribers;
         private boolean subscribed;
         private CreatorDTO creator;
@@ -87,6 +90,23 @@ public class UserPlayList{
         private Object sharedUsers;
         private Object shareStatus;
         private boolean copied;
+
+
+        public void setSongGson(String songGson) {
+            this.songGson = songGson;
+        }
+
+        public String getSongGson() {
+            return songGson;
+        }
+
+        public void set_id(int _id) {
+            this._id = _id;
+        }
+
+        public int get_id() {
+            return _id;
+        }
 
         public List<?> getSubscribers() {
             return subscribers;
@@ -704,6 +724,56 @@ public class UserPlayList{
             public void setAvatarImgId_str(String avatarImgId_str) {
                 this.avatarImgId_str = avatarImgId_str;
             }
+        }
+
+        @Override
+        public String toString() {
+            return "PlaylistDTO{" +
+                    "songGson='" + songGson + '\'' +
+                    ", _id=" + _id +
+                    ", subscribers=" + subscribers +
+                    ", subscribed=" + subscribed +
+                    ", creator=" + creator +
+                    ", artists=" + artists +
+                    ", tracks=" + tracks +
+                    ", updateFrequency=" + updateFrequency +
+                    ", backgroundCoverId=" + backgroundCoverId +
+                    ", backgroundCoverUrl=" + backgroundCoverUrl +
+                    ", titleImage=" + titleImage +
+                    ", titleImageUrl=" + titleImageUrl +
+                    ", englishTitle=" + englishTitle +
+                    ", opRecommend=" + opRecommend +
+                    ", recommendInfo=" + recommendInfo +
+                    ", subscribedCount=" + subscribedCount +
+                    ", cloudTrackCount=" + cloudTrackCount +
+                    ", userId=" + userId +
+                    ", totalDuration=" + totalDuration +
+                    ", coverImgId=" + coverImgId +
+                    ", privacy=" + privacy +
+                    ", trackUpdateTime=" + trackUpdateTime +
+                    ", trackCount=" + trackCount +
+                    ", updateTime=" + updateTime +
+                    ", commentThreadId='" + commentThreadId + '\'' +
+                    ", coverImgUrl='" + coverImgUrl + '\'' +
+                    ", specialType=" + specialType +
+                    ", anonimous=" + anonimous +
+                    ", createTime=" + createTime +
+                    ", highQuality=" + highQuality +
+                    ", newImported=" + newImported +
+                    ", trackNumberUpdateTime=" + trackNumberUpdateTime +
+                    ", playCount=" + playCount +
+                    ", adType=" + adType +
+                    ", description='" + description + '\'' +
+                    ", tags=" + tags +
+                    ", ordered=" + ordered +
+                    ", status=" + status +
+                    ", name='" + name + '\'' +
+                    ", id=" + id +
+                    ", coverImgId_str='" + coverImgId_str + '\'' +
+                    ", sharedUsers=" + sharedUsers +
+                    ", shareStatus=" + shareStatus +
+                    ", copied=" + copied +
+                    '}';
         }
     }
 }

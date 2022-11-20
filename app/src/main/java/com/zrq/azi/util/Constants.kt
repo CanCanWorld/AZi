@@ -4,11 +4,13 @@ object Constants {
 
     const val BASE_URL = "https://www.zhangruiqian.ga"
 
-    const val LOGIN_VISITOR ="/register/anonimous"
+    const val LOGIN_VISITOR = "/register/anonimous"
 
     const val LOGIN_NUMBER_PASSWORD = "/login/cellphone"
 
     const val USER_PLAY_LIST = "/user/playlist"
+
+    const val PLAY_LIST_ALL = "/playlist/track/all"
 
     const val DJ_PROGRAM = "/dj/program"
 
@@ -16,26 +18,21 @@ object Constants {
 
     const val DATABASE_NAME = "azi_player"
 
-    const val DATABASE_VERSION = 1
-
-    const val TABLE_NAME = "azi_music_table"
+    const val DATABASE_VERSION = 3
 
     const val FIELD_ID = "_id"
 
-    const val FIELD_SONG_NAME = "song_name"
+    //歌单表
+    const val LIST_TABLE = "list_table"
 
-    const val FIELD_COVER = "cover"
+    const val LIST_NAME = "name"
 
-    const val FIELD_SONG_ID = "song_id"
+    const val LIST_ID = "list_id"
 
-    const val FIELD_LISTENER_COUNT = "listener_count"
+    const val LIST_COUNT = "count"
 
-    const val FIELD_DURATION = "duration"
+    const val LIST_COVER = "cover"
 
-    const val FIELD_CREATE_TIME = "create_time"
-
-    const val PAGE_HOME = 0
-
-    const val PAGE_LOVE = 1
+    const val LIST_SONGS = "list_songs"
 
 }

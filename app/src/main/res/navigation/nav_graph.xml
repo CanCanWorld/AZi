@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.zrq.azi.ui.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_playListFragment"
+            app:destination="@id/playListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loveFragment"
         android:name="com.zrq.azi.ui.LoveFragment"
@@ -32,4 +36,9 @@
         android:name="com.zrq.azi.ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/playListFragment"
+        android:name="com.zrq.azi.ui.PlayListFragment"
+        android:label="fragment_play_list"
+        tools:layout="@layout/fragment_play_list" />
 </navigation>

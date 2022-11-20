@@ -33,6 +33,7 @@ public class SongOfList {
     }
 
     public static class SongsDTO {
+        private int _id;
         private String name;
         private int id;
         private int pst;
@@ -62,7 +63,7 @@ public class SongOfList {
         private int djId;
         private int copyright;
         private int s_id;
-        private int mark;
+        private long mark;
         private int originCoverType;
         private Object originSongSimpleData;
         private Object tagPicList;
@@ -78,8 +79,25 @@ public class SongOfList {
         private int rtype;
         private Object rurl;
         private int mv;
-        private int publishTime;
+        private long publishTime;
         private List<String> tns;
+        private String singer;
+
+        public void set_id(int _id) {
+            this._id = _id;
+        }
+
+        public int get_id() {
+            return _id;
+        }
+
+        public void setSinger(String singer) {
+            this.singer = singer;
+        }
+
+        public String getSinger() {
+            return singer;
+        }
 
         public String getName() {
             return name;
@@ -313,11 +331,11 @@ public class SongOfList {
             this.s_id = s_id;
         }
 
-        public int getMark() {
+        public long getMark() {
             return mark;
         }
 
-        public void setMark(int mark) {
+        public void setMark(long mark) {
             this.mark = mark;
         }
 
@@ -441,11 +459,11 @@ public class SongOfList {
             this.mv = mv;
         }
 
-        public int getPublishTime() {
+        public long getPublishTime() {
             return publishTime;
         }
 
-        public void setPublishTime(int publishTime) {
+        public void setPublishTime(long publishTime) {
             this.publishTime = publishTime;
         }
 
@@ -518,7 +536,7 @@ public class SongOfList {
             private int br;
             private int fid;
             private int size;
-            private int vd;
+            private float vd;
             private int sr;
 
             public int getBr() {
@@ -545,11 +563,11 @@ public class SongOfList {
                 this.size = size;
             }
 
-            public int getVd() {
+            public float getVd() {
                 return vd;
             }
 
-            public void setVd(int vd) {
+            public void setVd(float vd) {
                 this.vd = vd;
             }
 
@@ -566,7 +584,7 @@ public class SongOfList {
             private int br;
             private int fid;
             private int size;
-            private int vd;
+            private float vd;
             private int sr;
 
             public int getBr() {
@@ -593,11 +611,11 @@ public class SongOfList {
                 this.size = size;
             }
 
-            public int getVd() {
+            public float getVd() {
                 return vd;
             }
 
-            public void setVd(int vd) {
+            public void setVd(float vd) {
                 this.vd = vd;
             }
 
@@ -614,7 +632,7 @@ public class SongOfList {
             private int br;
             private int fid;
             private int size;
-            private int vd;
+            private float vd;
             private int sr;
 
             public int getBr() {
@@ -641,11 +659,11 @@ public class SongOfList {
                 this.size = size;
             }
 
-            public int getVd() {
+            public float getVd() {
                 return vd;
             }
 
-            public void setVd(int vd) {
+            public void setVd(float vd) {
                 this.vd = vd;
             }
 
@@ -662,7 +680,7 @@ public class SongOfList {
             private int br;
             private int fid;
             private int size;
-            private int vd;
+            private float vd;
             private int sr;
 
             public int getBr() {
@@ -689,11 +707,11 @@ public class SongOfList {
                 this.size = size;
             }
 
-            public int getVd() {
+            public float getVd() {
                 return vd;
             }
 
-            public void setVd(int vd) {
+            public void setVd(float vd) {
                 this.vd = vd;
             }
 
@@ -710,7 +728,7 @@ public class SongOfList {
             private int br;
             private int fid;
             private int size;
-            private int vd;
+            private float vd;
             private int sr;
 
             public int getBr() {
@@ -737,11 +755,11 @@ public class SongOfList {
                 this.size = size;
             }
 
-            public int getVd() {
+            public float getVd() {
                 return vd;
             }
 
-            public void setVd(int vd) {
+            public void setVd(float vd) {
                 this.vd = vd;
             }
 

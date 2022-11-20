@@ -6,6 +6,7 @@ import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
@@ -13,25 +14,26 @@ import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import android.widget.SeekBar
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.tencent.mmkv.MMKV
 import com.zrq.azi.adapter.ViewpagerAdapter
-import com.zrq.azi.bean.Dj
-import com.zrq.azi.dao.SongDaoImpl
+import com.zrq.azi.bean.SongOfList
+import com.zrq.azi.dao.ListDaoImpl
 import com.zrq.azi.databinding.ActivityMainBinding
 import com.zrq.azi.databinding.DialogTipBinding
 import com.zrq.azi.db.SongDatabaseHelper
 import com.zrq.azi.service.PlayerService
 import com.zrq.azi.interfaces.IPlayerControl
 import com.zrq.azi.interfaces.IPlayerViewControl
-import com.zrq.azi.ui.HomeFragment
-import com.zrq.azi.util.Constants
 import com.zrq.azi.view.VisualizeView
 
 class MainActivity : AppCompatActivity(), IPlayerViewControl {
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -46,9 +48,11 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
 
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mainModel: MainModel
-    private lateinit var songDaoImpl: SongDaoImpl
+
+    private lateinit var listDaoImpl: ListDaoImpl
+
     private lateinit var mVpAdapter: ViewpagerAdapter
-    private val list = ArrayList<Dj.ProgramsBean>()
+    private val list = ArrayList<SongOfList.SongsDTO>()
     private var dialogTip: AlertDialog? = null
     private val dialogTipBinding by lazy {
         DialogTipBinding.inflate(LayoutInflater.from(this))
@@ -71,10 +75,11 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
         bindService(intent, connection, BIND_AUTO_CREATE)
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     private fun initData() {
         //数据库
-        songDaoImpl = SongDaoImpl(SongDatabaseHelper(this))
-        mainModel.songDaoImpl = songDaoImpl
+        listDaoImpl = ListDaoImpl(SongDatabaseHelper(this))
+        mainModel.listDaoImpl = listDaoImpl
 
         //mainModel
         mainModel.hidePlayBar = {
@@ -91,6 +96,12 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
             viewPager.adapter = mVpAdapter
             visualizeView.setMode(VisualizeView.SINGLE)
         }
+        mainModel.setScreen = {
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            val lp: WindowManager.LayoutParams = window.attributes
+            lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+            window.attributes = lp
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -98,11 +109,12 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
         //提示框
         if (MMKV.defaultMMKV().decodeBool("show_tip", true))
             showTipDialog()
+
         mBinding.apply {
             viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    Log.d(HomeFragment.TAG, "onPageSelected: $position")
+                    Log.d(TAG, "onPageSelected: $position")
                     mainModel.playerControl?.let {
                         it.setList(list)
                         it.play(position)
@@ -134,17 +146,10 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
             position.observe(this@MainActivity) {
                 mBinding.viewPager.setCurrentItem(it, false)
             }
-            playOfPage.observe(this@MainActivity) {
+
+            playList.observe(this@MainActivity) {
                 list.clear()
-                when (it) {
-                    Constants.PAGE_HOME -> {
-                        list.addAll(mainModel.homeList)
-                    }
-                    Constants.PAGE_LOVE -> {
-                        list.addAll(mainModel.loveList)
-                    }
-                    else -> {}
-                }
+                list.addAll(it)
                 mVpAdapter.notifyDataSetChanged()
             }
         }
