@@ -4,15 +4,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.Navigation
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.tencent.mmkv.MMKV
 import com.zrq.azi.R
+import com.zrq.azi.bean.LoginInfo
 import com.zrq.azi.databinding.FragmentLoginBinding
 import com.zrq.azi.util.Constants.BASE_URL
 import com.zrq.azi.util.Constants.LOGIN_NUMBER
 import com.zrq.azi.util.Constants.SENT_CAPTCHA
+import com.zrq.azi.util.ToastUtil
 import com.zrq.azi.util.Util.httpGet
 import org.json.JSONObject
 
@@ -43,6 +48,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                         textInputPassword.hint = "验证码"
                         tvCardTitle.text = "手机登录"
                         btnGetVerification.visibility = View.VISIBLE
+                        etPassword.setText("")
+                        etPassword.inputType = EditorInfo.TYPE_CLASS_TEXT
                         TYPE_NUMBER
                     }
                     else -> {
@@ -53,6 +60,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                         llPassword.visibility = View.GONE
                         tvRight.text = "手机登录"
                         tvCardTitle.text = "游客登录"
+                        etPassword.inputType = EditorInfo.TYPE_CLASS_TEXT
                         TYPE_VISITOR
                     }
                 }
@@ -71,6 +79,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                         textInputNumber.hint = "手机号"
                         textInputPassword.hint = "验证码"
                         tvCardTitle.text = "手机登录"
+                        etPassword.inputType = EditorInfo.TYPE_CLASS_TEXT
+                        etPassword.setText("")
                         btnGetVerification.visibility = View.VISIBLE
                         TYPE_NUMBER
                     }
@@ -84,6 +94,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                         textInputPassword.hint = "密码"
                         tvLeft.text = "手机登录"
                         tvCardTitle.text = "密码登录"
+                        etPassword.inputType = 129
+                        etPassword.setText("")
                         btnGetVerification.visibility = View.GONE
                         TYPE_EMAIL
                     }
@@ -154,15 +166,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         httpGet(url) { success, msg ->
             if (success) {
                 Log.d(TAG, "loginWithCaptcha: $msg")
-                JSONObject(msg).let {
-                    if (it["code"] == 200) {
-                        val uid = JSONObject(it["id"].toString()).get("id").toString()
-                        Log.d(TAG, "getVerification: $uid")
-                        MMKV.defaultMMKV().putString("uid", uid)
-                    }
+                val loginInfo = Gson().fromJson(msg, LoginInfo::class.java)
+                if (loginInfo.code == 200 && loginInfo?.account?.id != null) {
+                    MMKV.defaultMMKV().putString("uid", loginInfo.account.id.toString())
+                    MMKV.defaultMMKV().putString("avatarUrl", loginInfo.profile.avatarUrl)
+                    MMKV.defaultMMKV().putString("nickname", loginInfo.profile.nickname)
+                    Navigation.findNavController(requireActivity(), R.id.fragment_container)
+                        .navigate(R.id.homeFragment)
+                } else {
+                    ToastUtil.showToast(requireContext(), msg)
                 }
             } else {
-                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                ToastUtil.showToast(requireContext(), msg)
                 Log.e(TAG, "loginWithCaptcha: $msg")
             }
         }
@@ -173,8 +188,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         httpGet(url) { success, msg ->
             if (success) {
                 Log.d(TAG, "loginWithPassword: $msg")
+                val loginInfo = Gson().fromJson(msg, LoginInfo::class.java)
+                if (loginInfo.code == 200 && loginInfo?.account?.id != null) {
+                    MMKV.defaultMMKV().putString("uid", loginInfo.account.id.toString())
+                    Navigation.findNavController(requireActivity(), R.id.fragment_container)
+                        .navigate(R.id.homeFragment)
+                } else {
+                    ToastUtil.showToast(requireContext(), msg)
+                }
             } else {
-                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                ToastUtil.showToast(requireContext(), msg)
                 Log.e(TAG, "loginWithPassword: $msg")
             }
         }

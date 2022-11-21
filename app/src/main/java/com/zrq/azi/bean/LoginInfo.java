@@ -4,7 +4,7 @@ import java.util.List;
 
 public class LoginInfo {
 
-    private int loginType;
+    private long loglongype;
     private int code;
     private AccountDTO account;
     private String token;
@@ -12,12 +12,12 @@ public class LoginInfo {
     private List<BindingsDTO> bindings;
     private String cookie;
 
-    public int getLoginType() {
-        return loginType;
+    public long getLoglongype() {
+        return loglongype;
     }
 
-    public void setLoginType(int loginType) {
-        this.loginType = loginType;
+    public void setLoglongype(long loglongype) {
+        this.loglongype = loglongype;
     }
 
     public int getCode() {
@@ -69,27 +69,27 @@ public class LoginInfo {
     }
 
     public static class AccountDTO {
-        private int id;
+        private long id;
         private String userName;
-        private int type;
-        private int status;
-        private int whitelistAuthority;
+        private long type;
+        private long status;
+        private long whitelistAuthority;
         private long createTime;
         private String salt;
-        private int tokenVersion;
-        private int ban;
-        private int baoyueVersion;
-        private int donateVersion;
-        private int vipType;
+        private long tokenVersion;
+        private long ban;
+        private long baoyueVersion;
+        private long donateVersion;
+        private long vipType;
         private long viptypeVersion;
         private boolean anonimousUser;
         private boolean uninitialized;
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(long id) {
             this.id = id;
         }
 
@@ -101,27 +101,27 @@ public class LoginInfo {
             this.userName = userName;
         }
 
-        public int getType() {
+        public long getType() {
             return type;
         }
 
-        public void setType(int type) {
+        public void setType(long type) {
             this.type = type;
         }
 
-        public int getStatus() {
+        public long getStatus() {
             return status;
         }
 
-        public void setStatus(int status) {
+        public void setStatus(long status) {
             this.status = status;
         }
 
-        public int getWhitelistAuthority() {
+        public long getWhitelistAuthority() {
             return whitelistAuthority;
         }
 
-        public void setWhitelistAuthority(int whitelistAuthority) {
+        public void setWhitelistAuthority(long whitelistAuthority) {
             this.whitelistAuthority = whitelistAuthority;
         }
 
@@ -141,43 +141,43 @@ public class LoginInfo {
             this.salt = salt;
         }
 
-        public int getTokenVersion() {
+        public long getTokenVersion() {
             return tokenVersion;
         }
 
-        public void setTokenVersion(int tokenVersion) {
+        public void setTokenVersion(long tokenVersion) {
             this.tokenVersion = tokenVersion;
         }
 
-        public int getBan() {
+        public long getBan() {
             return ban;
         }
 
-        public void setBan(int ban) {
+        public void setBan(long ban) {
             this.ban = ban;
         }
 
-        public int getBaoyueVersion() {
+        public long getBaoyueVersion() {
             return baoyueVersion;
         }
 
-        public void setBaoyueVersion(int baoyueVersion) {
+        public void setBaoyueVersion(long baoyueVersion) {
             this.baoyueVersion = baoyueVersion;
         }
 
-        public int getDonateVersion() {
+        public long getDonateVersion() {
             return donateVersion;
         }
 
-        public void setDonateVersion(int donateVersion) {
+        public void setDonateVersion(long donateVersion) {
             this.donateVersion = donateVersion;
         }
 
-        public int getVipType() {
+        public long getVipType() {
             return vipType;
         }
 
-        public void setVipType(int vipType) {
+        public void setVipType(long vipType) {
             this.vipType = vipType;
         }
 
@@ -209,23 +209,23 @@ public class LoginInfo {
     public static class ProfileDTO {
         private boolean followed;
         private String backgroundUrl;
-        private int userId;
+        private long userId;
         private String avatarImgIdStr;
         private String backgroundImgIdStr;
-        private int userType;
+        private long userType;
         private String avatarUrl;
-        private int vipType;
-        private int authStatus;
-        private int djStatus;
+        private long vipType;
+        private long authStatus;
+        private long djStatus;
         private String detailDescription;
         private ExpertsDTO experts;
         private Object expertTags;
-        private int accountStatus;
+        private long accountStatus;
         private String nickname;
         private long birthday;
-        private int gender;
-        private int province;
-        private int city;
+        private long gender;
+        private long province;
+        private long city;
         private long avatarImgId;
         private long backgroundImgId;
         private boolean defaultAvatar;
@@ -233,14 +233,14 @@ public class LoginInfo {
         private boolean mutual;
         private String description;
         private String signature;
-        private int authority;
+        private long authority;
         private String avatarImgId_str;
-        private int followeds;
-        private int follows;
-        private int eventCount;
+        private long followeds;
+        private long follows;
+        private long eventCount;
         private Object avatarDetail;
-        private int playlistCount;
-        private int playlistBeSubscribedCount;
+        private long playlistCount;
+        private long playlistBeSubscribedCount;
 
         public boolean isFollowed() {
             return followed;
@@ -258,11 +258,11 @@ public class LoginInfo {
             this.backgroundUrl = backgroundUrl;
         }
 
-        public int getUserId() {
+        public long getUserId() {
             return userId;
         }
 
-        public void setUserId(int userId) {
+        public void setUserId(long userId) {
             this.userId = userId;
         }
 
@@ -282,11 +282,11 @@ public class LoginInfo {
             this.backgroundImgIdStr = backgroundImgIdStr;
         }
 
-        public int getUserType() {
+        public long getUserType() {
             return userType;
         }
 
-        public void setUserType(int userType) {
+        public void setUserType(long userType) {
             this.userType = userType;
         }
 
@@ -298,27 +298,27 @@ public class LoginInfo {
             this.avatarUrl = avatarUrl;
         }
 
-        public int getVipType() {
+        public long getVipType() {
             return vipType;
         }
 
-        public void setVipType(int vipType) {
+        public void setVipType(long vipType) {
             this.vipType = vipType;
         }
 
-        public int getAuthStatus() {
+        public long getAuthStatus() {
             return authStatus;
         }
 
-        public void setAuthStatus(int authStatus) {
+        public void setAuthStatus(long authStatus) {
             this.authStatus = authStatus;
         }
 
-        public int getDjStatus() {
+        public long getDjStatus() {
             return djStatus;
         }
 
-        public void setDjStatus(int djStatus) {
+        public void setDjStatus(long djStatus) {
             this.djStatus = djStatus;
         }
 
@@ -346,11 +346,11 @@ public class LoginInfo {
             this.expertTags = expertTags;
         }
 
-        public int getAccountStatus() {
+        public long getAccountStatus() {
             return accountStatus;
         }
 
-        public void setAccountStatus(int accountStatus) {
+        public void setAccountStatus(long accountStatus) {
             this.accountStatus = accountStatus;
         }
 
@@ -370,27 +370,27 @@ public class LoginInfo {
             this.birthday = birthday;
         }
 
-        public int getGender() {
+        public long getGender() {
             return gender;
         }
 
-        public void setGender(int gender) {
+        public void setGender(long gender) {
             this.gender = gender;
         }
 
-        public int getProvince() {
+        public long getProvince() {
             return province;
         }
 
-        public void setProvince(int province) {
+        public void setProvince(long province) {
             this.province = province;
         }
 
-        public int getCity() {
+        public long getCity() {
             return city;
         }
 
-        public void setCity(int city) {
+        public void setCity(long city) {
             this.city = city;
         }
 
@@ -450,11 +450,11 @@ public class LoginInfo {
             this.signature = signature;
         }
 
-        public int getAuthority() {
+        public long getAuthority() {
             return authority;
         }
 
-        public void setAuthority(int authority) {
+        public void setAuthority(long authority) {
             this.authority = authority;
         }
 
@@ -466,27 +466,27 @@ public class LoginInfo {
             this.avatarImgId_str = avatarImgId_str;
         }
 
-        public int getFolloweds() {
+        public long getFolloweds() {
             return followeds;
         }
 
-        public void setFolloweds(int followeds) {
+        public void setFolloweds(long followeds) {
             this.followeds = followeds;
         }
 
-        public int getFollows() {
+        public long getFollows() {
             return follows;
         }
 
-        public void setFollows(int follows) {
+        public void setFollows(long follows) {
             this.follows = follows;
         }
 
-        public int getEventCount() {
+        public long getEventCount() {
             return eventCount;
         }
 
-        public void setEventCount(int eventCount) {
+        public void setEventCount(long eventCount) {
             this.eventCount = eventCount;
         }
 
@@ -498,19 +498,19 @@ public class LoginInfo {
             this.avatarDetail = avatarDetail;
         }
 
-        public int getPlaylistCount() {
+        public long getPlaylistCount() {
             return playlistCount;
         }
 
-        public void setPlaylistCount(int playlistCount) {
+        public void setPlaylistCount(long playlistCount) {
             this.playlistCount = playlistCount;
         }
 
-        public int getPlaylistBeSubscribedCount() {
+        public long getPlaylistBeSubscribedCount() {
             return playlistBeSubscribedCount;
         }
 
-        public void setPlaylistBeSubscribedCount(int playlistBeSubscribedCount) {
+        public void setPlaylistBeSubscribedCount(long playlistBeSubscribedCount) {
             this.playlistBeSubscribedCount = playlistBeSubscribedCount;
         }
 
@@ -519,21 +519,21 @@ public class LoginInfo {
     }
 
     public static class BindingsDTO {
-        private int userId;
+        private long userId;
         private String url;
         private boolean expired;
         private long bindingTime;
-        private int refreshTime;
+        private long refreshTime;
         private String tokenJsonStr;
-        private int expiresIn;
+        private long expiresIn;
         private long id;
-        private int type;
+        private long type;
 
-        public int getUserId() {
+        public long getUserId() {
             return userId;
         }
 
-        public void setUserId(int userId) {
+        public void setUserId(long userId) {
             this.userId = userId;
         }
 
@@ -561,11 +561,11 @@ public class LoginInfo {
             this.bindingTime = bindingTime;
         }
 
-        public int getRefreshTime() {
+        public long getRefreshTime() {
             return refreshTime;
         }
 
-        public void setRefreshTime(int refreshTime) {
+        public void setRefreshTime(long refreshTime) {
             this.refreshTime = refreshTime;
         }
 
@@ -577,11 +577,11 @@ public class LoginInfo {
             this.tokenJsonStr = tokenJsonStr;
         }
 
-        public int getExpiresIn() {
+        public long getExpiresIn() {
             return expiresIn;
         }
 
-        public void setExpiresIn(int expiresIn) {
+        public void setExpiresIn(long expiresIn) {
             this.expiresIn = expiresIn;
         }
 
@@ -593,11 +593,11 @@ public class LoginInfo {
             this.id = id;
         }
 
-        public int getType() {
+        public long getType() {
             return type;
         }
 
-        public void setType(int type) {
+        public void setType(long type) {
             this.type = type;
         }
     }

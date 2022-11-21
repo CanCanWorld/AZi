@@ -6,7 +6,7 @@ public class SongOfList {
 
     private List<SongsDTO> songs;
     private List<PrivilegesDTO> privileges;
-    private int code;
+    private long code;
 
     public List<SongsDTO> getSongs() {
         return songs;
@@ -24,31 +24,31 @@ public class SongOfList {
         this.privileges = privileges;
     }
 
-    public int getCode() {
+    public long getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(long code) {
         this.code = code;
     }
 
     public static class SongsDTO {
-        private int _id;
+        private long _id;
         private String name;
-        private int id;
-        private int pst;
-        private int t;
+        private long id;
+        private long pst;
+        private long t;
         private List<ArDTO> ar;
         private List<?> alia;
-        private int pop;
-        private int st;
+        private long pop;
+        private long st;
         private String rt;
-        private int fee;
-        private int v;
+        private long fee;
+        private long v;
         private Object crbt;
         private String cf;
         private AlDTO al;
-        private int dt;
+        private long dt;
         private HDTO h;
         private MDTO m;
         private LDTO l;
@@ -56,38 +56,38 @@ public class SongOfList {
         private HrDTO hr;
         private Object a;
         private String cd;
-        private int no;
+        private long no;
         private Object rtUrl;
-        private int ftype;
+        private long ftype;
         private List<?> rtUrls;
-        private int djId;
-        private int copyright;
-        private int s_id;
+        private long djId;
+        private long copyright;
+        private long s_id;
         private long mark;
-        private int originCoverType;
+        private long originCoverType;
         private Object originSongSimpleData;
         private Object tagPicList;
         private boolean resourceState;
-        private int version;
+        private long version;
         private Object songJumpInfo;
         private Object entertainmentTags;
         private Object awardTags;
-        private int single;
+        private long single;
         private Object noCopyrightRcmd;
-        private int mst;
-        private int cp;
-        private int rtype;
+        private long mst;
+        private long cp;
+        private long rtype;
         private Object rurl;
-        private int mv;
+        private long mv;
         private long publishTime;
         private List<String> tns;
         private String singer;
 
-        public void set_id(int _id) {
+        public void set_id(long _id) {
             this._id = _id;
         }
 
-        public int get_id() {
+        public long get_id() {
             return _id;
         }
 
@@ -107,27 +107,27 @@ public class SongOfList {
             this.name = name;
         }
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(long id) {
             this.id = id;
         }
 
-        public int getPst() {
+        public long getPst() {
             return pst;
         }
 
-        public void setPst(int pst) {
+        public void setPst(long pst) {
             this.pst = pst;
         }
 
-        public int getT() {
+        public long getT() {
             return t;
         }
 
-        public void setT(int t) {
+        public void setT(long t) {
             this.t = t;
         }
 
@@ -147,19 +147,19 @@ public class SongOfList {
             this.alia = alia;
         }
 
-        public int getPop() {
+        public long getPop() {
             return pop;
         }
 
-        public void setPop(int pop) {
+        public void setPop(long pop) {
             this.pop = pop;
         }
 
-        public int getSt() {
+        public long getSt() {
             return st;
         }
 
-        public void setSt(int st) {
+        public void setSt(long st) {
             this.st = st;
         }
 
@@ -171,19 +171,19 @@ public class SongOfList {
             this.rt = rt;
         }
 
-        public int getFee() {
+        public long getFee() {
             return fee;
         }
 
-        public void setFee(int fee) {
+        public void setFee(long fee) {
             this.fee = fee;
         }
 
-        public int getV() {
+        public long getV() {
             return v;
         }
 
-        public void setV(int v) {
+        public void setV(long v) {
             this.v = v;
         }
 
@@ -211,11 +211,11 @@ public class SongOfList {
             this.al = al;
         }
 
-        public int getDt() {
+        public long getDt() {
             return dt;
         }
 
-        public void setDt(int dt) {
+        public void setDt(long dt) {
             this.dt = dt;
         }
 
@@ -275,11 +275,11 @@ public class SongOfList {
             this.cd = cd;
         }
 
-        public int getNo() {
+        public long getNo() {
             return no;
         }
 
-        public void setNo(int no) {
+        public void setNo(long no) {
             this.no = no;
         }
 
@@ -291,11 +291,11 @@ public class SongOfList {
             this.rtUrl = rtUrl;
         }
 
-        public int getFtype() {
+        public long getFtype() {
             return ftype;
         }
 
-        public void setFtype(int ftype) {
+        public void setFtype(long ftype) {
             this.ftype = ftype;
         }
 
@@ -307,27 +307,27 @@ public class SongOfList {
             this.rtUrls = rtUrls;
         }
 
-        public int getDjId() {
+        public long getDjId() {
             return djId;
         }
 
-        public void setDjId(int djId) {
+        public void setDjId(long djId) {
             this.djId = djId;
         }
 
-        public int getCopyright() {
+        public long getCopyright() {
             return copyright;
         }
 
-        public void setCopyright(int copyright) {
+        public void setCopyright(long copyright) {
             this.copyright = copyright;
         }
 
-        public int getS_id() {
+        public long getS_id() {
             return s_id;
         }
 
-        public void setS_id(int s_id) {
+        public void setS_id(long s_id) {
             this.s_id = s_id;
         }
 
@@ -339,11 +339,11 @@ public class SongOfList {
             this.mark = mark;
         }
 
-        public int getOriginCoverType() {
+        public long getOriginCoverType() {
             return originCoverType;
         }
 
-        public void setOriginCoverType(int originCoverType) {
+        public void setOriginCoverType(long originCoverType) {
             this.originCoverType = originCoverType;
         }
 
@@ -371,11 +371,11 @@ public class SongOfList {
             this.resourceState = resourceState;
         }
 
-        public int getVersion() {
+        public long getVersion() {
             return version;
         }
 
-        public void setVersion(int version) {
+        public void setVersion(long version) {
             this.version = version;
         }
 
@@ -403,11 +403,11 @@ public class SongOfList {
             this.awardTags = awardTags;
         }
 
-        public int getSingle() {
+        public long getSingle() {
             return single;
         }
 
-        public void setSingle(int single) {
+        public void setSingle(long single) {
             this.single = single;
         }
 
@@ -419,27 +419,27 @@ public class SongOfList {
             this.noCopyrightRcmd = noCopyrightRcmd;
         }
 
-        public int getMst() {
+        public long getMst() {
             return mst;
         }
 
-        public void setMst(int mst) {
+        public void setMst(long mst) {
             this.mst = mst;
         }
 
-        public int getCp() {
+        public long getCp() {
             return cp;
         }
 
-        public void setCp(int cp) {
+        public void setCp(long cp) {
             this.cp = cp;
         }
 
-        public int getRtype() {
+        public long getRtype() {
             return rtype;
         }
 
-        public void setRtype(int rtype) {
+        public void setRtype(long rtype) {
             this.rtype = rtype;
         }
 
@@ -451,11 +451,11 @@ public class SongOfList {
             this.rurl = rurl;
         }
 
-        public int getMv() {
+        public long getMv() {
             return mv;
         }
 
-        public void setMv(int mv) {
+        public void setMv(long mv) {
             this.mv = mv;
         }
 
@@ -476,18 +476,18 @@ public class SongOfList {
         }
 
         public static class AlDTO {
-            private int id;
+            private long id;
             private String name;
             private String picUrl;
             private List<?> tns;
             private String pic_str;
             private long pic;
 
-            public int getId() {
+            public long getId() {
                 return id;
             }
 
-            public void setId(int id) {
+            public void setId(long id) {
                 this.id = id;
             }
 
@@ -533,33 +533,33 @@ public class SongOfList {
         }
 
         public static class HDTO {
-            private int br;
-            private int fid;
-            private int size;
+            private long br;
+            private long fid;
+            private long size;
             private float vd;
-            private int sr;
+            private long sr;
 
-            public int getBr() {
+            public long getBr() {
                 return br;
             }
 
-            public void setBr(int br) {
+            public void setBr(long br) {
                 this.br = br;
             }
 
-            public int getFid() {
+            public long getFid() {
                 return fid;
             }
 
-            public void setFid(int fid) {
+            public void setFid(long fid) {
                 this.fid = fid;
             }
 
-            public int getSize() {
+            public long getSize() {
                 return size;
             }
 
-            public void setSize(int size) {
+            public void setSize(long size) {
                 this.size = size;
             }
 
@@ -571,43 +571,43 @@ public class SongOfList {
                 this.vd = vd;
             }
 
-            public int getSr() {
+            public long getSr() {
                 return sr;
             }
 
-            public void setSr(int sr) {
+            public void setSr(long sr) {
                 this.sr = sr;
             }
         }
 
         public static class MDTO {
-            private int br;
-            private int fid;
-            private int size;
+            private long br;
+            private long fid;
+            private long size;
             private float vd;
-            private int sr;
+            private long sr;
 
-            public int getBr() {
+            public long getBr() {
                 return br;
             }
 
-            public void setBr(int br) {
+            public void setBr(long br) {
                 this.br = br;
             }
 
-            public int getFid() {
+            public long getFid() {
                 return fid;
             }
 
-            public void setFid(int fid) {
+            public void setFid(long fid) {
                 this.fid = fid;
             }
 
-            public int getSize() {
+            public long getSize() {
                 return size;
             }
 
-            public void setSize(int size) {
+            public void setSize(long size) {
                 this.size = size;
             }
 
@@ -619,43 +619,43 @@ public class SongOfList {
                 this.vd = vd;
             }
 
-            public int getSr() {
+            public long getSr() {
                 return sr;
             }
 
-            public void setSr(int sr) {
+            public void setSr(long sr) {
                 this.sr = sr;
             }
         }
 
         public static class LDTO {
-            private int br;
-            private int fid;
-            private int size;
+            private long br;
+            private long fid;
+            private long size;
             private float vd;
-            private int sr;
+            private long sr;
 
-            public int getBr() {
+            public long getBr() {
                 return br;
             }
 
-            public void setBr(int br) {
+            public void setBr(long br) {
                 this.br = br;
             }
 
-            public int getFid() {
+            public long getFid() {
                 return fid;
             }
 
-            public void setFid(int fid) {
+            public void setFid(long fid) {
                 this.fid = fid;
             }
 
-            public int getSize() {
+            public long getSize() {
                 return size;
             }
 
-            public void setSize(int size) {
+            public void setSize(long size) {
                 this.size = size;
             }
 
@@ -667,43 +667,43 @@ public class SongOfList {
                 this.vd = vd;
             }
 
-            public int getSr() {
+            public long getSr() {
                 return sr;
             }
 
-            public void setSr(int sr) {
+            public void setSr(long sr) {
                 this.sr = sr;
             }
         }
 
         public static class SqDTO {
-            private int br;
-            private int fid;
-            private int size;
+            private long br;
+            private long fid;
+            private long size;
             private float vd;
-            private int sr;
+            private long sr;
 
-            public int getBr() {
+            public long getBr() {
                 return br;
             }
 
-            public void setBr(int br) {
+            public void setBr(long br) {
                 this.br = br;
             }
 
-            public int getFid() {
+            public long getFid() {
                 return fid;
             }
 
-            public void setFid(int fid) {
+            public void setFid(long fid) {
                 this.fid = fid;
             }
 
-            public int getSize() {
+            public long getSize() {
                 return size;
             }
 
-            public void setSize(int size) {
+            public void setSize(long size) {
                 this.size = size;
             }
 
@@ -715,43 +715,43 @@ public class SongOfList {
                 this.vd = vd;
             }
 
-            public int getSr() {
+            public long getSr() {
                 return sr;
             }
 
-            public void setSr(int sr) {
+            public void setSr(long sr) {
                 this.sr = sr;
             }
         }
 
         public static class HrDTO {
-            private int br;
-            private int fid;
-            private int size;
+            private long br;
+            private long fid;
+            private long size;
             private float vd;
-            private int sr;
+            private long sr;
 
-            public int getBr() {
+            public long getBr() {
                 return br;
             }
 
-            public void setBr(int br) {
+            public void setBr(long br) {
                 this.br = br;
             }
 
-            public int getFid() {
+            public long getFid() {
                 return fid;
             }
 
-            public void setFid(int fid) {
+            public void setFid(long fid) {
                 this.fid = fid;
             }
 
-            public int getSize() {
+            public long getSize() {
                 return size;
             }
 
-            public void setSize(int size) {
+            public void setSize(long size) {
                 this.size = size;
             }
 
@@ -763,26 +763,26 @@ public class SongOfList {
                 this.vd = vd;
             }
 
-            public int getSr() {
+            public long getSr() {
                 return sr;
             }
 
-            public void setSr(int sr) {
+            public void setSr(long sr) {
                 this.sr = sr;
             }
         }
 
         public static class ArDTO {
-            private int id;
+            private long id;
             private String name;
             private List<?> tns;
             private List<?> alias;
 
-            public int getId() {
+            public long getId() {
                 return id;
             }
 
-            public void setId(int id) {
+            public void setId(long id) {
                 this.id = id;
             }
 
@@ -813,23 +813,23 @@ public class SongOfList {
     }
 
     public static class PrivilegesDTO {
-        private int id;
-        private int fee;
-        private int payed;
-        private int st;
-        private int pl;
-        private int dl;
-        private int sp;
-        private int cp;
-        private int subp;
+        private long id;
+        private long fee;
+        private long payed;
+        private long st;
+        private long pl;
+        private long dl;
+        private long sp;
+        private long cp;
+        private long subp;
         private boolean cs;
-        private int maxbr;
-        private int fl;
+        private long maxbr;
+        private long fl;
         private boolean toast;
-        private int flag;
+        private long flag;
         private boolean preSell;
-        private int playMaxbr;
-        private int downloadMaxbr;
+        private long playMaxbr;
+        private long downloadMaxbr;
         private String maxBrLevel;
         private String playMaxBrLevel;
         private String downloadMaxBrLevel;
@@ -840,75 +840,75 @@ public class SongOfList {
         private FreeTrialPrivilegeDTO freeTrialPrivilege;
         private List<ChargeInfoListDTO> chargeInfoList;
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(long id) {
             this.id = id;
         }
 
-        public int getFee() {
+        public long getFee() {
             return fee;
         }
 
-        public void setFee(int fee) {
+        public void setFee(long fee) {
             this.fee = fee;
         }
 
-        public int getPayed() {
+        public long getPayed() {
             return payed;
         }
 
-        public void setPayed(int payed) {
+        public void setPayed(long payed) {
             this.payed = payed;
         }
 
-        public int getSt() {
+        public long getSt() {
             return st;
         }
 
-        public void setSt(int st) {
+        public void setSt(long st) {
             this.st = st;
         }
 
-        public int getPl() {
+        public long getPl() {
             return pl;
         }
 
-        public void setPl(int pl) {
+        public void setPl(long pl) {
             this.pl = pl;
         }
 
-        public int getDl() {
+        public long getDl() {
             return dl;
         }
 
-        public void setDl(int dl) {
+        public void setDl(long dl) {
             this.dl = dl;
         }
 
-        public int getSp() {
+        public long getSp() {
             return sp;
         }
 
-        public void setSp(int sp) {
+        public void setSp(long sp) {
             this.sp = sp;
         }
 
-        public int getCp() {
+        public long getCp() {
             return cp;
         }
 
-        public void setCp(int cp) {
+        public void setCp(long cp) {
             this.cp = cp;
         }
 
-        public int getSubp() {
+        public long getSubp() {
             return subp;
         }
 
-        public void setSubp(int subp) {
+        public void setSubp(long subp) {
             this.subp = subp;
         }
 
@@ -920,19 +920,19 @@ public class SongOfList {
             this.cs = cs;
         }
 
-        public int getMaxbr() {
+        public long getMaxbr() {
             return maxbr;
         }
 
-        public void setMaxbr(int maxbr) {
+        public void setMaxbr(long maxbr) {
             this.maxbr = maxbr;
         }
 
-        public int getFl() {
+        public long getFl() {
             return fl;
         }
 
-        public void setFl(int fl) {
+        public void setFl(long fl) {
             this.fl = fl;
         }
 
@@ -944,11 +944,11 @@ public class SongOfList {
             this.toast = toast;
         }
 
-        public int getFlag() {
+        public long getFlag() {
             return flag;
         }
 
-        public void setFlag(int flag) {
+        public void setFlag(long flag) {
             this.flag = flag;
         }
 
@@ -960,19 +960,19 @@ public class SongOfList {
             this.preSell = preSell;
         }
 
-        public int getPlayMaxbr() {
+        public long getPlayMaxbr() {
             return playMaxbr;
         }
 
-        public void setPlayMaxbr(int playMaxbr) {
+        public void setPlayMaxbr(long playMaxbr) {
             this.playMaxbr = playMaxbr;
         }
 
-        public int getDownloadMaxbr() {
+        public long getDownloadMaxbr() {
             return downloadMaxbr;
         }
 
-        public void setDownloadMaxbr(int downloadMaxbr) {
+        public void setDownloadMaxbr(long downloadMaxbr) {
             this.downloadMaxbr = downloadMaxbr;
         }
 
@@ -1079,16 +1079,16 @@ public class SongOfList {
         }
 
         public static class ChargeInfoListDTO {
-            private int rate;
+            private long rate;
             private Object chargeUrl;
             private Object chargeMessage;
-            private int chargeType;
+            private long chargeType;
 
-            public int getRate() {
+            public long getRate() {
                 return rate;
             }
 
-            public void setRate(int rate) {
+            public void setRate(long rate) {
                 this.rate = rate;
             }
 
@@ -1108,11 +1108,11 @@ public class SongOfList {
                 this.chargeMessage = chargeMessage;
             }
 
-            public int getChargeType() {
+            public long getChargeType() {
                 return chargeType;
             }
 
-            public void setChargeType(int chargeType) {
+            public void setChargeType(long chargeType) {
                 this.chargeType = chargeType;
             }
         }

@@ -8,7 +8,7 @@ import java.util.List;
 public class SongUrl {
 
     private List<DataBean> data;
-    private int code;
+    private long code;
 
     public List<DataBean> getData() {
         return data;
@@ -18,45 +18,45 @@ public class SongUrl {
         this.data = data;
     }
 
-    public int getCode() {
+    public long getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(long code) {
         this.code = code;
     }
 
     public static class DataBean {
-        private int id;
+        private long id;
         private String url;
-        private int br;
-        private int size;
+        private long br;
+        private long size;
         private String md5;
-        private int code;
-        private int expi;
+        private long code;
+        private long expi;
         private String type;
         private double gain;
-        private int fee;
+        private long fee;
         private Object uf;
-        private int payed;
-        private int flag;
+        private long payed;
+        private long flag;
         private boolean canExtend;
         private Object freeTrialInfo;
         private Object level;
         private Object encodeType;
         private Object freeTrialPrivilege;
         private FreeTimeTrialPrivilegeBean freeTimeTrialPrivilege;
-        private int urlSource;
-        private int rightSource;
+        private long urlSource;
+        private long rightSource;
         private String podcastCtrp;
         private Object effectTypes;
-        private int time;
+        private long time;
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(long id) {
             this.id = id;
         }
 
@@ -68,19 +68,19 @@ public class SongUrl {
             this.url = url;
         }
 
-        public int getBr() {
+        public long getBr() {
             return br;
         }
 
-        public void setBr(int br) {
+        public void setBr(long br) {
             this.br = br;
         }
 
-        public int getSize() {
+        public long getSize() {
             return size;
         }
 
-        public void setSize(int size) {
+        public void setSize(long size) {
             this.size = size;
         }
 
@@ -92,19 +92,19 @@ public class SongUrl {
             this.md5 = md5;
         }
 
-        public int getCode() {
+        public long getCode() {
             return code;
         }
 
-        public void setCode(int code) {
+        public void setCode(long code) {
             this.code = code;
         }
 
-        public int getExpi() {
+        public long getExpi() {
             return expi;
         }
 
-        public void setExpi(int expi) {
+        public void setExpi(long expi) {
             this.expi = expi;
         }
 
@@ -124,11 +124,11 @@ public class SongUrl {
             this.gain = gain;
         }
 
-        public int getFee() {
+        public long getFee() {
             return fee;
         }
 
-        public void setFee(int fee) {
+        public void setFee(long fee) {
             this.fee = fee;
         }
 
@@ -140,19 +140,19 @@ public class SongUrl {
             this.uf = uf;
         }
 
-        public int getPayed() {
+        public long getPayed() {
             return payed;
         }
 
-        public void setPayed(int payed) {
+        public void setPayed(long payed) {
             this.payed = payed;
         }
 
-        public int getFlag() {
+        public long getFlag() {
             return flag;
         }
 
-        public void setFlag(int flag) {
+        public void setFlag(long flag) {
             this.flag = flag;
         }
 
@@ -204,19 +204,19 @@ public class SongUrl {
             this.freeTimeTrialPrivilege = freeTimeTrialPrivilege;
         }
 
-        public int getUrlSource() {
+        public long getUrlSource() {
             return urlSource;
         }
 
-        public void setUrlSource(int urlSource) {
+        public void setUrlSource(long urlSource) {
             this.urlSource = urlSource;
         }
 
-        public int getRightSource() {
+        public long getRightSource() {
             return rightSource;
         }
 
-        public void setRightSource(int rightSource) {
+        public void setRightSource(long rightSource) {
             this.rightSource = rightSource;
         }
 
@@ -236,19 +236,19 @@ public class SongUrl {
             this.effectTypes = effectTypes;
         }
 
-        public int getTime() {
+        public long getTime() {
             return time;
         }
 
-        public void setTime(int time) {
+        public void setTime(long time) {
             this.time = time;
         }
 
         public static class FreeTimeTrialPrivilegeBean {
             private boolean resConsumable;
             private boolean userConsumable;
-            private int type;
-            private int remainTime;
+            private long type;
+            private long remalongime;
 
             public boolean isResConsumable() {
                 return resConsumable;
@@ -266,20 +266,20 @@ public class SongUrl {
                 this.userConsumable = userConsumable;
             }
 
-            public int getType() {
+            public long getType() {
                 return type;
             }
 
-            public void setType(int type) {
+            public void setType(long type) {
                 this.type = type;
             }
 
-            public int getRemainTime() {
-                return remainTime;
+            public long getRemalongime() {
+                return remalongime;
             }
 
-            public void setRemainTime(int remainTime) {
-                this.remainTime = remainTime;
+            public void setRemalongime(long remalongime) {
+                this.remalongime = remalongime;
             }
         }
     }

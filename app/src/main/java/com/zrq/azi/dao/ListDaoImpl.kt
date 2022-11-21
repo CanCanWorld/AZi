@@ -58,10 +58,10 @@ class ListDaoImpl(
     @SuppressLint("Range")
     private fun cursorToBean(cursor: Cursor): UserPlayList.PlaylistDTO {
         val list = UserPlayList.PlaylistDTO()
-        list._id = cursor.getInt(cursor.getColumnIndex(FIELD_ID))
+        list._id = cursor.getLong(cursor.getColumnIndex(FIELD_ID))
         list.name = cursor.getString(cursor.getColumnIndex(LIST_NAME))
         list.coverImgUrl = cursor.getString(cursor.getColumnIndex(LIST_COVER))
-        list.trackCount = cursor.getInt(cursor.getColumnIndex(LIST_COUNT))
+        list.trackCount = cursor.getLong(cursor.getColumnIndex(LIST_COUNT))
         list.songGson = cursor.getString(cursor.getColumnIndex(LIST_SONGS))
         list.id = cursor.getLong(cursor.getColumnIndex(LIST_ID))
         return list

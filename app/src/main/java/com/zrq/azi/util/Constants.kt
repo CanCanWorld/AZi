@@ -15,6 +15,8 @@ object Constants {
     // /captcha/verify?phone=13xxx&captcha=1597
     const val VERIFY_CAPTCHA = "/captcha/verify"
 
+    const val LOGOUT = "/logout"
+
     const val USER_PLAY_LIST = "/user/playlist"
 
     const val PLAY_LIST_ALL = "/playlist/track/all"

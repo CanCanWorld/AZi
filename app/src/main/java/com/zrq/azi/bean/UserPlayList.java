@@ -11,7 +11,7 @@ public class UserPlayList{
     private String version;
     private boolean more;
     private ArrayList<PlaylistDTO> playlist;
-    private int code;
+    private long code;
 
     public String getVersion() {
         return version;
@@ -37,17 +37,17 @@ public class UserPlayList{
         this.playlist = playlist;
     }
 
-    public int getCode() {
+    public long getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(long code) {
         this.code = code;
     }
 
     public static class PlaylistDTO {
         private String songGson;
-        private int _id;
+        private long _id;
         private List<?> subscribers;
         private boolean subscribed;
         private CreatorDTO creator;
@@ -61,29 +61,29 @@ public class UserPlayList{
         private Object englishTitle;
         private boolean opRecommend;
         private Object recommendInfo;
-        private int subscribedCount;
-        private int cloudTrackCount;
-        private int userId;
-        private int totalDuration;
+        private long subscribedCount;
+        private long cloudTrackCount;
+        private long userId;
+        private long totalDuration;
         private long coverImgId;
-        private int privacy;
+        private long privacy;
         private long trackUpdateTime;
-        private int trackCount;
+        private long trackCount;
         private long updateTime;
         private String commentThreadId;
         private String coverImgUrl;
-        private int specialType;
+        private long specialType;
         private boolean anonimous;
         private long createTime;
         private boolean highQuality;
         private boolean newImported;
         private long trackNumberUpdateTime;
         private long playCount;
-        private int adType;
+        private long adType;
         private String description;
         private List<String> tags;
         private boolean ordered;
-        private int status;
+        private long status;
         private String name;
         private long id;
         private String coverImgId_str;
@@ -100,11 +100,11 @@ public class UserPlayList{
             return songGson;
         }
 
-        public void set_id(int _id) {
+        public void set_id(long _id) {
             this._id = _id;
         }
 
-        public int get_id() {
+        public long get_id() {
             return _id;
         }
 
@@ -212,35 +212,35 @@ public class UserPlayList{
             this.recommendInfo = recommendInfo;
         }
 
-        public int getSubscribedCount() {
+        public long getSubscribedCount() {
             return subscribedCount;
         }
 
-        public void setSubscribedCount(int subscribedCount) {
+        public void setSubscribedCount(long subscribedCount) {
             this.subscribedCount = subscribedCount;
         }
 
-        public int getCloudTrackCount() {
+        public long getCloudTrackCount() {
             return cloudTrackCount;
         }
 
-        public void setCloudTrackCount(int cloudTrackCount) {
+        public void setCloudTrackCount(long cloudTrackCount) {
             this.cloudTrackCount = cloudTrackCount;
         }
 
-        public int getUserId() {
+        public long getUserId() {
             return userId;
         }
 
-        public void setUserId(int userId) {
+        public void setUserId(long userId) {
             this.userId = userId;
         }
 
-        public int getTotalDuration() {
+        public long getTotalDuration() {
             return totalDuration;
         }
 
-        public void setTotalDuration(int totalDuration) {
+        public void setTotalDuration(long totalDuration) {
             this.totalDuration = totalDuration;
         }
 
@@ -252,11 +252,11 @@ public class UserPlayList{
             this.coverImgId = coverImgId;
         }
 
-        public int getPrivacy() {
+        public long getPrivacy() {
             return privacy;
         }
 
-        public void setPrivacy(int privacy) {
+        public void setPrivacy(long privacy) {
             this.privacy = privacy;
         }
 
@@ -268,11 +268,11 @@ public class UserPlayList{
             this.trackUpdateTime = trackUpdateTime;
         }
 
-        public int getTrackCount() {
+        public long getTrackCount() {
             return trackCount;
         }
 
-        public void setTrackCount(int trackCount) {
+        public void setTrackCount(long trackCount) {
             this.trackCount = trackCount;
         }
 
@@ -300,11 +300,11 @@ public class UserPlayList{
             this.coverImgUrl = coverImgUrl;
         }
 
-        public int getSpecialType() {
+        public long getSpecialType() {
             return specialType;
         }
 
-        public void setSpecialType(int specialType) {
+        public void setSpecialType(long specialType) {
             this.specialType = specialType;
         }
 
@@ -356,11 +356,11 @@ public class UserPlayList{
             this.playCount = playCount;
         }
 
-        public int getAdType() {
+        public long getAdType() {
             return adType;
         }
 
-        public void setAdType(int adType) {
+        public void setAdType(long adType) {
             this.adType = adType;
         }
 
@@ -388,11 +388,11 @@ public class UserPlayList{
             this.ordered = ordered;
         }
 
-        public int getStatus() {
+        public long getStatus() {
             return status;
         }
 
-        public void setStatus(int status) {
+        public void setStatus(long status) {
             this.status = status;
         }
 
@@ -446,16 +446,16 @@ public class UserPlayList{
 
         public static class CreatorDTO {
             private boolean defaultAvatar;
-            private int province;
-            private int authStatus;
+            private long province;
+            private long authStatus;
             private boolean followed;
             private String avatarUrl;
-            private int accountStatus;
-            private int gender;
-            private int city;
-            private int birthday;
-            private int userId;
-            private int userType;
+            private long accountStatus;
+            private long gender;
+            private long city;
+            private long birthday;
+            private long userId;
+            private long userType;
             private String nickname;
             private String signature;
             private String description;
@@ -463,14 +463,14 @@ public class UserPlayList{
             private long avatarImgId;
             private long backgroundImgId;
             private String backgroundUrl;
-            private int authority;
+            private long authority;
             private boolean mutual;
             private Object expertTags;
             private Object experts;
-            private int djStatus;
-            private int vipType;
+            private long djStatus;
+            private long vipType;
             private Object remarkName;
-            private int authenticationTypes;
+            private long authenticationTypes;
             private Object avatarDetail;
             private boolean anchor;
             private String avatarImgIdStr;
@@ -485,19 +485,19 @@ public class UserPlayList{
                 this.defaultAvatar = defaultAvatar;
             }
 
-            public int getProvince() {
+            public long getProvince() {
                 return province;
             }
 
-            public void setProvince(int province) {
+            public void setProvince(long province) {
                 this.province = province;
             }
 
-            public int getAuthStatus() {
+            public long getAuthStatus() {
                 return authStatus;
             }
 
-            public void setAuthStatus(int authStatus) {
+            public void setAuthStatus(long authStatus) {
                 this.authStatus = authStatus;
             }
 
@@ -517,51 +517,51 @@ public class UserPlayList{
                 this.avatarUrl = avatarUrl;
             }
 
-            public int getAccountStatus() {
+            public long getAccountStatus() {
                 return accountStatus;
             }
 
-            public void setAccountStatus(int accountStatus) {
+            public void setAccountStatus(long accountStatus) {
                 this.accountStatus = accountStatus;
             }
 
-            public int getGender() {
+            public long getGender() {
                 return gender;
             }
 
-            public void setGender(int gender) {
+            public void setGender(long gender) {
                 this.gender = gender;
             }
 
-            public int getCity() {
+            public long getCity() {
                 return city;
             }
 
-            public void setCity(int city) {
+            public void setCity(long city) {
                 this.city = city;
             }
 
-            public int getBirthday() {
+            public long getBirthday() {
                 return birthday;
             }
 
-            public void setBirthday(int birthday) {
+            public void setBirthday(long birthday) {
                 this.birthday = birthday;
             }
 
-            public int getUserId() {
+            public long getUserId() {
                 return userId;
             }
 
-            public void setUserId(int userId) {
+            public void setUserId(long userId) {
                 this.userId = userId;
             }
 
-            public int getUserType() {
+            public long getUserType() {
                 return userType;
             }
 
-            public void setUserType(int userType) {
+            public void setUserType(long userType) {
                 this.userType = userType;
             }
 
@@ -621,11 +621,11 @@ public class UserPlayList{
                 this.backgroundUrl = backgroundUrl;
             }
 
-            public int getAuthority() {
+            public long getAuthority() {
                 return authority;
             }
 
-            public void setAuthority(int authority) {
+            public void setAuthority(long authority) {
                 this.authority = authority;
             }
 
@@ -653,19 +653,19 @@ public class UserPlayList{
                 this.experts = experts;
             }
 
-            public int getDjStatus() {
+            public long getDjStatus() {
                 return djStatus;
             }
 
-            public void setDjStatus(int djStatus) {
+            public void setDjStatus(long djStatus) {
                 this.djStatus = djStatus;
             }
 
-            public int getVipType() {
+            public long getVipType() {
                 return vipType;
             }
 
-            public void setVipType(int vipType) {
+            public void setVipType(long vipType) {
                 this.vipType = vipType;
             }
 
@@ -677,11 +677,11 @@ public class UserPlayList{
                 this.remarkName = remarkName;
             }
 
-            public int getAuthenticationTypes() {
+            public long getAuthenticationTypes() {
                 return authenticationTypes;
             }
 
-            public void setAuthenticationTypes(int authenticationTypes) {
+            public void setAuthenticationTypes(long authenticationTypes) {
                 this.authenticationTypes = authenticationTypes;
             }
 

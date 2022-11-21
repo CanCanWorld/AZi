@@ -5,15 +5,15 @@ import androidx.annotation.Keep;
 @Keep
 public class UserInfo {
 
-    private int code;
+    private long code;
     private AccountDTO account;
     private ProfileDTO profile;
 
-    public int getCode() {
+    public long getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(long code) {
         this.code = code;
     }
 
@@ -34,25 +34,25 @@ public class UserInfo {
     }
 
     public static class AccountDTO {
-        private int id;
+        private long id;
         private String userName;
-        private int type;
-        private int status;
-        private int whitelistAuthority;
+        private long type;
+        private long status;
+        private long whitelistAuthority;
         private long createTime;
-        private int tokenVersion;
-        private int ban;
-        private int baoyueVersion;
-        private int donateVersion;
-        private int vipType;
+        private long tokenVersion;
+        private long ban;
+        private long baoyueVersion;
+        private long donateVersion;
+        private long vipType;
         private boolean anonimousUser;
         private boolean paidFee;
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(long id) {
             this.id = id;
         }
 
@@ -64,27 +64,27 @@ public class UserInfo {
             this.userName = userName;
         }
 
-        public int getType() {
+        public long getType() {
             return type;
         }
 
-        public void setType(int type) {
+        public void setType(long type) {
             this.type = type;
         }
 
-        public int getStatus() {
+        public long getStatus() {
             return status;
         }
 
-        public void setStatus(int status) {
+        public void setStatus(long status) {
             this.status = status;
         }
 
-        public int getWhitelistAuthority() {
+        public long getWhitelistAuthority() {
             return whitelistAuthority;
         }
 
-        public void setWhitelistAuthority(int whitelistAuthority) {
+        public void setWhitelistAuthority(long whitelistAuthority) {
             this.whitelistAuthority = whitelistAuthority;
         }
 
@@ -96,43 +96,43 @@ public class UserInfo {
             this.createTime = createTime;
         }
 
-        public int getTokenVersion() {
+        public long getTokenVersion() {
             return tokenVersion;
         }
 
-        public void setTokenVersion(int tokenVersion) {
+        public void setTokenVersion(long tokenVersion) {
             this.tokenVersion = tokenVersion;
         }
 
-        public int getBan() {
+        public long getBan() {
             return ban;
         }
 
-        public void setBan(int ban) {
+        public void setBan(long ban) {
             this.ban = ban;
         }
 
-        public int getBaoyueVersion() {
+        public long getBaoyueVersion() {
             return baoyueVersion;
         }
 
-        public void setBaoyueVersion(int baoyueVersion) {
+        public void setBaoyueVersion(long baoyueVersion) {
             this.baoyueVersion = baoyueVersion;
         }
 
-        public int getDonateVersion() {
+        public long getDonateVersion() {
             return donateVersion;
         }
 
-        public void setDonateVersion(int donateVersion) {
+        public void setDonateVersion(long donateVersion) {
             this.donateVersion = donateVersion;
         }
 
-        public int getVipType() {
+        public long getVipType() {
             return vipType;
         }
 
-        public void setVipType(int vipType) {
+        public void setVipType(long vipType) {
             this.vipType = vipType;
         }
 
@@ -154,8 +154,8 @@ public class UserInfo {
     }
 
     public static class ProfileDTO {
-        private int userId;
-        private int userType;
+        private long userId;
+        private long userType;
         private String nickname;
         private long avatarImgId;
         private String avatarUrl;
@@ -164,47 +164,47 @@ public class UserInfo {
         private String signature;
         private long createTime;
         private String userName;
-        private int accountType;
+        private long accountType;
         private String shortUserName;
         private long birthday;
-        private int authority;
-        private int gender;
-        private int accountStatus;
-        private int province;
-        private int city;
-        private int authStatus;
+        private long authority;
+        private long gender;
+        private long accountStatus;
+        private long province;
+        private long city;
+        private long authStatus;
         private Object description;
         private Object detailDescription;
         private boolean defaultAvatar;
         private Object expertTags;
         private Object experts;
-        private int djStatus;
-        private int locationStatus;
-        private int vipType;
+        private long djStatus;
+        private long locationStatus;
+        private long vipType;
         private boolean followed;
         private boolean mutual;
         private boolean authenticated;
-        private long lastLoginTime;
+        private long lastLoglongime;
         private String lastLoginIP;
         private Object remarkName;
         private long viptypeVersion;
-        private int authenticationTypes;
+        private long authenticationTypes;
         private Object avatarDetail;
         private boolean anchor;
 
-        public int getUserId() {
+        public long getUserId() {
             return userId;
         }
 
-        public void setUserId(int userId) {
+        public void setUserId(long userId) {
             this.userId = userId;
         }
 
-        public int getUserType() {
+        public long getUserType() {
             return userType;
         }
 
-        public void setUserType(int userType) {
+        public void setUserType(long userType) {
             this.userType = userType;
         }
 
@@ -272,11 +272,11 @@ public class UserInfo {
             this.userName = userName;
         }
 
-        public int getAccountType() {
+        public long getAccountType() {
             return accountType;
         }
 
-        public void setAccountType(int accountType) {
+        public void setAccountType(long accountType) {
             this.accountType = accountType;
         }
 
@@ -296,51 +296,51 @@ public class UserInfo {
             this.birthday = birthday;
         }
 
-        public int getAuthority() {
+        public long getAuthority() {
             return authority;
         }
 
-        public void setAuthority(int authority) {
+        public void setAuthority(long authority) {
             this.authority = authority;
         }
 
-        public int getGender() {
+        public long getGender() {
             return gender;
         }
 
-        public void setGender(int gender) {
+        public void setGender(long gender) {
             this.gender = gender;
         }
 
-        public int getAccountStatus() {
+        public long getAccountStatus() {
             return accountStatus;
         }
 
-        public void setAccountStatus(int accountStatus) {
+        public void setAccountStatus(long accountStatus) {
             this.accountStatus = accountStatus;
         }
 
-        public int getProvince() {
+        public long getProvince() {
             return province;
         }
 
-        public void setProvince(int province) {
+        public void setProvince(long province) {
             this.province = province;
         }
 
-        public int getCity() {
+        public long getCity() {
             return city;
         }
 
-        public void setCity(int city) {
+        public void setCity(long city) {
             this.city = city;
         }
 
-        public int getAuthStatus() {
+        public long getAuthStatus() {
             return authStatus;
         }
 
-        public void setAuthStatus(int authStatus) {
+        public void setAuthStatus(long authStatus) {
             this.authStatus = authStatus;
         }
 
@@ -384,27 +384,27 @@ public class UserInfo {
             this.experts = experts;
         }
 
-        public int getDjStatus() {
+        public long getDjStatus() {
             return djStatus;
         }
 
-        public void setDjStatus(int djStatus) {
+        public void setDjStatus(long djStatus) {
             this.djStatus = djStatus;
         }
 
-        public int getLocationStatus() {
+        public long getLocationStatus() {
             return locationStatus;
         }
 
-        public void setLocationStatus(int locationStatus) {
+        public void setLocationStatus(long locationStatus) {
             this.locationStatus = locationStatus;
         }
 
-        public int getVipType() {
+        public long getVipType() {
             return vipType;
         }
 
-        public void setVipType(int vipType) {
+        public void setVipType(long vipType) {
             this.vipType = vipType;
         }
 
@@ -432,12 +432,12 @@ public class UserInfo {
             this.authenticated = authenticated;
         }
 
-        public long getLastLoginTime() {
-            return lastLoginTime;
+        public long getLastLoglongime() {
+            return lastLoglongime;
         }
 
-        public void setLastLoginTime(long lastLoginTime) {
-            this.lastLoginTime = lastLoginTime;
+        public void setLastLoglongime(long lastLoglongime) {
+            this.lastLoglongime = lastLoglongime;
         }
 
         public String getLastLoginIP() {
@@ -464,11 +464,11 @@ public class UserInfo {
             this.viptypeVersion = viptypeVersion;
         }
 
-        public int getAuthenticationTypes() {
+        public long getAuthenticationTypes() {
             return authenticationTypes;
         }
 
-        public void setAuthenticationTypes(int authenticationTypes) {
+        public void setAuthenticationTypes(long authenticationTypes) {
             this.authenticationTypes = authenticationTypes;
         }
 

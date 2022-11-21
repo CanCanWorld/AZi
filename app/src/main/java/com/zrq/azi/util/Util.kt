@@ -11,8 +11,8 @@ object Util {
 
     const val TAG = "Util"
 
-    fun formatDuration(duration: Int): String {
-        if (duration == 0) return "00:00"
+    fun formatDuration(duration: Long): String {
+        if (duration.toInt() == 0) return "00:00"
         val m = duration / (60 * 1000)
         val s = (duration - 60 * 1000 * m) / 1000
         return String.format("%02d", m) + ":" + String.format("%02d", s)
@@ -34,7 +34,10 @@ object Util {
 
     fun httpGet(url: String, callBack: (Boolean, String) -> Unit) {
         Thread {
-            val request: Request = Request.Builder().url(url).get().build()
+            val request: Request = Request.Builder()
+                .url("$url?cookie=dc1adab9b4eaf6281ae1039a4ef07a76abe86796ee19e8e028927a5675362ff6993166e004087dd366bf5ba4165422f19db50889adcecd8282d04195b7e46dd3b785c2e21c4614017a561ba977ae766d")
+                .get()
+                .build()
             Log.d(TAG, "httpGet: $url")
             OkHttpClient().newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {

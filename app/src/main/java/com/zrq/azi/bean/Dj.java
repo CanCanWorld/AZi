@@ -7,24 +7,24 @@ import java.util.List;
 @Keep
 public class Dj {
 
-    private int count;
-    private int code;
+    private long count;
+    private long code;
     private List<ProgramsBean> programs;
     private boolean more;
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(long count) {
         this.count = count;
     }
 
-    public int getCode() {
+    public long getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(long code) {
         this.code = code;
     }
 
@@ -50,19 +50,19 @@ public class Dj {
         private DjBean dj;
         private String blurCoverUrl;
         private RadioBean radio;
-        private int duration;
+        private long duration;
         private Object authDTO;
         private boolean buyed;
         private Object programDesc;
         private Object h5Links;
         private boolean canReward;
-        private int auditStatus;
+        private long auditStatus;
         private Object videoInfo;
-        private int score;
+        private long score;
         private Object liveInfo;
         private Object alg;
         private Object disPlayStatus;
-        private int auditDisPlayStatus;
+        private long auditDisPlayStatus;
         private Object categoryName;
         private Object secondCategoryName;
         private boolean existLyric;
@@ -71,43 +71,43 @@ public class Dj {
         private Object icon;
         private Object adIconInfo;
         private boolean isPublish;
-        private int trackCount;
-        private int mainTrackId;
-        private int createEventId;
+        private long trackCount;
+        private long malongrackId;
+        private long createEventId;
         private Object titbitImages;
-        private int listenerCount;
-        private int serialNum;
+        private long listenerCount;
+        private long serialNum;
         private long scheduledPublishTime;
         private long coverId;
-        private int smallLanguageAuditStatus;
-        private int categoryId;
+        private long smallLanguageAuditStatus;
+        private long categoryId;
         private List<?> channels;
-        private int pubStatus;
-        private int bdAuditStatus;
-        private int secondCategoryId;
+        private long pubStatus;
+        private long bdAuditStatus;
+        private long secondCategoryId;
         private String coverUrl;
         private String commentThreadId;
         private boolean privacy;
-        private int programFeeType;
+        private long programFeeType;
         private boolean reward;
-        private int subscribedCount;
+        private long subscribedCount;
         private Object titbits;
-        private int feeScope;
+        private long feeScope;
         private String name;
         private long id;
         private String description;
         private long createTime;
-        private int shareCount;
+        private long shareCount;
         private boolean subscribed;
-        private int likedCount;
-        private int commentCount;
-        private int _id;
+        private long likedCount;
+        private long commentCount;
+        private long _id;
 
-        public int get_id() {
+        public long get_id() {
             return _id;
         }
 
-        public void set_id(int _id) {
+        public void set_id(long _id) {
             this._id = _id;
         }
 
@@ -151,11 +151,11 @@ public class Dj {
             this.radio = radio;
         }
 
-        public int getDuration() {
+        public long getDuration() {
             return duration;
         }
 
-        public void setDuration(int duration) {
+        public void setDuration(long duration) {
             this.duration = duration;
         }
 
@@ -199,11 +199,11 @@ public class Dj {
             this.canReward = canReward;
         }
 
-        public int getAuditStatus() {
+        public long getAuditStatus() {
             return auditStatus;
         }
 
-        public void setAuditStatus(int auditStatus) {
+        public void setAuditStatus(long auditStatus) {
             this.auditStatus = auditStatus;
         }
 
@@ -215,11 +215,11 @@ public class Dj {
             this.videoInfo = videoInfo;
         }
 
-        public int getScore() {
+        public long getScore() {
             return score;
         }
 
-        public void setScore(int score) {
+        public void setScore(long score) {
             this.score = score;
         }
 
@@ -247,11 +247,11 @@ public class Dj {
             this.disPlayStatus = disPlayStatus;
         }
 
-        public int getAuditDisPlayStatus() {
+        public long getAuditDisPlayStatus() {
             return auditDisPlayStatus;
         }
 
-        public void setAuditDisPlayStatus(int auditDisPlayStatus) {
+        public void setAuditDisPlayStatus(long auditDisPlayStatus) {
             this.auditDisPlayStatus = auditDisPlayStatus;
         }
 
@@ -319,27 +319,27 @@ public class Dj {
             this.isPublish = isPublish;
         }
 
-        public int getTrackCount() {
+        public long getTrackCount() {
             return trackCount;
         }
 
-        public void setTrackCount(int trackCount) {
+        public void setTrackCount(long trackCount) {
             this.trackCount = trackCount;
         }
 
-        public int getMainTrackId() {
-            return mainTrackId;
+        public long getMalongrackId() {
+            return malongrackId;
         }
 
-        public void setMainTrackId(int mainTrackId) {
-            this.mainTrackId = mainTrackId;
+        public void setMalongrackId(long malongrackId) {
+            this.malongrackId = malongrackId;
         }
 
-        public int getCreateEventId() {
+        public long getCreateEventId() {
             return createEventId;
         }
 
-        public void setCreateEventId(int createEventId) {
+        public void setCreateEventId(long createEventId) {
             this.createEventId = createEventId;
         }
 
@@ -351,19 +351,19 @@ public class Dj {
             this.titbitImages = titbitImages;
         }
 
-        public int getListenerCount() {
+        public long getListenerCount() {
             return listenerCount;
         }
 
-        public void setListenerCount(int listenerCount) {
+        public void setListenerCount(long listenerCount) {
             this.listenerCount = listenerCount;
         }
 
-        public int getSerialNum() {
+        public long getSerialNum() {
             return serialNum;
         }
 
-        public void setSerialNum(int serialNum) {
+        public void setSerialNum(long serialNum) {
             this.serialNum = serialNum;
         }
 
@@ -383,19 +383,19 @@ public class Dj {
             this.coverId = coverId;
         }
 
-        public int getSmallLanguageAuditStatus() {
+        public long getSmallLanguageAuditStatus() {
             return smallLanguageAuditStatus;
         }
 
-        public void setSmallLanguageAuditStatus(int smallLanguageAuditStatus) {
+        public void setSmallLanguageAuditStatus(long smallLanguageAuditStatus) {
             this.smallLanguageAuditStatus = smallLanguageAuditStatus;
         }
 
-        public int getCategoryId() {
+        public long getCategoryId() {
             return categoryId;
         }
 
-        public void setCategoryId(int categoryId) {
+        public void setCategoryId(long categoryId) {
             this.categoryId = categoryId;
         }
 
@@ -407,27 +407,27 @@ public class Dj {
             this.channels = channels;
         }
 
-        public int getPubStatus() {
+        public long getPubStatus() {
             return pubStatus;
         }
 
-        public void setPubStatus(int pubStatus) {
+        public void setPubStatus(long pubStatus) {
             this.pubStatus = pubStatus;
         }
 
-        public int getBdAuditStatus() {
+        public long getBdAuditStatus() {
             return bdAuditStatus;
         }
 
-        public void setBdAuditStatus(int bdAuditStatus) {
+        public void setBdAuditStatus(long bdAuditStatus) {
             this.bdAuditStatus = bdAuditStatus;
         }
 
-        public int getSecondCategoryId() {
+        public long getSecondCategoryId() {
             return secondCategoryId;
         }
 
-        public void setSecondCategoryId(int secondCategoryId) {
+        public void setSecondCategoryId(long secondCategoryId) {
             this.secondCategoryId = secondCategoryId;
         }
 
@@ -455,11 +455,11 @@ public class Dj {
             this.privacy = privacy;
         }
 
-        public int getProgramFeeType() {
+        public long getProgramFeeType() {
             return programFeeType;
         }
 
-        public void setProgramFeeType(int programFeeType) {
+        public void setProgramFeeType(long programFeeType) {
             this.programFeeType = programFeeType;
         }
 
@@ -471,11 +471,11 @@ public class Dj {
             this.reward = reward;
         }
 
-        public int getSubscribedCount() {
+        public long getSubscribedCount() {
             return subscribedCount;
         }
 
-        public void setSubscribedCount(int subscribedCount) {
+        public void setSubscribedCount(long subscribedCount) {
             this.subscribedCount = subscribedCount;
         }
 
@@ -487,11 +487,11 @@ public class Dj {
             this.titbits = titbits;
         }
 
-        public int getFeeScope() {
+        public long getFeeScope() {
             return feeScope;
         }
 
-        public void setFeeScope(int feeScope) {
+        public void setFeeScope(long feeScope) {
             this.feeScope = feeScope;
         }
 
@@ -527,11 +527,11 @@ public class Dj {
             this.createTime = createTime;
         }
 
-        public int getShareCount() {
+        public long getShareCount() {
             return shareCount;
         }
 
-        public void setShareCount(int shareCount) {
+        public void setShareCount(long shareCount) {
             this.shareCount = shareCount;
         }
 
@@ -543,62 +543,62 @@ public class Dj {
             this.subscribed = subscribed;
         }
 
-        public int getLikedCount() {
+        public long getLikedCount() {
             return likedCount;
         }
 
-        public void setLikedCount(int likedCount) {
+        public void setLikedCount(long likedCount) {
             this.likedCount = likedCount;
         }
 
-        public int getCommentCount() {
+        public long getCommentCount() {
             return commentCount;
         }
 
-        public void setCommentCount(int commentCount) {
+        public void setCommentCount(long commentCount) {
             this.commentCount = commentCount;
         }
 
         public static class MainSongBean {
             private String name;
-            private int id;
-            private int position;
+            private long id;
+            private long position;
             private List<?> alias;
-            private int status;
-            private int fee;
-            private int copyrightId;
+            private long status;
+            private long fee;
+            private long copyrightId;
             private String disc;
-            private int no;
+            private long no;
             private List<ArtistsBean> artists;
             private AlbumBean album;
             private boolean starred;
-            private int popularity;
-            private int score;
-            private int starredNum;
-            private int duration;
-            private int playedNum;
-            private int dayPlays;
-            private int hearTime;
+            private long popularity;
+            private long score;
+            private long starredNum;
+            private long duration;
+            private long playedNum;
+            private long dayPlays;
+            private long hearTime;
             private String ringtone;
             private Object crbt;
             private Object audition;
             private String copyFrom;
             private String commentThreadId;
             private Object rtUrl;
-            private int ftype;
+            private long ftype;
             private List<?> rtUrls;
-            private int copyright;
+            private long copyright;
             private Object transName;
             private Object sign;
-            private int mark;
+            private long mark;
             private Object noCopyrightRcmd;
             private Object hMusic;
             private Object mMusic;
             private LMusicBean lMusic;
             private BMusicBean bMusic;
-            private int rtype;
+            private long rtype;
             private Object rurl;
-            private int mvid;
+            private long mvid;
             private Object mp3Url;
 
             public String getName() {
@@ -609,19 +609,19 @@ public class Dj {
                 this.name = name;
             }
 
-            public int getId() {
+            public long getId() {
                 return id;
             }
 
-            public void setId(int id) {
+            public void setId(long id) {
                 this.id = id;
             }
 
-            public int getPosition() {
+            public long getPosition() {
                 return position;
             }
 
-            public void setPosition(int position) {
+            public void setPosition(long position) {
                 this.position = position;
             }
 
@@ -633,27 +633,27 @@ public class Dj {
                 this.alias = alias;
             }
 
-            public int getStatus() {
+            public long getStatus() {
                 return status;
             }
 
-            public void setStatus(int status) {
+            public void setStatus(long status) {
                 this.status = status;
             }
 
-            public int getFee() {
+            public long getFee() {
                 return fee;
             }
 
-            public void setFee(int fee) {
+            public void setFee(long fee) {
                 this.fee = fee;
             }
 
-            public int getCopyrightId() {
+            public long getCopyrightId() {
                 return copyrightId;
             }
 
-            public void setCopyrightId(int copyrightId) {
+            public void setCopyrightId(long copyrightId) {
                 this.copyrightId = copyrightId;
             }
 
@@ -665,11 +665,11 @@ public class Dj {
                 this.disc = disc;
             }
 
-            public int getNo() {
+            public long getNo() {
                 return no;
             }
 
-            public void setNo(int no) {
+            public void setNo(long no) {
                 this.no = no;
             }
 
@@ -697,59 +697,59 @@ public class Dj {
                 this.starred = starred;
             }
 
-            public int getPopularity() {
+            public long getPopularity() {
                 return popularity;
             }
 
-            public void setPopularity(int popularity) {
+            public void setPopularity(long popularity) {
                 this.popularity = popularity;
             }
 
-            public int getScore() {
+            public long getScore() {
                 return score;
             }
 
-            public void setScore(int score) {
+            public void setScore(long score) {
                 this.score = score;
             }
 
-            public int getStarredNum() {
+            public long getStarredNum() {
                 return starredNum;
             }
 
-            public void setStarredNum(int starredNum) {
+            public void setStarredNum(long starredNum) {
                 this.starredNum = starredNum;
             }
 
-            public int getDuration() {
+            public long getDuration() {
                 return duration;
             }
 
-            public void setDuration(int duration) {
+            public void setDuration(long duration) {
                 this.duration = duration;
             }
 
-            public int getPlayedNum() {
+            public long getPlayedNum() {
                 return playedNum;
             }
 
-            public void setPlayedNum(int playedNum) {
+            public void setPlayedNum(long playedNum) {
                 this.playedNum = playedNum;
             }
 
-            public int getDayPlays() {
+            public long getDayPlays() {
                 return dayPlays;
             }
 
-            public void setDayPlays(int dayPlays) {
+            public void setDayPlays(long dayPlays) {
                 this.dayPlays = dayPlays;
             }
 
-            public int getHearTime() {
+            public long getHearTime() {
                 return hearTime;
             }
 
-            public void setHearTime(int hearTime) {
+            public void setHearTime(long hearTime) {
                 this.hearTime = hearTime;
             }
 
@@ -801,11 +801,11 @@ public class Dj {
                 this.rtUrl = rtUrl;
             }
 
-            public int getFtype() {
+            public long getFtype() {
                 return ftype;
             }
 
-            public void setFtype(int ftype) {
+            public void setFtype(long ftype) {
                 this.ftype = ftype;
             }
 
@@ -817,11 +817,11 @@ public class Dj {
                 this.rtUrls = rtUrls;
             }
 
-            public int getCopyright() {
+            public long getCopyright() {
                 return copyright;
             }
 
-            public void setCopyright(int copyright) {
+            public void setCopyright(long copyright) {
                 this.copyright = copyright;
             }
 
@@ -841,11 +841,11 @@ public class Dj {
                 this.sign = sign;
             }
 
-            public int getMark() {
+            public long getMark() {
                 return mark;
             }
 
-            public void setMark(int mark) {
+            public void setMark(long mark) {
                 this.mark = mark;
             }
 
@@ -889,11 +889,11 @@ public class Dj {
                 this.bMusic = bMusic;
             }
 
-            public int getRtype() {
+            public long getRtype() {
                 return rtype;
             }
 
-            public void setRtype(int rtype) {
+            public void setRtype(long rtype) {
                 this.rtype = rtype;
             }
 
@@ -905,11 +905,11 @@ public class Dj {
                 this.rurl = rurl;
             }
 
-            public int getMvid() {
+            public long getMvid() {
                 return mvid;
             }
 
-            public void setMvid(int mvid) {
+            public void setMvid(long mvid) {
                 this.mvid = mvid;
             }
 
@@ -923,15 +923,15 @@ public class Dj {
 
             public static class AlbumBean {
                 private String name;
-                private int id;
+                private long id;
                 private Object type;
-                private int size;
+                private long size;
                 private long picId;
                 private String blurPicUrl;
-                private int companyId;
+                private long companyId;
                 private long pic;
                 private String picUrl;
-                private int publishTime;
+                private long publishTime;
                 private String description;
                 private String tags;
                 private Object company;
@@ -939,13 +939,13 @@ public class Dj {
                 private ArtistBean artist;
                 private List<?> songs;
                 private List<?> alias;
-                private int status;
-                private int copyrightId;
+                private long status;
+                private long copyrightId;
                 private String commentThreadId;
                 private List<ArtistsBean> artists;
                 private Object subType;
                 private Object transName;
-                private int mark;
+                private long mark;
                 private String picId_str;
 
                 public String getName() {
@@ -956,11 +956,11 @@ public class Dj {
                     this.name = name;
                 }
 
-                public int getId() {
+                public long getId() {
                     return id;
                 }
 
-                public void setId(int id) {
+                public void setId(long id) {
                     this.id = id;
                 }
 
@@ -972,11 +972,11 @@ public class Dj {
                     this.type = type;
                 }
 
-                public int getSize() {
+                public long getSize() {
                     return size;
                 }
 
-                public void setSize(int size) {
+                public void setSize(long size) {
                     this.size = size;
                 }
 
@@ -996,11 +996,11 @@ public class Dj {
                     this.blurPicUrl = blurPicUrl;
                 }
 
-                public int getCompanyId() {
+                public long getCompanyId() {
                     return companyId;
                 }
 
-                public void setCompanyId(int companyId) {
+                public void setCompanyId(long companyId) {
                     this.companyId = companyId;
                 }
 
@@ -1020,11 +1020,11 @@ public class Dj {
                     this.picUrl = picUrl;
                 }
 
-                public int getPublishTime() {
+                public long getPublishTime() {
                     return publishTime;
                 }
 
-                public void setPublishTime(int publishTime) {
+                public void setPublishTime(long publishTime) {
                     this.publishTime = publishTime;
                 }
 
@@ -1084,19 +1084,19 @@ public class Dj {
                     this.alias = alias;
                 }
 
-                public int getStatus() {
+                public long getStatus() {
                     return status;
                 }
 
-                public void setStatus(int status) {
+                public void setStatus(long status) {
                     this.status = status;
                 }
 
-                public int getCopyrightId() {
+                public long getCopyrightId() {
                     return copyrightId;
                 }
 
-                public void setCopyrightId(int copyrightId) {
+                public void setCopyrightId(long copyrightId) {
                     this.copyrightId = copyrightId;
                 }
 
@@ -1132,11 +1132,11 @@ public class Dj {
                     this.transName = transName;
                 }
 
-                public int getMark() {
+                public long getMark() {
                     return mark;
                 }
 
-                public void setMark(int mark) {
+                public void setMark(long mark) {
                     this.mark = mark;
                 }
 
@@ -1150,17 +1150,17 @@ public class Dj {
 
                 public static class ArtistBean {
                     private String name;
-                    private int id;
-                    private int picId;
-                    private int img1v1Id;
+                    private long id;
+                    private long picId;
+                    private long img1v1Id;
                     private String briefDesc;
                     private String picUrl;
                     private String img1v1Url;
-                    private int albumSize;
+                    private long albumSize;
                     private List<?> alias;
                     private String trans;
-                    private int musicSize;
-                    private int topicPerson;
+                    private long musicSize;
+                    private long topicPerson;
 
                     public String getName() {
                         return name;
@@ -1170,27 +1170,27 @@ public class Dj {
                         this.name = name;
                     }
 
-                    public int getId() {
+                    public long getId() {
                         return id;
                     }
 
-                    public void setId(int id) {
+                    public void setId(long id) {
                         this.id = id;
                     }
 
-                    public int getPicId() {
+                    public long getPicId() {
                         return picId;
                     }
 
-                    public void setPicId(int picId) {
+                    public void setPicId(long picId) {
                         this.picId = picId;
                     }
 
-                    public int getImg1v1Id() {
+                    public long getImg1v1Id() {
                         return img1v1Id;
                     }
 
-                    public void setImg1v1Id(int img1v1Id) {
+                    public void setImg1v1Id(long img1v1Id) {
                         this.img1v1Id = img1v1Id;
                     }
 
@@ -1218,11 +1218,11 @@ public class Dj {
                         this.img1v1Url = img1v1Url;
                     }
 
-                    public int getAlbumSize() {
+                    public long getAlbumSize() {
                         return albumSize;
                     }
 
-                    public void setAlbumSize(int albumSize) {
+                    public void setAlbumSize(long albumSize) {
                         this.albumSize = albumSize;
                     }
 
@@ -1242,36 +1242,36 @@ public class Dj {
                         this.trans = trans;
                     }
 
-                    public int getMusicSize() {
+                    public long getMusicSize() {
                         return musicSize;
                     }
 
-                    public void setMusicSize(int musicSize) {
+                    public void setMusicSize(long musicSize) {
                         this.musicSize = musicSize;
                     }
 
-                    public int getTopicPerson() {
+                    public long getTopicPerson() {
                         return topicPerson;
                     }
 
-                    public void setTopicPerson(int topicPerson) {
+                    public void setTopicPerson(long topicPerson) {
                         this.topicPerson = topicPerson;
                     }
                 }
 
                 public static class ArtistsBean {
                     private String name;
-                    private int id;
-                    private int picId;
-                    private int img1v1Id;
+                    private long id;
+                    private long picId;
+                    private long img1v1Id;
                     private String briefDesc;
                     private String picUrl;
                     private String img1v1Url;
-                    private int albumSize;
+                    private long albumSize;
                     private List<?> alias;
                     private String trans;
-                    private int musicSize;
-                    private int topicPerson;
+                    private long musicSize;
+                    private long topicPerson;
 
                     public String getName() {
                         return name;
@@ -1281,27 +1281,27 @@ public class Dj {
                         this.name = name;
                     }
 
-                    public int getId() {
+                    public long getId() {
                         return id;
                     }
 
-                    public void setId(int id) {
+                    public void setId(long id) {
                         this.id = id;
                     }
 
-                    public int getPicId() {
+                    public long getPicId() {
                         return picId;
                     }
 
-                    public void setPicId(int picId) {
+                    public void setPicId(long picId) {
                         this.picId = picId;
                     }
 
-                    public int getImg1v1Id() {
+                    public long getImg1v1Id() {
                         return img1v1Id;
                     }
 
-                    public void setImg1v1Id(int img1v1Id) {
+                    public void setImg1v1Id(long img1v1Id) {
                         this.img1v1Id = img1v1Id;
                     }
 
@@ -1329,11 +1329,11 @@ public class Dj {
                         this.img1v1Url = img1v1Url;
                     }
 
-                    public int getAlbumSize() {
+                    public long getAlbumSize() {
                         return albumSize;
                     }
 
-                    public void setAlbumSize(int albumSize) {
+                    public void setAlbumSize(long albumSize) {
                         this.albumSize = albumSize;
                     }
 
@@ -1353,19 +1353,19 @@ public class Dj {
                         this.trans = trans;
                     }
 
-                    public int getMusicSize() {
+                    public long getMusicSize() {
                         return musicSize;
                     }
 
-                    public void setMusicSize(int musicSize) {
+                    public void setMusicSize(long musicSize) {
                         this.musicSize = musicSize;
                     }
 
-                    public int getTopicPerson() {
+                    public long getTopicPerson() {
                         return topicPerson;
                     }
 
-                    public void setTopicPerson(int topicPerson) {
+                    public void setTopicPerson(long topicPerson) {
                         this.topicPerson = topicPerson;
                     }
                 }
@@ -1374,13 +1374,13 @@ public class Dj {
             public static class LMusicBean {
                 private Object name;
                 private long id;
-                private int size;
+                private long size;
                 private String extension;
-                private int sr;
-                private int dfsId;
-                private int bitrate;
-                private int playTime;
-                private int volumeDelta;
+                private long sr;
+                private long dfsId;
+                private long bitrate;
+                private long playTime;
+                private long volumeDelta;
 
                 public Object getName() {
                     return name;
@@ -1398,11 +1398,11 @@ public class Dj {
                     this.id = id;
                 }
 
-                public int getSize() {
+                public long getSize() {
                     return size;
                 }
 
-                public void setSize(int size) {
+                public void setSize(long size) {
                     this.size = size;
                 }
 
@@ -1414,43 +1414,43 @@ public class Dj {
                     this.extension = extension;
                 }
 
-                public int getSr() {
+                public long getSr() {
                     return sr;
                 }
 
-                public void setSr(int sr) {
+                public void setSr(long sr) {
                     this.sr = sr;
                 }
 
-                public int getDfsId() {
+                public long getDfsId() {
                     return dfsId;
                 }
 
-                public void setDfsId(int dfsId) {
+                public void setDfsId(long dfsId) {
                     this.dfsId = dfsId;
                 }
 
-                public int getBitrate() {
+                public long getBitrate() {
                     return bitrate;
                 }
 
-                public void setBitrate(int bitrate) {
+                public void setBitrate(long bitrate) {
                     this.bitrate = bitrate;
                 }
 
-                public int getPlayTime() {
+                public long getPlayTime() {
                     return playTime;
                 }
 
-                public void setPlayTime(int playTime) {
+                public void setPlayTime(long playTime) {
                     this.playTime = playTime;
                 }
 
-                public int getVolumeDelta() {
+                public long getVolumeDelta() {
                     return volumeDelta;
                 }
 
-                public void setVolumeDelta(int volumeDelta) {
+                public void setVolumeDelta(long volumeDelta) {
                     this.volumeDelta = volumeDelta;
                 }
             }
@@ -1458,13 +1458,13 @@ public class Dj {
             public static class BMusicBean {
                 private Object name;
                 private long id;
-                private int size;
+                private long size;
                 private String extension;
-                private int sr;
-                private int dfsId;
-                private int bitrate;
-                private int playTime;
-                private int volumeDelta;
+                private long sr;
+                private long dfsId;
+                private long bitrate;
+                private long playTime;
+                private long volumeDelta;
 
                 public Object getName() {
                     return name;
@@ -1482,11 +1482,11 @@ public class Dj {
                     this.id = id;
                 }
 
-                public int getSize() {
+                public long getSize() {
                     return size;
                 }
 
-                public void setSize(int size) {
+                public void setSize(long size) {
                     this.size = size;
                 }
 
@@ -1498,60 +1498,60 @@ public class Dj {
                     this.extension = extension;
                 }
 
-                public int getSr() {
+                public long getSr() {
                     return sr;
                 }
 
-                public void setSr(int sr) {
+                public void setSr(long sr) {
                     this.sr = sr;
                 }
 
-                public int getDfsId() {
+                public long getDfsId() {
                     return dfsId;
                 }
 
-                public void setDfsId(int dfsId) {
+                public void setDfsId(long dfsId) {
                     this.dfsId = dfsId;
                 }
 
-                public int getBitrate() {
+                public long getBitrate() {
                     return bitrate;
                 }
 
-                public void setBitrate(int bitrate) {
+                public void setBitrate(long bitrate) {
                     this.bitrate = bitrate;
                 }
 
-                public int getPlayTime() {
+                public long getPlayTime() {
                     return playTime;
                 }
 
-                public void setPlayTime(int playTime) {
+                public void setPlayTime(long playTime) {
                     this.playTime = playTime;
                 }
 
-                public int getVolumeDelta() {
+                public long getVolumeDelta() {
                     return volumeDelta;
                 }
 
-                public void setVolumeDelta(int volumeDelta) {
+                public void setVolumeDelta(long volumeDelta) {
                     this.volumeDelta = volumeDelta;
                 }
             }
 
             public static class ArtistsBean {
                 private String name;
-                private int id;
-                private int picId;
-                private int img1v1Id;
+                private long id;
+                private long picId;
+                private long img1v1Id;
                 private String briefDesc;
                 private String picUrl;
                 private String img1v1Url;
-                private int albumSize;
+                private long albumSize;
                 private List<?> alias;
                 private String trans;
-                private int musicSize;
-                private int topicPerson;
+                private long musicSize;
+                private long topicPerson;
 
                 public String getName() {
                     return name;
@@ -1561,27 +1561,27 @@ public class Dj {
                     this.name = name;
                 }
 
-                public int getId() {
+                public long getId() {
                     return id;
                 }
 
-                public void setId(int id) {
+                public void setId(long id) {
                     this.id = id;
                 }
 
-                public int getPicId() {
+                public long getPicId() {
                     return picId;
                 }
 
-                public void setPicId(int picId) {
+                public void setPicId(long picId) {
                     this.picId = picId;
                 }
 
-                public int getImg1v1Id() {
+                public long getImg1v1Id() {
                     return img1v1Id;
                 }
 
-                public void setImg1v1Id(int img1v1Id) {
+                public void setImg1v1Id(long img1v1Id) {
                     this.img1v1Id = img1v1Id;
                 }
 
@@ -1609,11 +1609,11 @@ public class Dj {
                     this.img1v1Url = img1v1Url;
                 }
 
-                public int getAlbumSize() {
+                public long getAlbumSize() {
                     return albumSize;
                 }
 
-                public void setAlbumSize(int albumSize) {
+                public void setAlbumSize(long albumSize) {
                     this.albumSize = albumSize;
                 }
 
@@ -1633,19 +1633,19 @@ public class Dj {
                     this.trans = trans;
                 }
 
-                public int getMusicSize() {
+                public long getMusicSize() {
                     return musicSize;
                 }
 
-                public void setMusicSize(int musicSize) {
+                public void setMusicSize(long musicSize) {
                     this.musicSize = musicSize;
                 }
 
-                public int getTopicPerson() {
+                public long getTopicPerson() {
                     return topicPerson;
                 }
 
-                public void setTopicPerson(int topicPerson) {
+                public void setTopicPerson(long topicPerson) {
                     this.topicPerson = topicPerson;
                 }
             }
@@ -1653,16 +1653,16 @@ public class Dj {
 
         public static class DjBean {
             private boolean defaultAvatar;
-            private int province;
-            private int authStatus;
+            private long province;
+            private long authStatus;
             private boolean followed;
             private String avatarUrl;
-            private int accountStatus;
-            private int gender;
-            private int city;
+            private long accountStatus;
+            private long gender;
+            private long city;
             private long birthday;
-            private int userId;
-            private int userType;
+            private long userId;
+            private long userType;
             private String nickname;
             private String signature;
             private String description;
@@ -1670,14 +1670,14 @@ public class Dj {
             private long avatarImgId;
             private long backgroundImgId;
             private String backgroundUrl;
-            private int authority;
+            private long authority;
             private boolean mutual;
             private Object expertTags;
             private Object experts;
-            private int djStatus;
-            private int vipType;
+            private long djStatus;
+            private long vipType;
             private Object remarkName;
-            private int authenticationTypes;
+            private long authenticationTypes;
             private Object avatarDetail;
             private String avatarImgIdStr;
             private String backgroundImgIdStr;
@@ -1693,19 +1693,19 @@ public class Dj {
                 this.defaultAvatar = defaultAvatar;
             }
 
-            public int getProvince() {
+            public long getProvince() {
                 return province;
             }
 
-            public void setProvince(int province) {
+            public void setProvince(long province) {
                 this.province = province;
             }
 
-            public int getAuthStatus() {
+            public long getAuthStatus() {
                 return authStatus;
             }
 
-            public void setAuthStatus(int authStatus) {
+            public void setAuthStatus(long authStatus) {
                 this.authStatus = authStatus;
             }
 
@@ -1725,27 +1725,27 @@ public class Dj {
                 this.avatarUrl = avatarUrl;
             }
 
-            public int getAccountStatus() {
+            public long getAccountStatus() {
                 return accountStatus;
             }
 
-            public void setAccountStatus(int accountStatus) {
+            public void setAccountStatus(long accountStatus) {
                 this.accountStatus = accountStatus;
             }
 
-            public int getGender() {
+            public long getGender() {
                 return gender;
             }
 
-            public void setGender(int gender) {
+            public void setGender(long gender) {
                 this.gender = gender;
             }
 
-            public int getCity() {
+            public long getCity() {
                 return city;
             }
 
-            public void setCity(int city) {
+            public void setCity(long city) {
                 this.city = city;
             }
 
@@ -1757,19 +1757,19 @@ public class Dj {
                 this.birthday = birthday;
             }
 
-            public int getUserId() {
+            public long getUserId() {
                 return userId;
             }
 
-            public void setUserId(int userId) {
+            public void setUserId(long userId) {
                 this.userId = userId;
             }
 
-            public int getUserType() {
+            public long getUserType() {
                 return userType;
             }
 
-            public void setUserType(int userType) {
+            public void setUserType(long userType) {
                 this.userType = userType;
             }
 
@@ -1829,11 +1829,11 @@ public class Dj {
                 this.backgroundUrl = backgroundUrl;
             }
 
-            public int getAuthority() {
+            public long getAuthority() {
                 return authority;
             }
 
-            public void setAuthority(int authority) {
+            public void setAuthority(long authority) {
                 this.authority = authority;
             }
 
@@ -1861,19 +1861,19 @@ public class Dj {
                 this.experts = experts;
             }
 
-            public int getDjStatus() {
+            public long getDjStatus() {
                 return djStatus;
             }
 
-            public void setDjStatus(int djStatus) {
+            public void setDjStatus(long djStatus) {
                 this.djStatus = djStatus;
             }
 
-            public int getVipType() {
+            public long getVipType() {
                 return vipType;
             }
 
-            public void setVipType(int vipType) {
+            public void setVipType(long vipType) {
                 this.vipType = vipType;
             }
 
@@ -1885,11 +1885,11 @@ public class Dj {
                 this.remarkName = remarkName;
             }
 
-            public int getAuthenticationTypes() {
+            public long getAuthenticationTypes() {
                 return authenticationTypes;
             }
 
-            public void setAuthenticationTypes(int authenticationTypes) {
+            public void setAuthenticationTypes(long authenticationTypes) {
                 this.authenticationTypes = authenticationTypes;
             }
 
@@ -1947,36 +1947,36 @@ public class Dj {
             private String category;
             private String secondCategory;
             private boolean buyed;
-            private int price;
-            private int originalPrice;
+            private long price;
+            private long originalPrice;
             private Object discountPrice;
-            private int purchaseCount;
+            private long purchaseCount;
             private Object lastProgramName;
             private Object videos;
             private boolean finished;
             private boolean underShelf;
             private Object liveInfo;
-            private int playCount;
+            private long playCount;
             private boolean privacy;
             private Object icon;
             private Object manualTagsDTO;
             private Object descPicList;
             private Object shortName;
             private boolean dynamic;
-            private int programCount;
-            private int categoryId;
-            private int taskId;
-            private int subCount;
+            private long programCount;
+            private long categoryId;
+            private long taskId;
+            private long subCount;
             private long picId;
-            private String intervenePicUrl;
-            private long intervenePicId;
+            private String longervenePicUrl;
+            private long longervenePicId;
             private String picUrl;
             private long lastProgramCreateTime;
-            private int radioFeeType;
+            private long radioFeeType;
             private long lastProgramId;
-            private int feeScope;
+            private long feeScope;
             private String name;
-            private int id;
+            private long id;
             private String desc;
             private long createTime;
 
@@ -2012,19 +2012,19 @@ public class Dj {
                 this.buyed = buyed;
             }
 
-            public int getPrice() {
+            public long getPrice() {
                 return price;
             }
 
-            public void setPrice(int price) {
+            public void setPrice(long price) {
                 this.price = price;
             }
 
-            public int getOriginalPrice() {
+            public long getOriginalPrice() {
                 return originalPrice;
             }
 
-            public void setOriginalPrice(int originalPrice) {
+            public void setOriginalPrice(long originalPrice) {
                 this.originalPrice = originalPrice;
             }
 
@@ -2036,11 +2036,11 @@ public class Dj {
                 this.discountPrice = discountPrice;
             }
 
-            public int getPurchaseCount() {
+            public long getPurchaseCount() {
                 return purchaseCount;
             }
 
-            public void setPurchaseCount(int purchaseCount) {
+            public void setPurchaseCount(long purchaseCount) {
                 this.purchaseCount = purchaseCount;
             }
 
@@ -2084,11 +2084,11 @@ public class Dj {
                 this.liveInfo = liveInfo;
             }
 
-            public int getPlayCount() {
+            public long getPlayCount() {
                 return playCount;
             }
 
-            public void setPlayCount(int playCount) {
+            public void setPlayCount(long playCount) {
                 this.playCount = playCount;
             }
 
@@ -2140,35 +2140,35 @@ public class Dj {
                 this.dynamic = dynamic;
             }
 
-            public int getProgramCount() {
+            public long getProgramCount() {
                 return programCount;
             }
 
-            public void setProgramCount(int programCount) {
+            public void setProgramCount(long programCount) {
                 this.programCount = programCount;
             }
 
-            public int getCategoryId() {
+            public long getCategoryId() {
                 return categoryId;
             }
 
-            public void setCategoryId(int categoryId) {
+            public void setCategoryId(long categoryId) {
                 this.categoryId = categoryId;
             }
 
-            public int getTaskId() {
+            public long getTaskId() {
                 return taskId;
             }
 
-            public void setTaskId(int taskId) {
+            public void setTaskId(long taskId) {
                 this.taskId = taskId;
             }
 
-            public int getSubCount() {
+            public long getSubCount() {
                 return subCount;
             }
 
-            public void setSubCount(int subCount) {
+            public void setSubCount(long subCount) {
                 this.subCount = subCount;
             }
 
@@ -2180,20 +2180,20 @@ public class Dj {
                 this.picId = picId;
             }
 
-            public String getIntervenePicUrl() {
-                return intervenePicUrl;
+            public String getlongervenePicUrl() {
+                return longervenePicUrl;
             }
 
-            public void setIntervenePicUrl(String intervenePicUrl) {
-                this.intervenePicUrl = intervenePicUrl;
+            public void setlongervenePicUrl(String longervenePicUrl) {
+                this.longervenePicUrl = longervenePicUrl;
             }
 
-            public long getIntervenePicId() {
-                return intervenePicId;
+            public long getlongervenePicId() {
+                return longervenePicId;
             }
 
-            public void setIntervenePicId(long intervenePicId) {
-                this.intervenePicId = intervenePicId;
+            public void setlongervenePicId(long longervenePicId) {
+                this.longervenePicId = longervenePicId;
             }
 
             public String getPicUrl() {
@@ -2212,11 +2212,11 @@ public class Dj {
                 this.lastProgramCreateTime = lastProgramCreateTime;
             }
 
-            public int getRadioFeeType() {
+            public long getRadioFeeType() {
                 return radioFeeType;
             }
 
-            public void setRadioFeeType(int radioFeeType) {
+            public void setRadioFeeType(long radioFeeType) {
                 this.radioFeeType = radioFeeType;
             }
 
@@ -2228,11 +2228,11 @@ public class Dj {
                 this.lastProgramId = lastProgramId;
             }
 
-            public int getFeeScope() {
+            public long getFeeScope() {
                 return feeScope;
             }
 
-            public void setFeeScope(int feeScope) {
+            public void setFeeScope(long feeScope) {
                 this.feeScope = feeScope;
             }
 
@@ -2244,11 +2244,11 @@ public class Dj {
                 this.name = name;
             }
 
-            public int getId() {
+            public long getId() {
                 return id;
             }
 
-            public void setId(int id) {
+            public void setId(long id) {
                 this.id = id;
             }
 
