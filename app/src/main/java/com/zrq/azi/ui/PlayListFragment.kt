@@ -19,6 +19,7 @@ import com.zrq.azi.interfaces.OnItemClickListener
 import com.zrq.azi.interfaces.OnItemLongClickListener
 import com.zrq.azi.util.Constants.BASE_URL
 import com.zrq.azi.util.Constants.PLAY_LIST_ALL
+import com.zrq.azi.util.Util.httpGet
 import okhttp3.*
 import java.io.IOException
 
@@ -87,67 +88,39 @@ class PlayListFragment : BaseFragment<FragmentPlayListBinding>(), OnItemClickLis
         }
     }
 
-
+    @SuppressLint("NotifyDataSetChanged")
     private fun loadListSong() {
-        Thread {
-            if (playListInfo != null) {
-                val url = "$BASE_URL$PLAY_LIST_ALL?id=${playListInfo!!.id}&offset=${offset * limit}&limit=$limit"
-                val request: Request = Request.Builder().url(url).get().build()
-                Log.d(TAG, "loadListSong: $url")
-
-                fun finish() {
-                    mBinding.refreshLayout.finishRefresh()
-                    mBinding.refreshLayout.finishLoadMore()
-                }
-
-                OkHttpClient().newCall(request).enqueue(object : Callback {
-                    override fun onFailure(call: Call, e: IOException) {
-                        finish()
-                    }
-
-                    @SuppressLint("NotifyDataSetChanged")
-                    override fun onResponse(call: Call, response: Response) {
-                        if (response.body != null) {
-                            val json = response.body!!.string()
-                            Log.d(TAG, "onResponse: $json")
-                            try {
-                                val songOfList = Gson().fromJson(json, SongOfList::class.java)
-                                if (songOfList?.songs != null) {
-                                    if (offset == 0)
-                                        list.clear()
-                                    list.addAll(songOfList.songs)
-                                    list.forEach {
-                                        for (i in it.ar.indices) {
-                                            if (i == 0)
-                                                it.singer = it.ar[i].name
-                                            else
-                                                it.singer = it.singer + "/" + it.ar[i].name
-                                        }
-                                        it.singer
-                                    }
-                                    if (playListInfo != null) {
-                                        playListInfo!!.songGson = Gson().toJson(list).toString()
-                                        Log.d(TAG, "toJson: ${Gson().toJson(list)}")
-                                        mainModel.listDaoImpl?.updateListSongs(playListInfo!!)
-                                    }
-                                    requireActivity().runOnUiThread {
-                                        mAdapter.notifyDataSetChanged()
-                                    }
-                                    finish()
-                                } else {
-                                    finish()
-                                }
-                            } catch (e: Exception) {
-                                Log.d(TAG, "onResponse: $e")
-                                finish()
+        if (playListInfo != null) {
+            val url = "$BASE_URL$PLAY_LIST_ALL?id=${playListInfo!!.id}&offset=${offset * limit}&limit=$limit"
+            httpGet(url) { success, msg ->
+                if (success) {
+                    val songOfList = Gson().fromJson(msg, SongOfList::class.java)
+                    if (songOfList?.songs != null) {
+                        if (offset == 0)
+                            list.clear()
+                        list.addAll(songOfList.songs)
+                        list.forEach {
+                            for (i in it.ar.indices) {
+                                if (i == 0)
+                                    it.singer = it.ar[i].name
+                                else
+                                    it.singer = it.singer + "/" + it.ar[i].name
                             }
-                        } else {
-                            finish()
+                            it.singer
+                        }
+                        playListInfo!!.songGson = Gson().toJson(list).toString()
+                        mainModel.listDaoImpl?.updateListSongs(playListInfo!!)
+                        requireActivity().runOnUiThread {
+                            mAdapter.notifyDataSetChanged()
                         }
                     }
-                })
+                } else {
+                    Log.d(TAG, "loadListSong: $msg")
+                }
+                mBinding.refreshLayout.finishRefresh()
+                mBinding.refreshLayout.finishLoadMore()
             }
-        }.start()
+        }
     }
 
     override fun onItemClick(view: View, position: Int) {

@@ -6,7 +6,14 @@ object Constants {
 
     const val LOGIN_VISITOR = "/register/anonimous"
 
-    const val LOGIN_NUMBER_PASSWORD = "/login/cellphone"
+    // /login/cellphone?phone=xxx&password=yyy /login/cellphone?phone=xxx&md5_password=yyy /login/cellphone?phone=xxx&captcha=1234
+    const val LOGIN_NUMBER = "/login/cellphone"
+
+    // /captcha/sent?phone=13xxx
+    const val SENT_CAPTCHA = "/captcha/sent"
+
+    // /captcha/verify?phone=13xxx&captcha=1597
+    const val VERIFY_CAPTCHA = "/captcha/verify"
 
     const val USER_PLAY_LIST = "/user/playlist"
 

@@ -20,6 +20,7 @@ import com.zrq.azi.interfaces.OnItemClickListener
 import com.zrq.azi.interfaces.OnItemLongClickListener
 import com.zrq.azi.util.Constants.BASE_URL
 import com.zrq.azi.util.Constants.USER_PLAY_LIST
+import com.zrq.azi.util.Util.httpGet
 import okhttp3.*
 import java.io.IOException
 
@@ -80,45 +81,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun loadUserPlayList() {
-        Thread {
-            val url = "$BASE_URL$USER_PLAY_LIST?uid=1443709708&offset=0&limit=200"
-            val request: Request = Request.Builder().url(url).get().build()
-            Log.d(TAG, "loadUserPlayList: $url")
-            OkHttpClient().newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                }
-
-                @SuppressLint("NotifyDataSetChanged")
-                override fun onResponse(call: Call, response: Response) {
-                    if (response.body != null) {
-                        val json = response.body!!.string()
-                        try {
-                            val playList = Gson().fromJson(json, UserPlayList::class.java)
-                            if (playList?.playlist != null) {
-                                mainModel.listDaoImpl?.updateAllList(playList.playlist)
-                                mainModel.listDaoImpl?.let {
-                                    list.clear()
-                                    list.addAll(it.listAllList())
-                                }
-                                //存入数据库
-                                requireActivity().runOnUiThread {
-                                    mAdapter.notifyDataSetChanged()
-                                    mBinding.refreshLayout.finishRefresh()
-                                }
-                            } else {
-                                mBinding.refreshLayout.finishRefresh()
-                            }
-                        } catch (e: Exception) {
-                            mBinding.refreshLayout.finishRefresh()
-                            Log.d(TAG, "onResponse: $e")
-                        }
-                    } else {
-                        mBinding.refreshLayout.finishRefresh()
+        val url = "$BASE_URL$USER_PLAY_LIST?uid=1443709708&offset=0&limit=200"
+        httpGet(url) { success, msg ->
+            if (success) {
+                val playList = Gson().fromJson(msg, UserPlayList::class.java)
+                if (playList?.playlist != null) {
+                    //存入数据库
+                    mainModel.listDaoImpl?.updateAllList(playList.playlist)
+                    mainModel.listDaoImpl?.let { it1 ->
+                        list.clear()
+                        list.addAll(it1.listAllList())
+                    }
+                    requireActivity().runOnUiThread {
+                        mAdapter.notifyDataSetChanged()
                     }
                 }
-            })
-        }.start()
+            } else {
+                Log.d(TAG, "loadUserPlayList: $msg")
+            }
+            mBinding.refreshLayout.finishRefresh()
+        }
     }
 
     override fun onItemClick(view: View, position: Int) {

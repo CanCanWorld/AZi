@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/et_number"
+            android:id="@+id/text_input_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
@@ -47,6 +47,7 @@
             android:visibility="gone">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -62,15 +63,16 @@
             android:visibility="gone">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/et_password"
+                android:id="@+id/text_input_password"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/verification_code">
+                android:layout_weight="1">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_password"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:hint="@string/verification_code" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
@@ -122,5 +124,4 @@
                 tools:ignore="RelativeOverlap" />
         </RelativeLayout>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

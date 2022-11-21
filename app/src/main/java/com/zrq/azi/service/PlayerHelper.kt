@@ -11,6 +11,7 @@ import com.zrq.azi.util.Constants.BASE_URL
 import com.zrq.azi.util.Constants.SONG_URL
 import com.zrq.azi.interfaces.IPlayerControl
 import com.zrq.azi.interfaces.IPlayerViewControl
+import com.zrq.azi.util.Util.httpGet
 import okhttp3.*
 import java.io.IOException
 import java.util.*
@@ -136,32 +137,19 @@ object PlayerHelper : Binder(), IPlayerControl {
     private fun loadSongUrl(callback: (String) -> Unit) {
         val id = playList[pos].id
         val url = "$BASE_URL$SONG_URL?id=$id"
-        Log.d(TAG, "loadSong: $url")
-        val request: Request = Request.Builder()
-            .url(url)
-            .get()
-            .build()
-        OkHttpClient().newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Log.d(TAG, "onFailure: ")
-                next()
-
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                if (response.body != null) {
-                    val json = response.body!!.string()
-                    val song = Gson().fromJson(json, SongUrl::class.java)
-                    if (song?.data?.get(0)?.url != null) {
-                        callback(song.data[0].url)
-                    }else{
-                        next()
-                    }
-                }else{
+        httpGet(url) { success, msg ->
+            if (success) {
+                val song = Gson().fromJson(msg, SongUrl::class.java)
+                if (song?.data?.get(0)?.url != null) {
+                    callback(song.data[0].url)
+                } else {
                     next()
                 }
+            } else {
+                Log.d(TAG, "loadSongUrl: $msg")
+                next()
             }
-        })
+        }
     }
 
     private fun startTimer() {

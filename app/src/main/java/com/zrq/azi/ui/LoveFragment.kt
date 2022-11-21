@@ -30,18 +30,18 @@ class LoveFragment : BaseFragment<FragmentLoveBinding>(), OnItemClickListener {
         val c = list[a]._id
         val s1 = list[a].apply { _id = list[b]._id }
         val s2 = list[b].apply { _id = c }
-        mainModel.songDaoImpl?.updateSongById(s1)
-        mainModel.songDaoImpl?.updateSongById(s2)
+//        mainModel.songDaoImpl?.updateSongById(s1)
+//        mainModel.songDaoImpl?.updateSongById(s2)
     }
 
     private val onItemDelete: (Int) -> Unit = {
-        mainModel.songDaoImpl?.deleteSong(list[it]._id)
+//        mainModel.songDaoImpl?.deleteSong(list[it]._id)
     }
 
     // todo: 数据库操作
     override fun initData() {
         list.clear()
-        mainModel.songDaoImpl?.listAllSongs()?.let { list.addAll(it) }
+//        mainModel.songDaoImpl?.listAllSongs()?.let { list.addAll(it) }
         adapter = LoveItemAdapter(requireContext(), list, this, onDataChange, onItemDelete)
         mBinding.apply {
             recyclerView.adapter = adapter

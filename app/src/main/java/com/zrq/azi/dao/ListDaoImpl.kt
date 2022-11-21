@@ -33,7 +33,6 @@ class ListDaoImpl(
         db.execSQL("delete from $LIST_TABLE;")
         db.execSQL("update sqlite_sequence set seq ='0' where name ='$LIST_TABLE';")
         newList.forEach {
-            Log.d(TAG, "updateAllList: $newList")
             db.insert(LIST_TABLE, null, beanToValues(it))
         }
         db.close()
@@ -42,8 +41,6 @@ class ListDaoImpl(
     override fun updateListSongs(newList: UserPlayList.PlaylistDTO) {
         val db = mHelper.writableDatabase
         val values = beanToValues(newList)
-        Log.d("TAG", "updateListSongs: ${newList._id}")
-        Log.d("TAG", "updateListSongs: ${newList.songGson}")
         db.update(LIST_TABLE, values, "$FIELD_ID=?", arrayOf(newList._id.toString()))
         db.close()
     }
