@@ -6,8 +6,7 @@
         <entry key="..\:/Android_project_git/AZi/app/src/main/res/drawable/seekbar_thumb.xml" value="0.231" />
         <entry key="..\:/Android_project_git/AZi/app/src/main/res/drawable/shape_item_bg.xml" value="0.2645" />
         <entry key="..\:/Android_project_git/AZi/app/src/main/res/layout/activity_main.xml" value="0.33697916666666666" />
-        <entry key="..\:/Android_project_git/AZi/app/src/main/res/layout/fragment_home.xml" value="0.6488095238095238" />
-        <entry key="..\:/Android_project_git/AZi/app/src/main/res/layout/fragment_login.xml" value="0.17708333333333334" />
+        <entry key="..\:/Android_project_git/AZi/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Android_project_git/AZi/app/src/main/res/layout/fragment_love.xml" value="0.33697916666666666" />
         <entry key="..\:/Android_project_git/AZi/app/src/main/res/layout/fragment_play_bar.xml" value="0.33697916666666666" />
         <entry key="..\:/Android_project_git/AZi/app/src/main/res/layout/fragment_play_list.xml" value="0.33" />
@@ -17,6 +16,8 @@
         <entry key="..\:/Android_project_git/AZi/app/src/main/res/layout/item_song.xml" value="0.5" />
         <entry key="..\:/Users/smq/AndroidStudioProjects/AZi/app/src/main/res/layout/activity_main.xml" value="0.30434782608695654" />
         <entry key="..\:/Users/smq/AndroidStudioProjects/AZi/app/src/main/res/layout/item_song.xml" value="0.44157608695652173" />
+        <entry key="..\:/Users/smq/android/AZi/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Users/smq/android/AZi/app/src/main/res/layout/fragment_login.xml" value="0.67" />
       </map>
     </option>
   </component>

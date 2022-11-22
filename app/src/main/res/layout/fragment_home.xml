@@ -43,14 +43,14 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_exit"
-                app:cornerRadius="20dp"
-                android:textColor="@color/white"
-                android:text="@string/exit"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                app:backgroundTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="@string/exit"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/red"
+                app:cornerRadius="20dp"
                 tools:ignore="RelativeOverlap" />
         </RelativeLayout>
 
@@ -120,6 +120,21 @@
                     android:layout_height="wrap_content"
                     android:text="@string/local" />
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="@string/my_list"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 

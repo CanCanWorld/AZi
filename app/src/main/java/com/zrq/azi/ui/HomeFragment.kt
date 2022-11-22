@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.tencent.mmkv.MMKV
+import com.zrq.azi.MainActivity
 import com.zrq.azi.R
 import com.zrq.azi.adapter.PlayListAdapter
 import com.zrq.azi.bean.UserPlayList
@@ -22,6 +23,9 @@ import com.zrq.azi.interfaces.OnItemClickListener
 import com.zrq.azi.interfaces.OnItemLongClickListener
 import com.zrq.azi.util.Constants.BASE_URL
 import com.zrq.azi.util.Constants.LOGOUT
+import com.zrq.azi.util.Constants.MMKV_AVATAR_URL
+import com.zrq.azi.util.Constants.MMKV_NICKNAME
+import com.zrq.azi.util.Constants.MMKV_UID
 import com.zrq.azi.util.Constants.USER_PLAY_LIST
 import com.zrq.azi.util.ToastUtil
 import com.zrq.azi.util.Util.httpGet
@@ -60,10 +64,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
         }
 
 
-        val avatarUrl = MMKV.defaultMMKV().decodeString("avatarUrl", "")
-        val nickname = MMKV.defaultMMKV().decodeString("nickname", "游客登录")
+        val avatarUrl = MMKV.defaultMMKV().decodeString(MMKV_AVATAR_URL, "")
+        val nickname = MMKV.defaultMMKV().decodeString(MMKV_NICKNAME, "游客登录")
         mBinding.tvUsername.text = nickname
         Glide.with(requireActivity()).load(avatarUrl).into(mBinding.ivUserHead)
+
+        val uid = MMKV.defaultMMKV().decodeString(MMKV_UID, "")
+        if (uid == "") {
+            Navigation.findNavController(requireActivity(), R.id.fragment_container)
+                .navigate(R.id.loginFragment)
+        }
     }
 
     override fun initEvent() {
@@ -89,11 +99,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
 
             btnExit.setOnClickListener {
                 exit()
+
             }
         }
     }
 
     private fun exit() {
+        MMKV.defaultMMKV().putString(MMKV_UID, "")
+        MMKV.defaultMMKV().putString(MMKV_AVATAR_URL, "")
+        MMKV.defaultMMKV().putString(MMKV_NICKNAME, "")
+        mainModel.listDaoImpl?.removeAll()
+
         val url = "$BASE_URL$LOGOUT"
         httpGet(url) { _, msg ->
             ToastUtil.showToast(requireContext(), msg)
@@ -105,7 +121,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
     @SuppressLint("NotifyDataSetChanged")
     private fun loadUserPlayList() {
         //1443709708
-        val uid = MMKV.defaultMMKV().decodeString("uid", "")
+        val uid = MMKV.defaultMMKV().decodeString(MMKV_UID, "")
         val url = "$BASE_URL$USER_PLAY_LIST?uid=$uid&offset=0&limit=200"
         httpGet(url) { success, msg ->
             if (success) {
@@ -130,7 +146,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
 
     override fun onItemClick(view: View, position: Int) {
         mainModel.playListInfo = list[position]
-        mainModel.playListCount = list[position].trackCount
+        mainModel.playListCount = list[position].trackCount.toInt()
         Navigation.findNavController(requireActivity(), R.id.fragment_container)
             .navigate(R.id.action_homeFragment_to_playListFragment)
     }

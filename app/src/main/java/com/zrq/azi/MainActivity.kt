@@ -19,6 +19,7 @@ import android.widget.SeekBar
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.viewpager2.widget.ViewPager2
 import com.tencent.mmkv.MMKV
 import com.zrq.azi.adapter.ViewpagerAdapter
@@ -30,6 +31,9 @@ import com.zrq.azi.db.SongDatabaseHelper
 import com.zrq.azi.service.PlayerService
 import com.zrq.azi.interfaces.IPlayerControl
 import com.zrq.azi.interfaces.IPlayerViewControl
+import com.zrq.azi.util.Constants
+import com.zrq.azi.util.Constants.MMKV_SHOW_TIP
+import com.zrq.azi.util.Constants.MMKV_UID
 import com.zrq.azi.view.VisualizeView
 
 class MainActivity : AppCompatActivity(), IPlayerViewControl {
@@ -102,12 +106,13 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
             lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
             window.attributes = lp
         }
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initEvent() {
         //提示框
-        if (MMKV.defaultMMKV().decodeBool("show_tip", true))
+        if (MMKV.defaultMMKV().decodeBool(MMKV_SHOW_TIP, true))
             showTipDialog()
 
         mBinding.apply {

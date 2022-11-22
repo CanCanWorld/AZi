@@ -3,7 +3,6 @@ package com.zrq.azi.dao
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.database.Cursor
-import android.util.Log
 import com.zrq.azi.bean.UserPlayList
 import com.zrq.azi.db.SongDatabaseHelper
 import com.zrq.azi.util.Constants.FIELD_ID
@@ -28,11 +27,11 @@ class ListDaoImpl(
         return lists
     }
 
-    override fun updateAllList(newList: ArrayList<UserPlayList.PlaylistDTO>){
+    override fun updateAllList(newLists: ArrayList<UserPlayList.PlaylistDTO>){
         val db = mHelper.writableDatabase
         db.execSQL("delete from $LIST_TABLE;")
         db.execSQL("update sqlite_sequence set seq ='0' where name ='$LIST_TABLE';")
-        newList.forEach {
+        newLists.forEach {
             db.insert(LIST_TABLE, null, beanToValues(it))
         }
         db.close()
@@ -42,6 +41,12 @@ class ListDaoImpl(
         val db = mHelper.writableDatabase
         val values = beanToValues(newList)
         db.update(LIST_TABLE, values, "$FIELD_ID=?", arrayOf(newList._id.toString()))
+        db.close()
+    }
+
+    override fun removeAll() {
+        val db = mHelper.writableDatabase
+        db.execSQL("delete from $LIST_TABLE;")
         db.close()
     }
 

@@ -5,13 +5,10 @@ object Constants {
     const val BASE_URL = "https://www.zhangruiqian.ga"
 
     const val LOGIN_VISITOR = "/register/anonimous"
-
     // /login/cellphone?phone=xxx&password=yyy /login/cellphone?phone=xxx&md5_password=yyy /login/cellphone?phone=xxx&captcha=1234
     const val LOGIN_NUMBER = "/login/cellphone"
-
     // /captcha/sent?phone=13xxx
     const val SENT_CAPTCHA = "/captcha/sent"
-
     // /captcha/verify?phone=13xxx&captcha=1597
     const val VERIFY_CAPTCHA = "/captcha/verify"
 
@@ -29,8 +26,9 @@ object Constants {
 
     const val DATABASE_VERSION = 3
 
-    const val FIELD_ID = "_id"
 
+    //数据库
+    const val FIELD_ID = "_id"
     //歌单表
     const val LIST_TABLE = "list_table"
 
@@ -43,5 +41,14 @@ object Constants {
     const val LIST_COVER = "cover"
 
     const val LIST_SONGS = "list_songs"
+
+    //MMKV
+    const val MMKV_UID = "uid"
+
+    const val MMKV_AVATAR_URL = "avatar_url"
+
+    const val MMKV_NICKNAME = "nickname"
+
+    const val MMKV_SHOW_TIP = "show_tip"
 
 }

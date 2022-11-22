@@ -8,4 +8,6 @@ interface IListDao {
     fun updateAllList(newLists: ArrayList<UserPlayList.PlaylistDTO>)
 
     fun updateListSongs(newList: UserPlayList.PlaylistDTO)
+
+    fun removeAll()
 }
