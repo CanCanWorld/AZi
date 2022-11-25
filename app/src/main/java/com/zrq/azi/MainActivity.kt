@@ -23,6 +23,7 @@ import androidx.navigation.Navigation
 import androidx.viewpager2.widget.ViewPager2
 import com.tencent.mmkv.MMKV
 import com.zrq.azi.adapter.ViewpagerAdapter
+import com.zrq.azi.bean.Song
 import com.zrq.azi.bean.SongOfList
 import com.zrq.azi.dao.ListDaoImpl
 import com.zrq.azi.databinding.ActivityMainBinding
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
     private lateinit var listDaoImpl: ListDaoImpl
 
     private lateinit var mVpAdapter: ViewpagerAdapter
-    private val list = ArrayList<SongOfList.SongsDTO>()
+    private val list = ArrayList<Song>()
     private var dialogTip: AlertDialog? = null
     private val dialogTipBinding by lazy {
         DialogTipBinding.inflate(LayoutInflater.from(this))

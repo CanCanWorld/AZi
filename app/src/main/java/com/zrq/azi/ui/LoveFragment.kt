@@ -63,7 +63,7 @@ class LoveFragment : BaseFragment<FragmentLoveBinding>(), OnItemClickListener {
                 @RequiresApi(Build.VERSION_CODES.P)
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
-                    if (dy > 40) {
+                    if (dy > 20) {
                         setScreen()
                     }
                 }

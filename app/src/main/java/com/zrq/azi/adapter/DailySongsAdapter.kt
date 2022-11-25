@@ -5,16 +5,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.zrq.azi.bean.SongOfList
+import com.zrq.azi.bean.DailySongs
 import com.zrq.azi.databinding.ItemListItemBinding
 import com.zrq.azi.interfaces.OnItemClickListener
 
-class ListItemAdapter(
+class DailySongsAdapter(
     private val context: Context,
-    private val list: ArrayList<SongOfList.SongsDTO>,
+    private val list: ArrayList<DailySongs.DataDTO.DailySongsDTO>,
     private val onItemClickListener: OnItemClickListener,
     private val onMoreClick: (Int) -> Unit,
-) : RecyclerView.Adapter<VH<ItemListItemBinding>>() {
+    ) : RecyclerView.Adapter<VH<ItemListItemBinding>>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH<ItemListItemBinding> {
         return VH(ItemListItemBinding.inflate(LayoutInflater.from(context), parent, false))
     }

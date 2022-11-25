@@ -41,4 +41,9 @@
         android:name="com.zrq.azi.ui.PlayListFragment"
         android:label="fragment_play_list"
         tools:layout="@layout/fragment_play_list" />
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.zrq.azi.ui.CommentFragment"
+        android:label="fragment_comment"
+        tools:layout="@layout/fragment_comment" />
 </navigation>

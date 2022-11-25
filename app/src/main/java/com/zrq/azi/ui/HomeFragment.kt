@@ -2,11 +2,12 @@ package com.zrq.azi.ui
 
 import android.annotation.SuppressLint
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.tencent.mmkv.MMKV
-import com.zrq.azi.MainActivity
 import com.zrq.azi.R
 import com.zrq.azi.adapter.PlayListAdapter
 import com.zrq.azi.bean.UserPlayList
@@ -26,11 +26,14 @@ import com.zrq.azi.util.Constants.LOGOUT
 import com.zrq.azi.util.Constants.MMKV_AVATAR_URL
 import com.zrq.azi.util.Constants.MMKV_NICKNAME
 import com.zrq.azi.util.Constants.MMKV_UID
+import com.zrq.azi.util.Constants.TYPE_DAILY_SONGS
+import com.zrq.azi.util.Constants.TYPE_USER_PLAY_LIST
 import com.zrq.azi.util.Constants.USER_PLAY_LIST
 import com.zrq.azi.util.ToastUtil
 import com.zrq.azi.util.Util.httpGet
-import okhttp3.*
-import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, OnItemLongClickListener {
@@ -45,13 +48,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
     private lateinit var mAdapter: PlayListAdapter
     private var offset = 1
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "SimpleDateFormat")
     @RequiresApi(Build.VERSION_CODES.P)
     override fun initData() {
         mAdapter = PlayListAdapter(requireContext(), list, this, this)
         mBinding.apply {
             recyclerView.adapter = mAdapter
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+            SimpleDateFormat("dd").apply { tvToday.text = format(Date()) }
         }
         if (mainModel.listDaoImpl != null) {
             if (mainModel.listDaoImpl!!.listAllList().size != 0) {
@@ -62,7 +67,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
                 loadUserPlayList()
             }
         }
-
 
         val avatarUrl = MMKV.defaultMMKV().decodeString(MMKV_AVATAR_URL, "")
         val nickname = MMKV.defaultMMKV().decodeString(MMKV_NICKNAME, "游客登录")
@@ -99,7 +103,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
 
             btnExit.setOnClickListener {
                 exit()
+            }
 
+            btnDailySongs.setOnClickListener {
+                mainModel.initSongListType = TYPE_DAILY_SONGS
+                Navigation.findNavController(requireActivity(), R.id.fragment_container)
+                    .navigate(R.id.action_homeFragment_to_playListFragment)
             }
         }
     }
@@ -133,7 +142,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
                         list.clear()
                         list.addAll(it1.listAllList())
                     }
-                    requireActivity().runOnUiThread {
+                    Handler(Looper.getMainLooper()).post {
                         mAdapter.notifyDataSetChanged()
                     }
                 }
@@ -147,6 +156,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
     override fun onItemClick(view: View, position: Int) {
         mainModel.playListInfo = list[position]
         mainModel.playListCount = list[position].trackCount.toInt()
+        mainModel.initSongListType = TYPE_USER_PLAY_LIST
         Navigation.findNavController(requireActivity(), R.id.fragment_container)
             .navigate(R.id.action_homeFragment_to_playListFragment)
     }

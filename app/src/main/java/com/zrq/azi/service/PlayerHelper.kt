@@ -5,15 +5,13 @@ import android.media.audiofx.Visualizer
 import android.os.Binder
 import android.util.Log
 import com.google.gson.Gson
-import com.zrq.azi.bean.SongOfList
+import com.zrq.azi.bean.Song
 import com.zrq.azi.bean.SongUrl
 import com.zrq.azi.util.Constants.BASE_URL
 import com.zrq.azi.util.Constants.SONG_URL
 import com.zrq.azi.interfaces.IPlayerControl
 import com.zrq.azi.interfaces.IPlayerViewControl
 import com.zrq.azi.util.Util.httpGet
-import okhttp3.*
-import java.io.IOException
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.abs
@@ -25,7 +23,7 @@ object PlayerHelper : Binder(), IPlayerControl {
 
     private var mMediaPlayer: MediaPlayer = MediaPlayer()
 
-    private var playList = ArrayList<SongOfList.SongsDTO>()
+    private var playList = ArrayList<Song>()
 
     private var pos = 0
 
@@ -85,13 +83,9 @@ object PlayerHelper : Binder(), IPlayerControl {
         }
     }
 
-    override fun setList(list: ArrayList<SongOfList.SongsDTO>) {
+    override fun setList(songList: ArrayList<Song>) {
         playList.clear()
-        playList.addAll(list)
-    }
-
-    override fun getList(): ArrayList<SongOfList.SongsDTO> {
-        return playList
+        playList.addAll(songList)
     }
 
     override fun seekTo(progress: Int) {
@@ -146,7 +140,6 @@ object PlayerHelper : Binder(), IPlayerControl {
                     next()
                 }
             } else {
-                Log.d(TAG, "loadSongUrl: $msg")
                 next()
             }
         }
