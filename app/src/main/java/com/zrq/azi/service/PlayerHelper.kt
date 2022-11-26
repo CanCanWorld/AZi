@@ -38,6 +38,7 @@ object PlayerHelper : Binder(), IPlayerControl {
     init {
         mMediaPlayer.setOnCompletionListener {
             Log.d(TAG, "${playList.size}: ")
+            stopTimer()
             next()
         }
         // 因为直接切歌会发生错误，所以增加错误监听器。返回true。就不会回调onCompletion方法了。
@@ -66,6 +67,7 @@ object PlayerHelper : Binder(), IPlayerControl {
             mMediaPlayer.prepareAsync()
             mMediaPlayer.setOnPreparedListener {
                 mMediaPlayer.start()
+                startTimer()
 //                initVisualizer()
             }
             startTimer()
@@ -152,7 +154,7 @@ object PlayerHelper : Binder(), IPlayerControl {
             if (mTimerTask == null) {
                 mTimerTask = SeekTimeTask()
             }
-            timer!!.schedule(mTimerTask, 0, 500)
+            timer!!.schedule(mTimerTask, 0, 2 * 1000)
         }
     }
 

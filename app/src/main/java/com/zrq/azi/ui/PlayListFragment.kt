@@ -4,35 +4,28 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.zrq.azi.R
 import com.zrq.azi.adapter.DailySongsAdapter
 import com.zrq.azi.adapter.ListItemAdapter
 import com.zrq.azi.bean.DailySongs
 import com.zrq.azi.bean.Song
 import com.zrq.azi.bean.SongOfList
 import com.zrq.azi.bean.UserPlayList
-import com.zrq.azi.databinding.DialogBottomBinding
 import com.zrq.azi.databinding.FragmentPlayListBinding
 import com.zrq.azi.interfaces.OnItemClickListener
 import com.zrq.azi.util.Constants.BASE_URL
-import com.zrq.azi.util.Constants.COMMENT
 import com.zrq.azi.util.Constants.DAILY_SONGS
-import com.zrq.azi.util.Constants.LIKE
 import com.zrq.azi.util.Constants.PLAY_LIST_ALL
 import com.zrq.azi.util.Constants.TYPE_DAILY_SONGS
+import com.zrq.azi.util.Constants.TYPE_MORE
 import com.zrq.azi.util.Constants.TYPE_UNKNOWN
 import com.zrq.azi.util.Constants.TYPE_USER_PLAY_LIST
 import com.zrq.azi.util.Util.httpGet
@@ -43,6 +36,7 @@ class PlayListFragment : BaseFragment<FragmentPlayListBinding>(), OnItemClickLis
         return FragmentPlayListBinding.inflate(inflater, container, false)
     }
 
+    private val songs = ArrayList<Song>()
     private val myList = ArrayList<SongOfList.SongsDTO>()
     private val dailyList = ArrayList<DailySongs.DataDTO.DailySongsDTO>()
     private lateinit var myAdapter: ListItemAdapter
@@ -52,54 +46,7 @@ class PlayListFragment : BaseFragment<FragmentPlayListBinding>(), OnItemClickLis
     private var limit = 100
     private var count = 0
     private val onMoreClick: (Int) -> Unit = { position ->
-        var song: Song? = null
-        bindingBottomDialog.apply {
-            when (mainModel.initSongListType) {
-                TYPE_USER_PLAY_LIST -> {
-                    song = Song(myList[position].id, myList[position].name, myList[position].singer, myList[position].al.picUrl)
-                }
-                TYPE_DAILY_SONGS -> {
-                    song = Song(dailyList[position].id, dailyList[position].name, dailyList[position].singer, dailyList[position].al.picUrl)
-                }
-                else -> {}
-            }
-            song?.let {
-                tvSongName.text = it.name
-                tvSinger.text = it.singer
-                Glide.with(requireContext())
-                    .load(it.coverUrl)
-                    .into(ivCover)
-                Glide.with(requireContext())
-                    .load(it.coverUrl)
-                    .into(ivBackground)
-                btnDownload.setOnClickListener {
-                    bottomDialog.cancel()
-                }
-                btnLove.setOnClickListener { _ ->
-                    val url = "$BASE_URL$LIKE?id=${it.id}"
-                    httpGet(url) { _, msg ->
-                        Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
-                    }
-                    bottomDialog.cancel()
-                }
-                btnComment.setOnClickListener { _ ->
-                    mainModel.commentId = it.id
-                    Navigation.findNavController(requireActivity(), R.id.fragment_container)
-                        .navigate(R.id.commentFragment)
-                    bottomDialog.cancel()
-                }
-            }
-        }
-        bottomDialog.show()
-    }
-    private val bottomDialog: BottomSheetDialog by lazy {
-        BottomSheetDialog(requireContext()).apply {
-            setContentView(bindingBottomDialog.root)
-        }
-    }
-
-    private val bindingBottomDialog by lazy {
-        DialogBottomBinding.inflate(LayoutInflater.from(requireContext()))
+        mainModel.showBottomSheetDialog(position, TYPE_MORE)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -122,6 +69,17 @@ class PlayListFragment : BaseFragment<FragmentPlayListBinding>(), OnItemClickLis
                     myList.clear()
                     val l: ArrayList<SongOfList.SongsDTO> = Gson().fromJson(mainModel.playListInfo!!.songGson, object : TypeToken<ArrayList<SongOfList.SongsDTO>>() {}.type)
                     myList.addAll(l)
+                    songs.clear()
+                    myList.forEach {
+                        for (i in it.ar.indices) {
+                            if (i == 0)
+                                it.singer = it.ar[i].name
+                            else
+                                it.singer = it.singer + "/" + it.ar[i].name
+                        }
+                        songs.add(Song(it.id, it.name, it.singer, it.al.picUrl))
+                    }
+                    mainModel.showList.postValue(songs)
                     offset = myList.size / limit
                 } else {
                     loadMyList()
@@ -197,6 +155,7 @@ class PlayListFragment : BaseFragment<FragmentPlayListBinding>(), OnItemClickLis
                         if (offset == 0)
                             myList.clear()
                         myList.addAll(songOfList.songs)
+                        songs.clear()
                         myList.forEach {
                             for (i in it.ar.indices) {
                                 if (i == 0)
@@ -204,7 +163,9 @@ class PlayListFragment : BaseFragment<FragmentPlayListBinding>(), OnItemClickLis
                                 else
                                     it.singer = it.singer + "/" + it.ar[i].name
                             }
+                            songs.add(Song(it.id, it.name, it.singer, it.al.picUrl))
                         }
+                        mainModel.showList.postValue(songs)
                         playListInfo!!.songGson = Gson().toJson(myList).toString()
                         mainModel.listDaoImpl?.updateListSongs(playListInfo!!)
                         Handler(Looper.getMainLooper()).post {
@@ -229,6 +190,7 @@ class PlayListFragment : BaseFragment<FragmentPlayListBinding>(), OnItemClickLis
                 if (dailySongs?.data?.dailySongs != null) {
                     dailyList.clear()
                     dailyList.addAll(dailySongs.data.dailySongs)
+                    songs.clear()
                     dailyList.forEach {
                         for (i in it.ar.indices) {
                             if (i == 0)
@@ -236,7 +198,9 @@ class PlayListFragment : BaseFragment<FragmentPlayListBinding>(), OnItemClickLis
                             else
                                 it.singer = it.singer + "/" + it.ar[i].name
                         }
+                        songs.add(Song(it.id, it.name, it.singer, it.al.picUrl))
                     }
+                    mainModel.showList.postValue(songs)
                     Handler(Looper.getMainLooper()).post {
                         dailyAdapter.notifyDataSetChanged()
                     }
@@ -251,21 +215,6 @@ class PlayListFragment : BaseFragment<FragmentPlayListBinding>(), OnItemClickLis
 
     override fun onItemClick(view: View, position: Int) {
         mainModel.showPlayBar()
-
-        val songs = ArrayList<Song>()
-        when (mainModel.initSongListType) {
-            TYPE_USER_PLAY_LIST -> {
-                myList.forEach {
-                    songs.add(Song(it.id, it.name, it.singer, it.al.picUrl))
-                }
-            }
-            TYPE_DAILY_SONGS -> {
-                dailyList.forEach {
-                    songs.add(Song(it.id, it.name, it.singer, it.al.picUrl))
-                }
-            }
-            else -> {}
-        }
         mainModel.playList.postValue(songs)
         mainModel.position.postValue(position)
         mainModel.playerControl?.let {

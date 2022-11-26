@@ -16,17 +16,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tencent.mmkv.MMKV
 import com.zrq.azi.adapter.ViewpagerAdapter
 import com.zrq.azi.bean.Song
-import com.zrq.azi.bean.SongOfList
 import com.zrq.azi.dao.ListDaoImpl
 import com.zrq.azi.databinding.ActivityMainBinding
+import com.zrq.azi.databinding.DialogBottomBinding
 import com.zrq.azi.databinding.DialogTipBinding
 import com.zrq.azi.db.SongDatabaseHelper
 import com.zrq.azi.service.PlayerService
@@ -34,7 +37,9 @@ import com.zrq.azi.interfaces.IPlayerControl
 import com.zrq.azi.interfaces.IPlayerViewControl
 import com.zrq.azi.util.Constants
 import com.zrq.azi.util.Constants.MMKV_SHOW_TIP
-import com.zrq.azi.util.Constants.MMKV_UID
+import com.zrq.azi.util.Constants.TYPE_BAR
+import com.zrq.azi.util.Constants.TYPE_MORE
+import com.zrq.azi.util.Util
 import com.zrq.azi.view.VisualizeView
 
 class MainActivity : AppCompatActivity(), IPlayerViewControl {
@@ -57,10 +62,24 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
     private lateinit var listDaoImpl: ListDaoImpl
 
     private lateinit var mVpAdapter: ViewpagerAdapter
-    private val list = ArrayList<Song>()
+    private val mPlayList = ArrayList<Song>()
+    private val mShowList = ArrayList<Song>()
+
+
     private var dialogTip: AlertDialog? = null
     private val dialogTipBinding by lazy {
         DialogTipBinding.inflate(LayoutInflater.from(this))
+    }
+
+
+    private val bottomDialog: BottomSheetDialog by lazy {
+        BottomSheetDialog(this).apply {
+            setContentView(bindingBottomDialog.root)
+        }
+    }
+
+    private val bindingBottomDialog by lazy {
+        DialogBottomBinding.inflate(LayoutInflater.from(this))
     }
 
     //服务
@@ -96,7 +115,7 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
             mBinding.visualizeView.visibility = View.VISIBLE
         }
 
-        mVpAdapter = ViewpagerAdapter(this, list)
+        mVpAdapter = ViewpagerAdapter(this, mPlayList)
         mBinding.apply {
             viewPager.adapter = mVpAdapter
             visualizeView.setMode(VisualizeView.SINGLE)
@@ -122,7 +141,7 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
                     super.onPageSelected(position)
                     Log.d(TAG, "onPageSelected: $position")
                     mainModel.playerControl?.let {
-                        it.setList(list)
+                        it.setList(mPlayList)
                         it.play(position)
                     }
                 }
@@ -154,9 +173,65 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
             }
 
             playList.observe(this@MainActivity) {
-                list.clear()
-                list.addAll(it)
+                mPlayList.clear()
+                mPlayList.addAll(it)
                 mVpAdapter.notifyDataSetChanged()
+            }
+
+            showList.observe(this@MainActivity) {
+                mShowList.clear()
+                mShowList.addAll(it)
+            }
+
+            showBottomSheetDialog = { pos, type ->
+                var song: Song? = null
+                when (type) {
+                    TYPE_MORE -> {
+                        if (pos > mShowList.size) {
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                        } else
+                        song = mShowList[pos]
+                    }
+                    TYPE_BAR -> {
+                        if (pos > mPlayList.size) {
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                        } else
+                            song = mPlayList[pos]
+                    }
+                }
+                song?.let {
+                    bindingBottomDialog.apply {
+                        tvSongName.text = song.name
+                        tvSinger.text = song.singer
+                        Glide.with(this@MainActivity)
+                            .load(song.coverUrl)
+                            .into(ivCover)
+                        Glide.with(this@MainActivity)
+                            .load(song.coverUrl)
+                            .into(ivBackground)
+                        btnDownload.setOnClickListener {
+                            bottomDialog.cancel()
+                        }
+                        btnLove.setOnClickListener { _ ->
+                            val url = "${Constants.BASE_URL}${Constants.LIKE}?id=${song.id}"
+                            Util.httpGet(url) { _, msg ->
+                                Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
+                            }
+                            bottomDialog.cancel()
+                        }
+                        btnComment.setOnClickListener { _ ->
+                            mainModel.commentId = song.id
+                            Navigation.findNavController(this@MainActivity, R.id.fragment_container)
+                                .navigate(R.id.commentFragment)
+                            bottomDialog.cancel()
+                        }
+                    }
+                }
+                bottomDialog.show()
+            }
+
+            hideBottomSheetDialog = {
+                bottomDialog.hide()
             }
         }
 

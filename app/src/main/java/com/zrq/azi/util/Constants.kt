@@ -70,4 +70,9 @@ object Constants {
 
     const val TYPE_DAILY_SONGS = 2
 
+    //点击显示详情的位置
+    const val TYPE_MORE = 0
+
+    const val TYPE_BAR = 1
+
 }

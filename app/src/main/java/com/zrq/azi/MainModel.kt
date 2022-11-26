@@ -15,23 +15,29 @@ class MainModel : ViewModel() {
 
     val playList = MutableLiveData<ArrayList<Song>>()
 
+    val showList = MutableLiveData<ArrayList<Song>>()
+
     var playerControl: IPlayerControl? = null
 
     var listDaoImpl: ListDaoImpl? = null
-
-    var hidePlayBar: () -> Unit = {}
-
-    var showPlayBar: () -> Unit = {}
 
     var playListInfo: UserPlayList.PlaylistDTO? = null
 
     var playListCount = 0
 
-    //设置全屏
-    var setScreen: () -> Unit = {}
-
     var initSongListType = TYPE_UNKNOWN
 
     var commentId = 0L
+
+    //设置全屏
+    var setScreen: () -> Unit = {}
+
+    var hidePlayBar: () -> Unit = {}
+
+    var showPlayBar: () -> Unit = {}
+
+    var showBottomSheetDialog: (Int, Int) -> Unit = { _, _ -> }
+
+    var hideBottomSheetDialog: () -> Unit = {}
 
 }
