@@ -189,26 +189,16 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
                     TYPE_MORE -> {
                         if (pos > mShowList.size) {
                             Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
                         } else
-                        song = mShowList[pos]
+                            song = mShowList[pos]
                     }
                     TYPE_BAR -> {
                         if (pos > mPlayList.size) {
                             Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
                         } else
-                            //////////////////////////////////////
                             song = mPlayList[pos]
                     }
                 }
