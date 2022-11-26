@@ -189,6 +189,18 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
                     TYPE_MORE -> {
                         if (pos > mShowList.size) {
                             Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
                         } else
                         song = mShowList[pos]
                     }
@@ -196,6 +208,7 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
                         if (pos > mPlayList.size) {
                             Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
                         } else
+                            //////////////////////////////////////
                             song = mPlayList[pos]
                     }
                 }

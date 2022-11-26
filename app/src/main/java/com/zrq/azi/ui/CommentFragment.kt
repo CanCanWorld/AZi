@@ -74,6 +74,32 @@ class CommentFragment : BaseFragment<FragmentCommentBinding>(), OnItemClickListe
                         mBinding.btnBack.show()
                     } else {
                         mBinding.btnBack.hide()
+                        /////////////////////////////////////////
+                        /**
+                         * Copy Revision Number
+                        Ctrl+Alt+Shift+C
+                        Create Patch...
+                        Cherry-Pick
+                        Checkout Revision "b27e1a55
+                        Show Repository at Revision
+                        Compare with Local
+                        Reset Current Branch to Here..
+                        Revert Commit
+                        Undo Commit..
+                        Edit Commit Message..
+                        Fixup.
+                        Squash Into.
+                        Drop Commit
+                        Interactively Rebase from Here..
+                        Branch "origin/main
+                        New Branch...
+                        New Tag..
+                        Go to Child Commit
+                        Go to Parent Commit
+                        向左箭头
+                        向右箭头
+                        Open on GitHub
+                         */
                     }
                 }
             })
