@@ -46,4 +46,9 @@
         android:name="com.zrq.azi.ui.CommentFragment"
         android:label="fragment_comment"
         tools:layout="@layout/fragment_comment" />
+    <fragment
+        android:id="@+id/dailyListFragment"
+        android:name="com.zrq.azi.ui.DailyListFragment"
+        android:label="fragment_daily_list"
+        tools:layout="@layout/fragment_daily_list" />
 </navigation>

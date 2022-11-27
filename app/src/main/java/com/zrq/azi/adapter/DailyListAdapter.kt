@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zrq.azi.R
+import com.zrq.azi.bean.DailyList
 import com.zrq.azi.bean.Dj
 import com.zrq.azi.bean.UserPlayList
 import com.zrq.azi.databinding.ItemPlayListBinding
@@ -18,9 +19,9 @@ import com.zrq.azi.interfaces.OnItemLongClickListener
 import com.zrq.azi.util.Util.formatDuration
 import java.text.SimpleDateFormat
 
-class PlayListAdapter(
+class DailyListAdapter(
     private val context: Context,
-    private val list: ArrayList<UserPlayList.PlaylistDTO>,
+    private val list: ArrayList<DailyList.RecommendBean>,
     private val onItemClickListener: OnItemClickListener,
 ) : RecyclerView.Adapter<VH<ItemPlayListBinding>>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH<ItemPlayListBinding> {
@@ -33,7 +34,7 @@ class PlayListAdapter(
         holder.binding.apply {
             tvTitle.text = bean.name
             tvDetail.text = "共${bean.trackCount}首歌"
-            Glide.with(context).load(bean.coverImgUrl).into(ivAlbum)
+            Glide.with(context).load(bean.picUrl).into(ivAlbum)
             root.setOnClickListener {
                 onItemClickListener.onItemClick(it, holder.adapterPosition)
             }

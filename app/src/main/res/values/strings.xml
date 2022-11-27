@@ -6,7 +6,7 @@
     <string name="_02_50">02:50</string>
     <string name="_2022_11_09">2022-11-09</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="content">当前版本：V2.0\n更新说明：\n *增加了收藏功能，长按收藏\n *收藏界面的基本功能（内容存储在本地，卸载前请备份）\n *跳转动画\n *数据的缓存，减少流量的损耗\n *优化安装包体积\n *修复部分bug\n历史版本：\n V1.0\n *完成基础的功能</string>
+    <string name="content">当前版本：V3.0\n更新说明：\n更新了很多，懒得写了，写写已知bug吧：歌单出现不同步时就在主界面刷新，多刷新（别问，问就是数据绑定没做好）,收藏歌曲要过段时间才能同步，息屏播放有时候会出问题，懒得排查凑合用吧。还有啥问题不用联系我，我懒得改。\n历史版本：\n V2.0（已废旧）\n *增加了收藏功能，长按收藏\n *收藏界面的基本功能（内容存储在本地，卸载前请备份）\n *跳转动画\n *数据的缓存，减少流量的损耗\n *优化安装包体积\n *修复部分bug\nV1.0\n *完成基础的功能</string>
     <string name="api">接口地址：\n <a href="https://www.zhangruiqian.ga">https://www.zhangruiqian.ga</a></string>
     <string name="project">项目地址：\n <a href="https://github.com/CanCanWorld/AZi.git">https://github.com/CanCanWorld/AZi.git</a></string>
     <string name="tip">温馨提示</string>
@@ -31,4 +31,11 @@
     <string name="download">下载</string>
     <string name="comment">评论</string>
     <string name="back">返回</string>
+    <string name="my_song_list">我的歌单</string>
+    <string name="not_love">取消收藏</string>
+    <string name="check_singer">查看歌手</string>
+    <string name="check_album">查看专辑</string>
+    <string name="daily_play_list">每日歌单</string>
+    <string name="follows">关注</string>
+    <string name="followed">粉丝</string>
 </resources>

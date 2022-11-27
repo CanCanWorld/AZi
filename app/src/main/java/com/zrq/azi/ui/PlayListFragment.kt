@@ -9,10 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.zrq.azi.R
 import com.zrq.azi.adapter.DailySongsAdapter
 import com.zrq.azi.adapter.ListItemAdapter
 import com.zrq.azi.bean.DailySongs
@@ -24,6 +26,7 @@ import com.zrq.azi.interfaces.OnItemClickListener
 import com.zrq.azi.util.Constants.BASE_URL
 import com.zrq.azi.util.Constants.DAILY_SONGS
 import com.zrq.azi.util.Constants.PLAY_LIST_ALL
+import com.zrq.azi.util.Constants.TYPE_DAILY_LIST
 import com.zrq.azi.util.Constants.TYPE_DAILY_SONGS
 import com.zrq.azi.util.Constants.TYPE_MORE
 import com.zrq.azi.util.Constants.TYPE_UNKNOWN
@@ -91,7 +94,16 @@ class PlayListFragment : BaseFragment<FragmentPlayListBinding>(), OnItemClickLis
                     recyclerView.adapter = dailyAdapter
                     recyclerView.layoutManager = LinearLayoutManager(requireContext())
                 }
-                loadDailyList()
+                loadDailySong()
+            }
+            TYPE_DAILY_LIST -> {
+                count = mainModel.playListCount
+                myAdapter = ListItemAdapter(requireContext(), myList, this, onMoreClick)
+                mBinding.apply {
+                    recyclerView.adapter = myAdapter
+                    recyclerView.layoutManager = LinearLayoutManager(requireContext())
+                }
+                loadDailyListSong()
             }
             else -> {}
         }
@@ -120,7 +132,7 @@ class PlayListFragment : BaseFragment<FragmentPlayListBinding>(), OnItemClickLis
                 mBinding.apply {
                     refreshLayout.setOnRefreshListener {
                         offset = 0
-                        loadDailyList()
+                        loadDailySong()
                     }
 
                     refreshLayout.setOnLoadMoreListener {
@@ -128,20 +140,49 @@ class PlayListFragment : BaseFragment<FragmentPlayListBinding>(), OnItemClickLis
                     }
                 }
             }
-            else -> {}
-        }
-        mBinding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            @RequiresApi(Build.VERSION_CODES.P)
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (dy > 20) {
-                    mainModel.setScreen()
+            TYPE_DAILY_LIST -> {
+                mBinding.apply {
+                    refreshLayout.setOnRefreshListener {
+                        offset = 0
+                        loadDailyListSong()
+                    }
+
+                    refreshLayout.setOnLoadMoreListener {
+                        offset++
+                        if (offset * limit > count) {
+                            it.finishLoadMore()
+                        } else {
+                            loadDailyListSong()
+                        }
+                    }
                 }
             }
+            else -> {}
+        }
+        mBinding.apply {
+            recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                @RequiresApi(Build.VERSION_CODES.P)
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if (dy > 20) {
+                        mainModel.setScreen()
+                    }
+                }
 
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        mBinding.btnBack.show()
+                    } else {
+                        mBinding.btnBack.hide()
+                    }
+                }
+            })
+
+            btnBack.setOnClickListener {
+                Navigation.findNavController(requireActivity(), R.id.fragment_container)
+                    .popBackStack()
             }
-        })
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -182,7 +223,40 @@ class PlayListFragment : BaseFragment<FragmentPlayListBinding>(), OnItemClickLis
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun loadDailyList() {
+    private fun loadDailyListSong() {
+        val url = "$BASE_URL$PLAY_LIST_ALL?id=${mainModel.listID}&offset=${offset * limit}&limit=$limit"
+        httpGet(url) { success, msg ->
+            if (success) {
+                val songOfList = Gson().fromJson(msg, SongOfList::class.java)
+                if (songOfList?.songs != null) {
+                    if (offset == 0)
+                        myList.clear()
+                    myList.addAll(songOfList.songs)
+                    songs.clear()
+                    myList.forEach {
+                        for (i in it.ar.indices) {
+                            if (i == 0)
+                                it.singer = it.ar[i].name
+                            else
+                                it.singer = it.singer + "/" + it.ar[i].name
+                        }
+                        songs.add(Song(it.id, it.name, it.singer, it.al.picUrl))
+                    }
+                    mainModel.showList.postValue(songs)
+                    Handler(Looper.getMainLooper()).post {
+                        myAdapter.notifyDataSetChanged()
+                    }
+                }
+            } else {
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+            }
+            mBinding.refreshLayout.finishRefresh()
+            mBinding.refreshLayout.finishLoadMore()
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun loadDailySong() {
         val url = "$BASE_URL$DAILY_SONGS"
         httpGet(url) { success, msg ->
             if (success) {

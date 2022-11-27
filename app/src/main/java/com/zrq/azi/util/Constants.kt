@@ -23,6 +23,8 @@ object Constants {
 
     const val DAILY_SONGS = "/recommend/songs"
 
+    const val DAILY_LIST = "/recommend/resource"
+
     const val LIKE = "/like"
 
     const val DJ_PROGRAM = "/dj/program"
@@ -32,6 +34,8 @@ object Constants {
     // /comment/music?id=186016&limit=1
     const val COMMENT = "/comment/music"
 
+    //  https://www.zhangruiqian.ga/playlist/tracks?op=add&pid=6884202385&tracks=1486506463
+    const val ADD_DEL = "/playlist/tracks"
 
 
     //数据库
@@ -69,6 +73,8 @@ object Constants {
     const val TYPE_USER_PLAY_LIST = 1
 
     const val TYPE_DAILY_SONGS = 2
+
+    const val TYPE_DAILY_LIST = 3
 
     //点击显示详情的位置
     const val TYPE_MORE = 0

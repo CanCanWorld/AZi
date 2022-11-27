@@ -9,182 +9,185 @@
     tools:context=".ui.HomeFragment">
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_card"
+        android:padding="15dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_user_head"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:elevation="2dp"
+            android:padding="5dp"
+            android:src="@mipmap/ic_launcher_round"
+            app:shapeAppearance="@style/circle_img" />
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/shape_card"
-            android:padding="15dp">
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@id/iv_user_head"
+            android:text="@string/visitor_login"
+            android:textColor="@color/grey_700"
+            android:textSize="16sp" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/iv_user_head"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:elevation="2dp"
-                android:padding="5dp"
-                android:src="@mipmap/ic_launcher_round"
-                app:shapeAppearance="@style/circle_img" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="@string/exit"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/red"
+            app:cornerRadius="20dp"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tv_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@id/iv_user_head"
-                android:text="@string/visitor_login"
-                android:textColor="@color/grey_700"
-                android:textSize="16sp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_exit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:text="@string/exit"
-                android:textColor="@color/white"
-                app:backgroundTint="@color/red"
-                app:cornerRadius="20dp"
-                tools:ignore="RelativeOverlap" />
-        </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="15dp"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginHorizontal="15dp"
-            android:orientation="horizontal">
+            android:id="@+id/btn_daily_songs"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/item_press"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/btn_daily_songs"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_calendar_today_24"
-                        app:tint="@color/main_color" />
-
-                    <TextView
-                        android:id="@+id/tv_today"
-                        android:text="@string/_1"
-                        android:textSize="11sp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="6dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/main_color"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/daily_songs" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btn_love"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_favorite_24"
+                    android:src="@drawable/ic_baseline_calendar_today_24"
                     app:tint="@color/main_color" />
 
                 <TextView
+                    android:id="@+id/tv_today"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/love" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btn_recently"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_access_time_24"
-                    app:tint="@color/main_color" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/recently" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btn_local"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:rotation="90"
-                    android:src="@drawable/ic_baseline_forward_24"
-                    app:tint="@color/main_color" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/local" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="15dp">
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/_1"
+                    android:textColor="@color/main_color"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/my_list"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
+                android:text="@string/daily_songs" />
         </LinearLayout>
 
-        <com.scwang.smart.refresh.layout.SmartRefreshLayout
-            android:id="@+id/refresh_layout"
+        <LinearLayout
+            android:id="@+id/btn_daily_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/item_press"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_format_list_bulleted_24"
+                app:tint="@color/main_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/daily_play_list" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_follows"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/item_press"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_person_24"
+                app:tint="@color/main_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/follows" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_followed"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/item_press"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_supervisor_account_24"
+                app:tint="@color/main_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/followed" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_list"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.scwang.smart.refresh.header.ClassicsHeader
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content" />
 
-            <com.scwang.smart.refresh.header.ClassicsHeader
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toTopOf="@id/view_pager"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/item_play_list" />
-        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toTopOf="@id/view_pager"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_play_list" />
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </LinearLayout>

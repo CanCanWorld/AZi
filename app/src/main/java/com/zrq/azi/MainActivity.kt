@@ -21,25 +21,31 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tencent.mmkv.MMKV
+import com.zrq.azi.adapter.PlayListAdapter
 import com.zrq.azi.adapter.ViewpagerAdapter
 import com.zrq.azi.bean.Song
+import com.zrq.azi.bean.UserPlayList
 import com.zrq.azi.dao.ListDaoImpl
 import com.zrq.azi.databinding.ActivityMainBinding
 import com.zrq.azi.databinding.DialogBottomBinding
+import com.zrq.azi.databinding.DialogSongListBinding
 import com.zrq.azi.databinding.DialogTipBinding
 import com.zrq.azi.db.SongDatabaseHelper
 import com.zrq.azi.service.PlayerService
 import com.zrq.azi.interfaces.IPlayerControl
 import com.zrq.azi.interfaces.IPlayerViewControl
-import com.zrq.azi.util.Constants
+import com.zrq.azi.interfaces.OnItemClickListener
+import com.zrq.azi.util.Constants.ADD_DEL
+import com.zrq.azi.util.Constants.BASE_URL
 import com.zrq.azi.util.Constants.MMKV_SHOW_TIP
 import com.zrq.azi.util.Constants.TYPE_BAR
 import com.zrq.azi.util.Constants.TYPE_MORE
-import com.zrq.azi.util.Util
+import com.zrq.azi.util.Util.httpGet
 import com.zrq.azi.view.VisualizeView
 
 class MainActivity : AppCompatActivity(), IPlayerViewControl {
@@ -62,15 +68,23 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
     private lateinit var listDaoImpl: ListDaoImpl
 
     private lateinit var mVpAdapter: ViewpagerAdapter
+
+    private lateinit var songListAdapter: PlayListAdapter
     private val mPlayList = ArrayList<Song>()
     private val mShowList = ArrayList<Song>()
+    private val songList = ArrayList<UserPlayList.PlaylistDTO>()
+    private var song: Song? = null
 
 
-    private var dialogTip: AlertDialog? = null
+    private val dialogTip: AlertDialog by lazy {
+        AlertDialog.Builder(this, R.style.NormalDialogStyle)
+            .setView(dialogTipBinding.root)
+            .setCancelable(true)
+            .create()
+    }
     private val dialogTipBinding by lazy {
         DialogTipBinding.inflate(LayoutInflater.from(this))
     }
-
 
     private val bottomDialog: BottomSheetDialog by lazy {
         BottomSheetDialog(this).apply {
@@ -80,6 +94,17 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
 
     private val bindingBottomDialog by lazy {
         DialogBottomBinding.inflate(LayoutInflater.from(this))
+    }
+
+    private val songListDialog: AlertDialog by lazy {
+        AlertDialog.Builder(this, R.style.NormalDialogStyle)
+            .setView(dialogSongListBinding.root)
+            .setCancelable(true)
+            .create()
+    }
+
+    private val dialogSongListBinding by lazy {
+        DialogSongListBinding.inflate(LayoutInflater.from(this))
     }
 
     //服务
@@ -99,6 +124,7 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
         bindService(intent, connection, BIND_AUTO_CREATE)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @RequiresApi(Build.VERSION_CODES.P)
     private fun initData() {
         //数据库
@@ -127,18 +153,64 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
             window.attributes = lp
         }
 
+        initDialog()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun initDialog() {
+
+        songListAdapter = PlayListAdapter(this, songList, object : OnItemClickListener {
+            override fun onItemClick(view: View, position: Int) {
+                Log.d(TAG, "onItemClick: ${songList.size}")
+                val url = "$BASE_URL$ADD_DEL?op=add&pid=${songList[position].id}&tracks=${song?.id}"
+                httpGet(url) { success, msg ->
+                    if (success && msg.contains("\"status\":200")) {
+                        Toast.makeText(this@MainActivity, "收藏成功", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        })
+
+        dialogSongListBinding.apply {
+            recyclerView.adapter = songListAdapter
+            recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+        }
+
+        if (mainModel.listDaoImpl != null) {
+            if (mainModel.listDaoImpl!!.listAllList().size != 0) {
+                songList.clear()
+                songList.addAll(mainModel.listDaoImpl!!.listAllList())
+                songListAdapter.notifyDataSetChanged()
+            } else {
+                Toast.makeText(this, "获取歌单失败，尝试主界面刷新", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        //提示框dialog
+        dialogTipBinding.apply {
+            dialogTipBinding.btnEnsure.setOnClickListener {
+                if (cbNeverTip.isChecked)
+                    MMKV.defaultMMKV().putBoolean("show_tip", false)
+                dialogTip.dismiss()
+            }
+            dialogTipBinding.tvApi.movementMethod = LinkMovementMethod.getInstance()
+            dialogTipBinding.tvProject.movementMethod = LinkMovementMethod.getInstance()
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initEvent() {
         //提示框
         if (MMKV.defaultMMKV().decodeBool(MMKV_SHOW_TIP, true))
-            showTipDialog()
+            dialogTip.show()
 
         mBinding.apply {
             viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
+                    mainModel.position.postValue(position)
                     Log.d(TAG, "onPageSelected: $position")
                     mainModel.playerControl?.let {
                         it.setList(mPlayList)
@@ -184,7 +256,6 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
             }
 
             showBottomSheetDialog = { pos, type ->
-                var song: Song? = null
                 when (type) {
                     TYPE_MORE -> {
                         if (pos > mShowList.size) {
@@ -195,14 +266,11 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
                     TYPE_BAR -> {
                         if (pos > mPlayList.size) {
                             Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(this@MainActivity, "指针越界", Toast.LENGTH_SHORT).show()
                         } else
                             song = mPlayList[pos]
                     }
                 }
-                song?.let {
+                song?.let { song ->
                     bindingBottomDialog.apply {
                         tvSongName.text = song.name
                         tvSinger.text = song.singer
@@ -213,20 +281,22 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
                             .load(song.coverUrl)
                             .into(ivBackground)
                         btnDownload.setOnClickListener {
-                            bottomDialog.cancel()
+                            Toast.makeText(this@MainActivity, "没做", Toast.LENGTH_SHORT).show()
                         }
                         btnLove.setOnClickListener { _ ->
-                            val url = "${Constants.BASE_URL}${Constants.LIKE}?id=${song.id}"
-                            Util.httpGet(url) { _, msg ->
-                                Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
-                            }
-                            bottomDialog.cancel()
+                            songListDialog.show()
                         }
                         btnComment.setOnClickListener { _ ->
                             mainModel.commentId = song.id
                             Navigation.findNavController(this@MainActivity, R.id.fragment_container)
                                 .navigate(R.id.commentFragment)
                             bottomDialog.cancel()
+                        }
+                        btnSinger.setOnClickListener {
+                            Toast.makeText(this@MainActivity, "没做", Toast.LENGTH_SHORT).show()
+                        }
+                        btnAlbum.setOnClickListener {
+                            Toast.makeText(this@MainActivity, "没做", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -238,26 +308,6 @@ class MainActivity : AppCompatActivity(), IPlayerViewControl {
             }
         }
 
-        dialogTipBinding.apply {
-
-            dialogTipBinding.btnEnsure.setOnClickListener {
-                if (cbNeverTip.isChecked)
-                    MMKV.defaultMMKV().putBoolean("show_tip", false)
-                dialogTip?.dismiss()
-            }
-            dialogTipBinding.tvApi.movementMethod = LinkMovementMethod.getInstance()
-            dialogTipBinding.tvProject.movementMethod = LinkMovementMethod.getInstance()
-        }
-    }
-
-    private fun showTipDialog() {
-        if (dialogTip == null) {
-            dialogTip = AlertDialog.Builder(this, R.style.NormalDialogStyle)
-                .setView(dialogTipBinding.root)
-                .setCancelable(true)
-                .create()
-        }
-        dialogTip?.show()
     }
 
     //权限

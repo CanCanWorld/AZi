@@ -25,6 +25,8 @@ class MainModel : ViewModel() {
 
     var playListCount = 0
 
+    var listID = 0L
+
     var initSongListType = TYPE_UNKNOWN
 
     var commentId = 0L

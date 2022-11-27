@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +21,6 @@ import com.zrq.azi.adapter.PlayListAdapter
 import com.zrq.azi.bean.UserPlayList
 import com.zrq.azi.databinding.FragmentHomeBinding
 import com.zrq.azi.interfaces.OnItemClickListener
-import com.zrq.azi.interfaces.OnItemLongClickListener
 import com.zrq.azi.util.Constants.BASE_URL
 import com.zrq.azi.util.Constants.LOGOUT
 import com.zrq.azi.util.Constants.MMKV_AVATAR_URL
@@ -36,7 +36,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, OnItemLongClickListener {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener {
     override fun providedViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -44,14 +44,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
         return FragmentHomeBinding.inflate(inflater, container, false)
     }
 
-    private val list = ArrayList<UserPlayList.PlaylistDTO>()
+    private val mList = ArrayList<UserPlayList.PlaylistDTO>()
     private lateinit var mAdapter: PlayListAdapter
     private var offset = 1
 
     @SuppressLint("NotifyDataSetChanged", "SimpleDateFormat")
     @RequiresApi(Build.VERSION_CODES.P)
     override fun initData() {
-        mAdapter = PlayListAdapter(requireContext(), list, this, this)
+        mAdapter = PlayListAdapter(requireContext(), mList, this)
         mBinding.apply {
             recyclerView.adapter = mAdapter
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -60,8 +60,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
         }
         if (mainModel.listDaoImpl != null) {
             if (mainModel.listDaoImpl!!.listAllList().size != 0) {
-                list.clear()
-                list.addAll(mainModel.listDaoImpl!!.listAllList())
+                mList.clear()
+                mList.addAll(mainModel.listDaoImpl!!.listAllList())
                 mAdapter.notifyDataSetChanged()
             } else {
                 loadUserPlayList()
@@ -110,6 +110,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
                 Navigation.findNavController(requireActivity(), R.id.fragment_container)
                     .navigate(R.id.action_homeFragment_to_playListFragment)
             }
+
+            btnDailyList.setOnClickListener {
+                Navigation.findNavController(requireActivity(), R.id.fragment_container)
+                    .navigate(R.id.dailyListFragment)
+            }
+
+            btnFollows.setOnClickListener {
+                Toast.makeText(requireContext(), "没做", Toast.LENGTH_SHORT).show()
+            }
+
+            btnFollowed.setOnClickListener {
+                Toast.makeText(requireContext(), "没做", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -139,8 +152,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
                     //存入数据库
                     mainModel.listDaoImpl?.updateAllList(playList.playlist)
                     mainModel.listDaoImpl?.let { it1 ->
-                        list.clear()
-                        list.addAll(it1.listAllList())
+                        mList.clear()
+                        mList.addAll(it1.listAllList())
                     }
                     Handler(Looper.getMainLooper()).post {
                         mAdapter.notifyDataSetChanged()
@@ -154,14 +167,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener, O
     }
 
     override fun onItemClick(view: View, position: Int) {
-        mainModel.playListInfo = list[position]
-        mainModel.playListCount = list[position].trackCount.toInt()
+        mainModel.playListInfo = mList[position]
+        mainModel.playListCount = mList[position].trackCount.toInt()
         mainModel.initSongListType = TYPE_USER_PLAY_LIST
         Navigation.findNavController(requireActivity(), R.id.fragment_container)
             .navigate(R.id.action_homeFragment_to_playListFragment)
-    }
-
-    override fun onItemLongClick(view: View, position: Int) {
     }
 
     companion object {

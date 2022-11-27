@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -14,7 +15,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#D8000000" />
+        android:background="#D2000000" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,23 +60,23 @@
 
             <LinearLayout
                 android:id="@+id/btn_love"
-                android:background="@drawable/dialog_press"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="10dp">
+                android:background="@drawable/dialog_press"
+                android:paddingVertical="10dp"
+                android:paddingStart="60dp"
+                tools:ignore="RtlSymmetry">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_favorite_border_24"
+                    android:src="@drawable/ic_baseline_favorite_24"
                     app:tint="@color/white___" />
 
                 <TextView
-                    android:paddingHorizontal="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
                     android:text="@string/collection"
                     android:textColor="@color/white___"
                     android:textSize="16sp" />
@@ -83,12 +84,12 @@
 
             <LinearLayout
                 android:id="@+id/btn_download"
-                android:background="@drawable/dialog_press"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="10dp">
+                android:background="@drawable/dialog_press"
+                android:paddingVertical="10dp"
+                android:paddingStart="60dp"
+                tools:ignore="RtlSymmetry">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -98,20 +99,21 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:paddingHorizontal="20dp"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
                     android:text="@string/download"
                     android:textColor="@color/white___"
                     android:textSize="16sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/btn_comment"
-                android:background="@drawable/dialog_press"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="10dp">
+                android:background="@drawable/dialog_press"
+                android:paddingVertical="10dp"
+                android:paddingStart="60dp"
+                tools:ignore="RtlSymmetry">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -121,20 +123,60 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:paddingHorizontal="20dp"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
                     android:text="@string/comment"
                     android:textColor="@color/white___"
                     android:textSize="16sp" />
             </LinearLayout>
-        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="15dp"
-            android:text="@string/cancel"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            <LinearLayout
+                android:id="@+id/btn_singer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dialog_press"
+                android:paddingVertical="10dp"
+                android:paddingStart="60dp"
+                tools:ignore="RtlSymmetry">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_person_24"
+                    app:tint="@color/white___" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:text="@string/check_singer"
+                    android:textColor="@color/white___"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_album"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dialog_press"
+                android:paddingVertical="10dp"
+                android:paddingStart="60dp"
+                tools:ignore="RtlSymmetry">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_album_24"
+                    app:tint="@color/white___" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:text="@string/check_album"
+                    android:textColor="@color/white___"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

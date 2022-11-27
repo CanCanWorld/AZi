@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:layout_below="@id/tv_username"
-            android:textColor="@color/grey_700"
+            android:textColor="@color/black"
             android:textSize="11sp" />
 
         <TextView
@@ -64,9 +64,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:itemCount="3"
             android:layout_below="@id/tv_comment"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            tools:itemCount="3" />
 
     </RelativeLayout>
 </LinearLayout>

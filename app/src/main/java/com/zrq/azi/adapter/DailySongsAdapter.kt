@@ -14,7 +14,7 @@ class DailySongsAdapter(
     private val list: ArrayList<DailySongs.DataDTO.DailySongsDTO>,
     private val onItemClickListener: OnItemClickListener,
     private val onMoreClick: (Int) -> Unit,
-    ) : RecyclerView.Adapter<VH<ItemListItemBinding>>() {
+) : RecyclerView.Adapter<VH<ItemListItemBinding>>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH<ItemListItemBinding> {
         return VH(ItemListItemBinding.inflate(LayoutInflater.from(context), parent, false))
     }
@@ -28,7 +28,7 @@ class DailySongsAdapter(
                 tvSongName.text = bean.name
             else
                 tvSongName.text = bean.name + "(${bean.tns[0]})"
-            tvDetail.text = bean.singer
+            tvDetail.text = bean.singer + "(${bean.reason})"
             root.setOnClickListener {
                 onItemClickListener.onItemClick(it, holder.adapterPosition)
             }
